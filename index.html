@@ -17,101 +17,80 @@
 	background-color: #C3B88C;
 }
 
-.characterChip {
+.charContainer {
+    width: 300px
+
+}
+
+.charContainer .characterChip {
     display: inline-block;
     padding: 0 25px;
     height: 50px;
+    width: 100%;
     font-size: 16px;
     line-height: 50px;
     border-radius: 25px;
     background-color: #f1f1f1;
 }
 
-.characterChip .chipName {
+.characterChip[data-activity="acted"] {
+    background-color: red;
+}
+
+.characterChip[data-activity="selected"] {
+    background-color: cadetblue;
+}
+
+li .chipData {
+    position: relative;
     float: left;
-    //margin: 0 10px 0 10px;
-    height: 50px;
-    width: 100px;
-	background-color: #C3B88C;
-	border: 1px solid black;
+    margin: 10px 5px 10px 5px;
+    height: 30px;
+    width: 50px;
+	background-color: #ffffff;
 	text-align: center;
 }
 
-.characterChip .chipInitBase {
-    float: left;
-    //margin: 0 10px 0 10px;
-    height: 50px;
-    width: 100px;
-	background-color: #C3B88C;
-	border: 1px solid black;
-	text-align: center;
+li .chipData:after {
+    position: absolute;
+    top: -30px;
+    left: 0px;
+    content: attr(data-char-property); /* Change this to reference data-char-property */
+    font-size: 10px;
 }
-.characterChip .chipInitCur {
-    float: left;
-    //margin: 0 10px 0 10px;
-    height: 50px;
-    width: 100px;
-	background-color: #C3B88C;
-	border: 1px solid black;
-	text-align: center;
+
+.closebtn {
+    position: relative;
+    padding-left: 10px;
+    color: #888;
+    font-weight: bold;
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.closebtn:hover {
+    color: #000;
 }
 
 </style>
 
-    <title>HTML dynamic table using JavaScript</title>
-    <script type="text/javascript" src="app.js"></script>
+<title>HTML dynamic table using JavaScript</title>
+<script type="text/javascript" src="app.js"></script>
+
 </head>
 <body onload="load()">
-<div id="characterInitTracker">
-<div class="characterChip">
-	<div class="chipName">
-		[Name]
-	</div>
-	<div class="chipInitBase">
-		[initBase]
-	</div>
-	<div class="chipInitCur">
-		[initCur]
-	</div>
-</div>
-</div>
-<div id="myform">
-<b>Simple form with name and age ...</b>
-<table>
-    <tr>
-        <td>Name:</td>
-        <td><input type="text" id="name"></td>
-    </tr>
-    <tr>
-        <td>Age:</td>
-        <td><input type="text" id="age">
-        <input type="button" id="add" value="Add" onclick="Javascript:addRow()"></td>
-    </tr>
-    <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-    </tr>
-</table>
-</div>
-<div id="mydata">
-<b>Current data in the system ...</b>
-<table id="myTableData"  border="1" cellpadding="2">
-    <tr>
-        <td>&nbsp;</td>
-        <td><b>Name</b></td>
-        <td><b>Age</b></td>
-    </tr>
-</table>
-&nbsp;
- 
-</div>
-<div id="myDynamicTable">
-<input type="button" id="create" value="Click here" onclick="Javascript:addTable()">
-to create a Table and add some data using JavaScript
-</div>
+
 <div id="myTableActions">
-<input type="button" id="next" value="next" onclick="Javascript:next_init()">
-<input type="button" id="add2" value="add" onclick="Javascript:addChar()">
+    <input type="button" id="next" value="next" onclick="Javascript:next_init()">
+    <input type="button" id="add2" value="add" onclick="Javascript:addChar()">
 </div>
+
+<div class="charContainer" id="charContainer">
+    <ul class="characterList" id="characterList">
+
+    </ul>
+</div>
+
 </body>
 </html>
