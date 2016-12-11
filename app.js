@@ -13,6 +13,8 @@ function char(name,initBase,initCur) {
 	this.name = name;
 	this.initBase = initBase;
 	this.initCur = initCur;
+	this.healthPMax = 6;
+	this.damageP = 0;
 	this.activity = "active";
 }
 
@@ -73,19 +75,43 @@ function insertChip(objChar) {
 	newCharacterChip.appendChild(newChipName);
 
 	var newElement = document.createElement("span");
+	newElement.className = "healthTooltip";
+	var newContent = document.createTextNode("health"); 
+	newElement.appendChild(newContent);
+	var newElementTip = document.createElement("span");
+	newElementTip.className = "tooltiptext";
+	for(var i = 1; i <= 6; i++) {
+		newElementTip.appendChild(addHealthbox(i,objChar));
+	}
+	newElement.appendChild(newElementTip);
+	newCharacterChip.appendChild(newElement);
+
+	var newElement = document.createElement("span");
 	newElement.className = "closebtn";
 	newElement.setAttribute('onClick','Javacsript:deleteChip(this)');
 	var newContent = document.createTextNode("\u00D7"); 
 	newElement.appendChild(newContent);
 	newCharacterChip.appendChild(newElement);
 
+
 	var charactersDiv = document.getElementById("characterList");
   	charactersDiv.appendChild(newCharacterChip); 
 }
 
+function addHealthbox(i,objChar) {
+	var element = document.createElement("span");
+	element.className = "healthbox"
+	element.setAttribute('onClick','healthBoxClick(this);');
+	if (objChar.damageP < i)
+		element.setAttribute('data-marked','false');
+	else
+		element.setAttribute('data-marked','true');
+	element.setAttribute('data-box-num',i);
+	return(element)
+}
+
 
 function addChar() {
-
 	newChar = new char("NA",0,0)
 	charArr.push(newChar)
   	insertChip(newChar)
@@ -95,6 +121,25 @@ function sort_data() {
 	
 	charArr.sort(function (a, b) { return parseInt(b.initCur) - parseInt(a.initCur); });
 
+}
+
+function healthBoxClick(element) {
+
+	// Set damageP
+	var char = charArr.filter(function ( objArr ) { return objArr.guid === element.parentNode.parentNode.parentNode.id; })[0]
+	if (element.dataset.marked === 'false') // If it isn't already marked, set damage to match
+		char.damageP=parseInt(element.dataset.boxNum);
+	else // Otherwise unset damage
+		char.damageP=parseInt(element.dataset.boxNum)-1;
+
+	// Set boxes to reflect damageP
+	var healthboxes = element.parentNode.getElementsByClassName(element.className)
+	for(var i = 0; i < healthboxes.length; i++) {
+		if (parseInt(healthboxes[i].dataset.boxNum) <= char.damageP)
+			healthboxes[i].dataset.marked = 'true';
+		else
+			healthboxes[i].dataset.marked = 'false';
+	}
 }
 
 function chipValidate(element,event) {
