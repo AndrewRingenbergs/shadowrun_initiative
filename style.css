@@ -14,7 +14,6 @@
 
 .charContainer {
     width: 300px
-
 }
 
 .charContainer .characterChip {
@@ -28,11 +27,11 @@
     background-color: #f1f1f1;
 }
 
-.characterChip[data-activity="acted"] {
+.characterChip.acted {
     background-color: red;
 }
 
-.characterChip[data-activity="selected"] {
+.characterChip.selected {
     background-color: cadetblue;
 }
 
@@ -113,10 +112,10 @@ li .chipData:after {
     display: inline-flex;
 }
 
-.healthTooltip .tooltiptext .healthbox[data-marked="false"]:hover {
-    background-color: #a50f0f;
+.healthTooltip .tooltiptext .healthbox:not(.marked):hover {
+    background-color: grey;
 }
 
-.healthTooltip .tooltiptext .healthbox[data-marked="true"] {
+.healthTooltip .tooltiptext .healthbox.marked {
     background-color: #a50f0f;
 }

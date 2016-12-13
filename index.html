@@ -2,22 +2,45 @@
 <html>
 
 <head>
-<title>HTML dynamic table using JavaScript</title>
-<script type="text/javascript" src="app.js"></script>
-<link rel="stylesheet" type="text/css" href="style.css">
+    <title>HTML dynamic table using Angular</title>
+    <script src="angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body onload="load()">
 
-<div id="myTableActions">
-    <input type="button" id="next" value="next" onclick="Javascript:next_init()">
-    <input type="button" id="add2" value="add" onclick="Javascript:addChar()">
+<div ng-app="myApp" ng-controller="myCtrl">
+
+    <div id="myTableActions">
+        <input type="button" value="next" ng-click="nextInit()">
+        <input type="button" value="add" ng-click="addChar()">
+    </div>
+
+    <div class="charContainer" id="charContainer">
+        <ul class="characterList" id="characterList">
+            <li
+                class="characterChip"
+                ng-repeat="char in charArr |  orderBy:'-initCur'"
+                ng-class="{'activeChar': char.activity=='active', 'selected': char.activity=='selected', 'acted': char.activity=='acted'}"
+            >
+                <input ng-model="char.name" class="chipData"></input> 
+                <input ng-model="char.initBase" type="number" class="chipData"></input> 
+                <input ng-model="char.initCur" type="number" class="chipData"></input>
+                <span class="healthTooltip">
+                    Health
+                    <span class="tooltiptext">
+                        <span
+                            ng-repeat="h in [1, 2, 3, 4, 5, 6]"
+                            class="healthbox"
+                            ng-click="healthBoxClick(char, h)"
+                            ng-class="{'marked': char.damageP >= h}"
+                        >
+                        </span>
+                    </span>
+                </span>
+                <span class="closebtn" ng-click="deleteChip(char)"> &#215 </span>
+            </li>
+        </ul>
+    </div>
 </div>
 
-<div class="charContainer" id="charContainer">
-    <ul class="characterList" id="characterList">
-
-    </ul>
-</div>
-
-</body>
 </html>
