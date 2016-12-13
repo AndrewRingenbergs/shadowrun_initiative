@@ -1,0 +1,121 @@
+.defaultChar {
+	background-color: 'white';
+	transition: 0.3s;
+}
+
+.activeChar {
+	background-color: #C9F6F2;
+	transition: 0.3s;
+}
+
+.actedChar {
+	background-color: #C3B88C;
+}
+
+.charContainer {
+    width: 300px
+}
+
+.charContainer .characterChip {
+    display: inline-block;
+    padding: 0 25px;
+    height: 50px;
+    width: 100%;
+    font-size: 16px;
+    line-height: 50px;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+}
+
+.characterChip.acted {
+    background-color: red;
+}
+
+.characterChip.selected {
+    background-color: cadetblue;
+}
+
+li .chipData {
+    position: relative;
+    float: left;
+    margin: 10px 5px 10px 5px;
+    height: 30px;
+    width: 50px;
+	background-color: #ffffff;
+	text-align: center;
+}
+
+li .chipData:after {
+    position: absolute;
+    top: -30px;
+    left: 0px;
+    content: attr(data-char-property); /* Change this to reference data-char-property */
+    font-size: 10px;
+}
+
+.closebtn {
+    position: relative;
+    padding-left: 10px;
+    color: #888;
+    font-weight: bold;
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.closebtn:hover {
+    color: #000;
+}
+
+/* Tooltip container */
+.healthTooltip {
+    position: relative;
+    display: inline-block;
+    margin: 10px 5px 10px 5px;
+    height: 30px;
+    width: 30px;
+}
+
+/* Tooltip text */
+.healthTooltip .tooltiptext {
+    visibility: hidden;
+    width: 50px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 0px 2px;
+    border-radius: 2px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: -100%;
+    left: 100%;
+    margin-left: 5px;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.healthTooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.healthTooltip .tooltiptext .healthbox {
+    background-color: #fff;
+    height: 10px;
+    width: 25%;
+    margin: 1%;
+    display: inline-flex;
+}
+
+.healthTooltip .tooltiptext .healthbox:not(.marked):hover {
+    background-color: grey;
+}
+
+.healthTooltip .tooltiptext .healthbox.marked {
+    background-color: #a50f0f;
+}

@@ -2,148 +2,45 @@
 <html>
 
 <head>
-<style>
-.defaultChar {
-	background-color: 'white';
-	transition: 0.3s;
-}
-
-.activeChar {
-	background-color: #C9F6F2;
-	transition: 0.3s;
-}
-
-.actedChar {
-	background-color: #C3B88C;
-}
-
-.charContainer {
-    width: 300px
-
-}
-
-.charContainer .characterChip {
-    display: inline-block;
-    padding: 0 25px;
-    height: 50px;
-    width: 100%;
-    font-size: 16px;
-    line-height: 50px;
-    border-radius: 25px;
-    background-color: #f1f1f1;
-}
-
-.characterChip[data-activity="acted"] {
-    background-color: red;
-}
-
-.characterChip[data-activity="selected"] {
-    background-color: cadetblue;
-}
-
-li .chipData {
-    position: relative;
-    float: left;
-    margin: 10px 5px 10px 5px;
-    height: 30px;
-    width: 50px;
-	background-color: #ffffff;
-	text-align: center;
-}
-
-li .chipData:after {
-    position: absolute;
-    top: -30px;
-    left: 0px;
-    content: attr(data-char-property); /* Change this to reference data-char-property */
-    font-size: 10px;
-}
-
-.closebtn {
-    position: relative;
-    padding-left: 10px;
-    color: #888;
-    font-weight: bold;
-    float: right;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.closebtn:hover {
-    color: #000;
-}
-
-/* Tooltip container */
-.healthTooltip {
-    position: relative;
-    display: inline-block;
-    margin: 10px 5px 10px 5px;
-    height: 30px;
-    width: 30px;
-}
-
-/* Tooltip text */
-.healthTooltip .tooltiptext {
-    visibility: hidden;
-    width: 50px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    padding: 0px 2px;
-    border-radius: 2px;
-
-    /* Position the tooltip text */
-    position: absolute;
-    z-index: 1;
-    bottom: -100%;
-    left: 100%;
-    margin-left: 5px;
-
-    /* Fade in tooltip */
-    opacity: 0;
-    transition: opacity 1s;
-}
-
-/* Show the tooltip text when you mouse over the tooltip container */
-.healthTooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-}
-
-.healthTooltip .tooltiptext .healthbox {
-    background-color: #fff;
-    height: 10px;
-    width: 25%;
-    margin: 1%;
-    display: inline-flex;
-}
-
-.healthTooltip .tooltiptext .healthbox[data-marked="false"]:hover {
-    background-color: #a50f0f;
-}
-
-.healthTooltip .tooltiptext .healthbox[data-marked="true"] {
-    background-color: #a50f0f;
-}
-
-</style>
-
-<title>HTML dynamic table using JavaScript</title>
-<script type="text/javascript" src="app.js"></script>
-
+    <title>HTML dynamic table using Angular</title>
+    <script src="angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body onload="load()">
 
-<div id="myTableActions">
-    <input type="button" id="next" value="next" onclick="Javascript:next_init()">
-    <input type="button" id="add2" value="add" onclick="Javascript:addChar()">
+<div ng-app="myApp" ng-controller="myCtrl">
+
+    <div id="myTableActions">
+        <input type="button" value="next" ng-click="nextInit()">
+        <input type="button" value="add" ng-click="addChar()">
+    </div>
+
+    <div class="charContainer" id="charContainer">
+        <ul class="characterList" id="characterList">
+            <li
+                class="characterChip"
+                ng-repeat="char in charArr |  orderBy:'-initCur'"
+                ng-class="{'activeChar': char.activity=='active', 'selected': char.activity=='selected', 'acted': char.activity=='acted'}"
+            >
+                <input ng-model="char.name" class="chipData"></input> 
+                <input ng-model="char.initBase" type="number" class="chipData"></input> 
+                <input ng-model="char.initCur" type="number" class="chipData"></input>
+                <span class="healthTooltip">
+                    Health
+                    <span class="tooltiptext">
+                        <span
+                            ng-repeat="h in [1, 2, 3, 4, 5, 6]"
+                            class="healthbox"
+                            ng-click="healthBoxClick(char, h)"
+                            ng-class="{'marked': char.damageP >= h}"
+                        >
+                        </span>
+                    </span>
+                </span>
+                <span class="closebtn" ng-click="deleteChip(char)"> &#215 </span>
+            </li>
+        </ul>
+    </div>
 </div>
 
-<div class="charContainer" id="charContainer">
-    <ul class="characterList" id="characterList">
-
-    </ul>
-</div>
-
-</body>
 </html>

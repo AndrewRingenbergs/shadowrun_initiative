@@ -1,213 +1,81 @@
-function guid() {
-  function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
-  }
-  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-    s4() + '-' + s4() + s4() + s4();
-}
+var app = angular.module("myApp", []); 
 
-function char(name,initBase,initCur) {
-	this.guid = guid();
-	this.name = name;
-	this.initBase = initBase;
-	this.initCur = initCur;
-	this.healthPMax = 6;
-	this.damageP = 0;
-	this.activity = "active";
-}
+app.controller("myCtrl", function($scope) {  
 
-var charArr = new Array();
-charArr.push(new char("Alpha",18,3));
-charArr.push(new char("Beta",5,4));
+	function s4() {
+		return Math.floor((1 + Math.random()) * 0x10000)
+		.toString(16)
+		.substring(1);
+		};
 
-function load() {
+	function guid() {
+		return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+		};
 
-	createCharTable();
-    console.log("Page load finished");
- 
-}
-
-function createCharTable() {
-
-	// Delete old
-	var el = document.getElementById('characterList');
-	while ( el.firstChild ) el.removeChild( el.firstChild );
-
-	// Create new
-	sort_data();
-	charArr.forEach( function (obj) { insertChip(obj); });
-}
-
-function insertChip(objChar) {
-
-	var newCharacterChip = document.createElement("li");
-	newCharacterChip.className = "characterChip";
-	newCharacterChip.id = objChar.guid;
-	newCharacterChip.setAttribute('data-activity',objChar.activity);
-
-	var newChipName = document.createElement("span");
-	newChipName.className = "chipData";
-	newChipName.contentEditable='true';
-	newChipName.setAttribute('onBlur','chipValidate(this,event);');
-	newChipName.setAttribute('data-char-property','name');
-	var newContent = document.createTextNode(objChar.name); 
-	newChipName.appendChild(newContent);
-	newCharacterChip.appendChild(newChipName);
-
-	var newChipName = document.createElement("span");
-	newChipName.className = "chipData";
-	newChipName.contentEditable='true';
-	newChipName.setAttribute('onBlur','chipValidate(this,event);');
-	newChipName.setAttribute('data-char-property','initBase');
-	var newContent = document.createTextNode(objChar.initBase); 
-	newChipName.appendChild(newContent);
-	newCharacterChip.appendChild(newChipName);
-
-	var newChipName = document.createElement("span");
-	newChipName.className = "chipData";
-	newChipName.contentEditable='true';
-	newChipName.setAttribute('onBlur','chipValidate(this,event);');
-	newChipName.setAttribute('data-char-property','initCur');
-	var newContent = document.createTextNode(objChar.initCur); 
-	newChipName.appendChild(newContent);
-	newCharacterChip.appendChild(newChipName);
-
-	var newElement = document.createElement("span");
-	newElement.className = "healthTooltip";
-	var newContent = document.createTextNode("health"); 
-	newElement.appendChild(newContent);
-	var newElementTip = document.createElement("span");
-	newElementTip.className = "tooltiptext";
-	for(var i = 1; i <= 6; i++) {
-		newElementTip.appendChild(addHealthbox(i,objChar));
+	function createChar(name, initBase, initCur) {
+		return {
+			guid: guid(),
+			name: name,
+			initBase: initBase,
+			initCur: initCur,
+			healthPMax: 6,
+			damageP: 0,
+			activity: "active"
+		};
 	}
-	newElement.appendChild(newElementTip);
-	newCharacterChip.appendChild(newElement);
 
-	var newElement = document.createElement("span");
-	newElement.className = "closebtn";
-	newElement.setAttribute('onClick','Javacsript:deleteChip(this)');
-	var newContent = document.createTextNode("\u00D7"); 
-	newElement.appendChild(newContent);
-	newCharacterChip.appendChild(newElement);
-
-
-	var charactersDiv = document.getElementById("characterList");
-  	charactersDiv.appendChild(newCharacterChip); 
-}
-
-function addHealthbox(i,objChar) {
-	var element = document.createElement("span");
-	element.className = "healthbox"
-	element.setAttribute('onClick','healthBoxClick(this);');
-	if (objChar.damageP < i)
-		element.setAttribute('data-marked','false');
-	else
-		element.setAttribute('data-marked','true');
-	element.setAttribute('data-box-num',i);
-	return(element)
-}
-
-
-function addChar() {
-	newChar = new char("NA",0,0)
-	charArr.push(newChar)
-  	insertChip(newChar)
-}
-
-function sort_data() {
-	
-	charArr.sort(function (a, b) { return parseInt(b.initCur) - parseInt(a.initCur); });
-
-}
-
-function healthBoxClick(element) {
-
-	// Set damageP
-	var char = charArr.filter(function ( objArr ) { return objArr.guid === element.parentNode.parentNode.parentNode.id; })[0]
-	if (element.dataset.marked === 'false') // If it isn't already marked, set damage to match
-		char.damageP=parseInt(element.dataset.boxNum);
-	else // Otherwise unset damage
-		char.damageP=parseInt(element.dataset.boxNum)-1;
-
-	// Set boxes to reflect damageP
-	var healthboxes = element.parentNode.getElementsByClassName(element.className)
-	for(var i = 0; i < healthboxes.length; i++) {
-		if (parseInt(healthboxes[i].dataset.boxNum) <= char.damageP)
-			healthboxes[i].dataset.marked = 'true';
-		else
-			healthboxes[i].dataset.marked = 'false';
+	$scope.addChar = function() {
+		console.log('Creating New Char');
+		newChar = createChar("NA", 0, 0);
+		$scope.charArr.push(newChar);
 	}
-}
 
-function chipValidate(element,event) {
-	var char = charArr.filter(function ( objArr ) { return objArr.guid === element.parentNode.id; })[0]
-	
-	var charProperty = element.dataset.charProperty
-
-	if (typeof char[charProperty] === 'number') { // if number store as integer
-		var n = parseInt(element.textContent, 10)
+	$scope.healthBoxClick = function(char, h) {
+		// Set damageP
+		char.damageP = h;
 	}
-	else n = element.textContent
 
-	if (element.textContent === n.toString()){
-		//console.log("True " + n + char.name);
-		if (n === char[charProperty]) {
-			// do nothing
+	$scope.nextInit = function() {
+		console.log('Next Initiative being calculated');
+
+		// Set current active char to acted
+		var activeCharArrPrior = $scope.charArr.filter(function (char) { return char.activity === "selected"; })[0];
+		if (activeCharArrPrior) {
+			activeCharArrPrior.activity = 'acted';
 		}
-		else { // update object
-			char[charProperty] = n
+
+		// Get list of non-acted characters & find the one with highest current initiative
+		var activeCharArr = $scope.charArr.filter(function (char) { return (char.activity === 'active' && char.initCur > 0); });
+
+		if (activeCharArr.length > 0) {
+			var targetChar = activeCharArr.reduce(function(a, b){ return a.initCur > b.initCur ? a : b });
+			// Set targetChar.active to true
+			targetChar.activity = 'selected';
 		}
-	}
-	else {
-		// replace with old value
-		element.textContent = char[charProperty]
-	}
-}
-
-
-function next_init() {
-
-	// Set current active char to acted
-	var activeCharArrPrior = charArr.filter(function (objArr) { return objArr.activity === "selected"; })[0];
-	if (typeof activeCharArrPrior != 'undefined') {
-		activeCharArrPrior.activity = 'acted';
-	}
-
-	// Get list of non-acted characters & find the one with highest current initiative
-	var activeCharArr = charArr.filter(function (objArr) { return (objArr.activity === 'active' && objArr.initCur > 0); });
-
-	if (activeCharArr.length > 0) {
-		var targetChar = activeCharArr.reduce(function(a, b){ return a.initCur > b.initCur ? a : b });
-
-		// Set targetChar.active to true
-		targetChar.activity = 'selected';
-	}
-	else {
-		// Start new pass
-		charArr.forEach( function (obj) { obj.initCur = obj.initCur - 10; });
-		charArr.forEach( function (obj) { obj.activity = 'active' });
-		
-		// New round if all characters have negative/0 initiative
-		if (charArr.filter(function (objArr) { return objArr.initCur > 0; }).length == 0) {
-			charArr.forEach( function (obj) { obj.initCur = obj.initBase; });
+		else {
+			// Start new pass
+			$scope.charArr.forEach( function (obj) { obj.initCur = obj.initCur - 10; });
+			$scope.charArr.forEach( function (obj) { obj.activity = 'active' });
+			
+			// New round if all characters have negative/0 initiative
+			if ($scope.charArr.filter(function (objArr) { return objArr.initCur > 0; }).length == 0) {
+				$scope.charArr.forEach( function (obj) { obj.initCur = obj.initBase; });
+			}
+			$scope.nextInit();
 		}
-		next_init();
+
+		console.log($scope.charArr)
 	}
 
-	console.log(charArr)
-	// refresh table
-	 createCharTable();
-}
-
-function deleteChip(el) {
-	for(var i = charArr.length - 1; i >= 0; i--) {
-		if(charArr[i].guid === el.parentNode.id) {
-		//console.log('Deleting ' + charArr[i].guid + " name: " + charArr[i].name)
-		charArr.splice(i, 1);
-		}
+	$scope.deleteChip = function(char) {
+		console.log("Deleting chip", char);
+		$scope.charArr.splice($scope.charArr.indexOf(char));
 	}
-	el.parentNode.parentNode.removeChild( el.parentNode )
-}
+
+	$scope.charArr = [];
+	$scope.charArr.push(createChar("Alpha", 18, 3));
+	$scope.charArr.push(createChar("Beta", 5, 4));
+
+	console.log("Page load finished");
+
+});
