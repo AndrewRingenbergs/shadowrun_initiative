@@ -8,19 +8,31 @@ function guid() {
     s4() + '-' + s4() + s4() + s4();
 }
 
-function char(name,initBase,initCur) {
-	this.guid = guid();
-	this.name = name;
-	this.initBase = initBase;
-	this.initCur = initCur;
-	this.healthPMax = 6;
-	this.damageP = 0;
-	this.activity = "active";
+function char(name,initBase,initCur, body, agility, reaction, strength, willpower, logic, intuition, charisma, edge, essence, magres) {
+	return {
+		guid: guid(),
+		name: name,
+		initBase: initBase,
+		initCur: initCur,
+		healthPMax: 6,
+		damageP: 0,
+		activity: "active",
+		body: body,
+		agility: agility,
+		reaction: reaction,
+		strength: strength,
+		willpower: willpower,
+		logic: logic,
+		intuition: intuition,
+		charisma: charisma,
+		edge: edge,
+		essence: essence,
+		magres: magres,
+		initiative: reaction+intuition
+	}
 }
 
-var charArr = new Array();
-charArr.push(new char("Alpha",18,3));
-charArr.push(new char("Beta",5,4));
+charArr = [new char("Alpha",18,3,12,5,6,2,1,1,1,1,1,6,0), new char("Beta",5,4,5,2,3,1,1,1,1,1,1,6,0)];
 
 function load() {
 
@@ -38,6 +50,7 @@ function createCharTable() {
 	// Create new
 	sort_data();
 	charArr.forEach( function (obj) { insertChip(obj); });
+
 }
 
 function insertChip(objChar) {
@@ -200,6 +213,7 @@ function next_init() {
 	console.log(charArr)
 	// refresh table
 	 createCharTable();
+	 displayActiveCharSheet();
 }
 
 function deleteChip(el) {
@@ -210,4 +224,33 @@ function deleteChip(el) {
 		}
 	}
 	el.parentNode.parentNode.removeChild( el.parentNode )
+}
+
+function displayActiveCharSheet() {
+	var char = charArr.filter(function (objArr) { return objArr.activity === "selected"; })[0];
+	var charSheet = document.getElementById('characterSheet');
+	charSheet.dataset.guid = char.guid;
+	dataInputOutputUpdate(char);
+}
+
+
+function dataInputBlur(element) {
+	var char = charArr.filter(function ( objArr ) { return objArr.guid === document.getElementById('characterSheet').dataset.guid;})[0]
+	
+	// should insert validation for this
+	char[element.dataset.contents] = element.value;
+}
+
+function dataInputOutputUpdate(charObj) { // needs testing
+	var charSheet = document.getElementById('characterSheet');
+	charSheet.dataset.guid = charObj.guid;
+
+	var dataInputs = charSheet.getElementsByClassName('sheetDataInput');
+	for (var i = 0; i < dataInputs.length; i++) {
+		dataInputs[i].value = charObj[dataInputs[i].dataset.contents];
+	}
+	var dataInputs = charSheet.getElementsByClassName('sheetDataOutput');
+	for (var i = 0; i < dataInputs.length; i++) {
+		dataInputs[i].textContent = charObj[dataInputs[i].dataset.contents];
+	}
 }

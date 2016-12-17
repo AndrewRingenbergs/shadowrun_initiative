@@ -3,6 +3,38 @@
 
 <head>
 <style>
+.column {
+    float: left;
+    margin: 15px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.characterSheet {
+    display: inline-block;
+    width: 60%;
+    height: 100%;
+    background-color: #555;
+    border-radius: 10px;
+    vertical-align:top;
+    color:#fff;
+}
+
+.characterSheet .sheetSection {
+    display: inline-block;
+    width: 50%;
+    margin: 2%;
+}
+
+.characterSheet .sheetSection .sheetData {
+    display: block;
+    width: 100%;
+}
+
 .defaultChar {
 	background-color: 'white';
 	transition: 0.3s;
@@ -18,19 +50,20 @@
 }
 
 .charContainer {
-    width: 300px
-
+    display: inline-block;
+    width: 30%;
+    vertical-align:top;
 }
 
-.charContainer .characterChip {
+.characterList .characterChip {
     display: inline-block;
-    padding: 0 25px;
+    margin: 5px 0px;
     height: 50px;
     width: 100%;
     font-size: 16px;
     line-height: 50px;
-    border-radius: 25px;
-    background-color: #f1f1f1;
+    background-color: #f5f5f5;
+    border-radius: 5px;
 }
 
 .characterChip[data-activity="acted"] {
@@ -39,6 +72,12 @@
 
 .characterChip[data-activity="selected"] {
     background-color: cadetblue;
+}
+
+.characterList {
+    list-style-type: none;
+    padding: inherit;
+    margin: 0px;
 }
 
 li .chipData {
@@ -61,7 +100,7 @@ li .chipData:after {
 
 .closebtn {
     position: relative;
-    padding-left: 10px;
+    padding: 0px 10px;
     color: #888;
     font-weight: bold;
     float: right;
@@ -126,6 +165,24 @@ li .chipData:after {
     background-color: #a50f0f;
 }
 
+.sheetDataItemName {
+    display: inline-block;
+    height: 100%;
+    margin: 5px;
+}
+
+.sheetDataInput, .sheetDataOutput {
+    float: right;
+    height: 100%;
+    width: 30px;
+    margin: 2px;
+}
+
+.columnHalf {
+    display: block;
+    width: 50%;
+}
+
 </style>
 
 <title>HTML dynamic table using JavaScript</title>
@@ -139,11 +196,81 @@ li .chipData:after {
     <input type="button" id="add2" value="add" onclick="Javascript:addChar()">
 </div>
 
-<div class="charContainer" id="charContainer">
-    <ul class="characterList" id="characterList">
+<span class="clearfix">
+    <span class="charContainer column" id="charContainer">
+        <ul class="characterList" id="characterList">
 
-    </ul>
-</div>
+        </ul>
+    </span>
+    <span class="characterSheet column" id="characterSheet" data-guid>
+        <span class="sheetSection" id="personalData">
+            <span class="sheetSectionTitle">
+                PERSONAL DATA
+            </span>
+            <span class="sheetData">
+                <span class="sheetDataItemName">Name</span>
+                <input class="sheetDataInput" type="text" data-contents="name" onblur="Javascript:dataInputBlur(this)"></input>
+            </span>
+        </span>
+        <span class="sheetSection" id="attributes">
+            ATTRIBUTES
+            <span class="columnHalf">
+                <span class="sheetData">
+                    <span class="sheetDataItemName">Body</span>
+                    <input class="sheetDataInput" type="number" data-contents="body" onblur="Javascript:dataInputBlur(this)"></input>
+                </span>
+                <span class="sheetData">
+                    <span class="sheetDataItemName">Agility</span>
+                    <input class="sheetDataInput" type="number" data-contents="agility" onblur="Javascript:dataInputBlur(this)"></input>
+                </span>
+                <span class="sheetData">
+                    <span class="sheetDataItemName">Reaction</span>
+                    <input class="sheetDataInput" type="number" data-contents="reaction" onblur="Javascript:dataInputBlur(this)"></input>
+                </span>
+                <span class="sheetData">
+                    <span class="sheetDataItemName">Strength</span>
+                    <input class="sheetDataInput" type="number" data-contents="strength" onblur="Javascript:dataInputBlur(this)"></input>
+                </span>
+                <span class="sheetData">
+                    <span class="sheetDataItemName">Willpower</span>
+                    <input class="sheetDataInput" type="number" data-contents="willpower" onblur="Javascript:dataInputBlur(this)"></input>
+                </span>
+                <span class="sheetData">
+                    <span class="sheetDataItemName">Logic</span>
+                    <input class="sheetDataInput" type="number" data-contents="logic" onblur="Javascript:dataInputBlur(this)"></input>
+                </span>
+                <span class="sheetData">
+                    <span class="sheetDataItemName">Intuition</span>
+                    <input class="sheetDataInput" type="number" data-contents="intuition" onblur="Javascript:dataInputBlur(this)"></input>
+                </span>
+                <span class="sheetData">
+                    <span class="sheetDataItemName">Charisma</span>
+                    <input class="sheetDataInput" type="number" data-contents="charisma" onblur="Javascript:dataInputBlur(this)"></input>
+                </span>
+                <span class="sheetData">
+                    <span class="sheetDataItemName">Edge</span>
+                    <input class="sheetDataInput" type="number" data-contents="edge" onblur="Javascript:dataInputBlur(this)"></input>
+                </span>
+            </span>
+            <span class="columnHalf">
+                <span class="sheetData">
+                    <span class="sheetDataItemName">Essence</span>
+                    <input class="sheetDataInput" type="number" data-contents="essence" onblur="Javascript:dataInputBlur(this)"></input>
+                </span>
+                <span class="sheetData">
+                    <span class="sheetDataItemName">Magic/Resonance</span>
+                    <input class="sheetDataInput" type="number" data-contents="magres" onblur="Javascript:dataInputBlur(this)"></input>
+                </span>
+                <span class="sheetData">
+                    <span class="sheetDataItemName">Initiative</span>
+                    <span class="sheetDataOutput" data-contents="initiative"></span>
+                </span>
+            </span>
+        </span>
+    </span>
+</span>
+
+</span>
 
 </body>
 </html>
