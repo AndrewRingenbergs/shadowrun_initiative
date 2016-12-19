@@ -19,25 +19,51 @@
         <ul class="characterList" id="characterList">
             <li
                 class="characterChip"
-                ng-repeat="char in charArr |  orderBy:'-initCur'"
+                ng-repeat="char in charArr |  orderBy:['-initCur()','-edge','-reaction','-intuition','-randomCoin']"
                 ng-class="{'activeChar': char.activity=='active', 'selected': char.activity=='selected', 'acted': char.activity=='acted'}"
             >
-                <input ng-model="char.name" class="chipData"></input> 
-                <input ng-model="char.initBase" type="number" class="chipData"></input> 
-                <input ng-model="char.initCur" type="number" class="chipData"></input>
-                <span class="healthTooltip">
-                    Health
-                    <span class="tooltiptext">
-                        <span
-                            ng-repeat="h in [1, 2, 3, 4, 5, 6]"
-                            class="healthbox"
-                            ng-click="healthBoxClick(char, h)"
-                            ng-class="{'marked': char.damageP >= h}"
-                        >
+                <span class="chipDataTable">
+                    <header class="chipDataRow">
+                        <span class="chipDataHeader">name</span>
+                        <span class="chipDataHeader">init</span>
+                        <span class="chipDataHeader">health</span>
+                    </header>
+                    <span class="chipDataRow">
+                        <input ng-model="char.name" class="chipData"></input> 
+                        <span class="chipData chipDataLabel">
+                            {{char.initCur()}}
+                            <span class="tooltip">
+                                <span style="display: inline-table;">
+                                    <span class="chipDataRow">
+                                        <input ng-model="char.initBase" class="chipData"></input>
+                                        <span style="display: table-cell; vertical-align: middle;"> + </span>
+                                        <span class="chipData">{{char.initiative}}</span>
+                                        <span style="display: table-cell; vertical-align: middle;"> + </span>
+                                        <input ng-model="char.initMod" type="number" class="chipData"></input>
+                                        <span style="display: table-cell; vertical-align: middle;"> = </span>
+                                        <span class="chipData dataRoll">
+                                            <span class="textPrior">{{char.initCur()}}</span>
+                                            <span class="textNew">{{char.initBreakdown()}}</span>
+                                        </span>
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                        <span class="chipData chipDataLabel">
+                            {{char.damageP}}
+                            <span class="tooltip">
+                                <span
+                                    ng-repeat="h in [1, 2, 3, 4, 5, 6]"
+                                    class="healthbox"
+                                    ng-click="healthBoxClick(char, h)"
+                                    ng-class="{'marked': char.damageP >= h}"
+                                >
+                                </span>
+                            </span>
                         </span>
                     </span>
                 </span>
-                <span class="closebtn" ng-click="deleteChip(char)"> &#215 </span>
+                <span class="closebtn" ng-click="deleteChip(char)"> &#215 </span>                
             </li>
         </ul>
     </div>

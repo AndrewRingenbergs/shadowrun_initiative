@@ -12,21 +12,53 @@ app.controller("myCtrl", function($scope) {
 		return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 		};
 
-	function createChar(name, initBase, initCur) {
+	function createChar(name, initBase, initMod, body, agility, reaction, strength, willpower, logic, intuition, charisma, edge, essence, magres) {
+		var initBaseRolls = rollDice(10);
+		var initPassAdj = 0;
+		var randomCoin = Math.floor(Math.random()*100+1);
+
 		return {
 			guid: guid(),
 			name: name,
+			initMod: initMod,
 			initBase: initBase,
-			initCur: initCur,
+			initPassAdj: initPassAdj,
+			initBaseRolls: initBaseRolls,
+			initRoll: function() { return this.initBase + "+" + this.initMod },
+			initNewRound: function() { this.initBaseRolls = rollDice(10); this.initPassAdj=0; this.randomCoin = Math.floor(Math.random()*100+1); console.log("New initiative round"); },
+			initCur: function() { return this.initBaseRolls.slice(0,this.initBase.split("d")[0]).reduce(function(a,b) { return a + b; },0)+this.initiative+this.initMod+this.initPassAdj; },
+			initBreakdown: function() { return "(" + this.initBaseRolls.slice(0,this.initBase.split("d")[0]) + ")+" + (this.initMod+this.initiative); },
 			healthPMax: 6,
 			damageP: 0,
-			activity: "active"
+			activity: "active",
+			body: body,
+			agility: agility,
+			reaction: reaction,
+			strength: strength,
+			willpower: willpower,
+			logic: logic,
+			intuition: intuition,
+			charisma: charisma,
+			edge: edge,
+			essence: essence,
+			magres: magres,
+			initiative: reaction+intuition,
+			randomCoin: randomCoin
 		};
 	}
 
+	function rollDice(dice) {
+		var rolls = [];
+		for(var i = 1; i <= dice; i++) {
+			rolls.push(Math.floor(Math.random()*6+1));
+		}
+		return rolls;
+	}
+
 	$scope.addChar = function() {
+		console.log($scope.charArr);
 		console.log('Creating New Char');
-		newChar = createChar("NA", 0, 0);
+		newChar = createChar("NA", '1d6', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 		$scope.charArr.push(newChar);
 	}
 
@@ -45,21 +77,23 @@ app.controller("myCtrl", function($scope) {
 		}
 
 		// Get list of non-acted characters & find the one with highest current initiative
-		var activeCharArr = $scope.charArr.filter(function (char) { return (char.activity === 'active' && char.initCur > 0); });
+		var activeCharArr = $scope.charArr.filter(function (char) { return (char.activity === 'active' && char.initCur() > 0); });
 
 		if (activeCharArr.length > 0) {
-			var targetChar = activeCharArr.reduce(function(a, b){ return a.initCur > b.initCur ? a : b });
+			var targetChar = activeCharArr.reduce(function(a, b){ return a.initCur() > b.initCur() ? a : b });
 			// Set targetChar.active to true
 			targetChar.activity = 'selected';
 		}
 		else {
 			// Start new pass
-			$scope.charArr.forEach( function (obj) { obj.initCur = obj.initCur - 10; });
-			$scope.charArr.forEach( function (obj) { obj.activity = 'active' });
+			$scope.charArr.forEach( function (obj) { obj.initPassAdj = obj.initPassAdj-10; });
+			$scope.charArr.forEach( function (obj) { obj.activity = 'active'; });
 			
 			// New round if all characters have negative/0 initiative
-			if ($scope.charArr.filter(function (objArr) { return objArr.initCur > 0; }).length == 0) {
-				$scope.charArr.forEach( function (obj) { obj.initCur = obj.initBase; });
+			if ($scope.charArr.filter(function (objArr) { return objArr.initCur() > 0; }).length == 0) {
+				$scope.charArr.forEach( function (obj) { 
+					obj.initNewRound();
+				});
 			}
 			$scope.nextInit();
 		}
@@ -74,8 +108,8 @@ app.controller("myCtrl", function($scope) {
 	}
 
 	$scope.charArr = [];
-	$scope.charArr.push(createChar("Alpha", 18, 3));
-	$scope.charArr.push(createChar("Beta", 5, 4));
+	$scope.charArr.push(createChar("Alpha", '1d6', 3, 0, 0, 3, 0, 0, 0, 4, 0, 0, 0, 0, 0));
+	$scope.charArr.push(createChar("Beta", '2d6', 4, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0));
 
 	console.log("Page load finished");
 
