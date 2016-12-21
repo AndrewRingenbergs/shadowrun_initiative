@@ -1,0 +1,14 @@
+{
+  "name": "shadowrun_initiative",
+  "version": "0.0.1",
+  "description": "A tool to allow showdowrunners to know who should roll the dice",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com/AndrewRingenbergs/shadowrun_initiative.git"
+  },
+  "author": "AndrewRingenbergs",
+  "license": "ISC"
+}
