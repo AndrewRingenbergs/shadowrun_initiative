@@ -10,5 +10,15 @@
     "url": "git@github.com/AndrewRingenbergs/shadowrun_initiative.git"
   },
   "author": "AndrewRingenbergs",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.6.0"
+  },
+  "devDependencies": {
+    "extract-text-webpack-plugin": "^1.0.1",
+    "html-webpack-plugin": "^2.24.1",
+    "webpack": "^1.14.0",
+    "webpack-append": "^0.1.2",
+    "webpack-dev-server": "^1.16.2"
+  }
 }
