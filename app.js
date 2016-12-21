@@ -1,6 +1,8 @@
-var app = angular.module("myApp", []); 
+require('angular')
 
-app.controller("myCtrl", function($scope) {  
+var app = angular.module("myApp", []);
+
+app.controller("myCtrl", function($scope) {
 
 	function s4() {
 		return Math.floor((1 + Math.random()) * 0x10000)
@@ -67,7 +69,6 @@ app.controller("myCtrl", function($scope) {
 			initModsCustom: initModsCustom,
 			removeCustomMod: function(customMod) { this.initModsCustom.splice(this.initModsCustom.indexOf(customMod),1); },
 			initModsAuto: initModsAuto,
-			
 			initMod: function () { return initModsCustom.reduce(function(a,b) { return a + parseInt(b["modifier"]); },0)+initModsAuto.reduce(function(a,b) { return a + parseInt(b["modifier"]); },0); },
 			initPassAdj: initPassAdj,
 			initBaseRolls: initBaseRolls,
@@ -136,10 +137,10 @@ app.controller("myCtrl", function($scope) {
 			// Start new pass
 			$scope.charArr.forEach( function (obj) { obj.initPassAdj = obj.initPassAdj-10; });
 			$scope.charArr.forEach( function (obj) { obj.activity = 'active'; });
-			
+
 			// New round if all characters have negative/0 initiative
 			if ($scope.charArr.filter(function (objArr) { return objArr.initCur() > 0; }).length == 0) {
-				$scope.charArr.forEach( function (obj) { 
+				$scope.charArr.forEach( function (obj) {
 					obj.initNewRound();
 				});
 			}
