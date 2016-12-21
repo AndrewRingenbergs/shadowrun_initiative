@@ -35,16 +35,15 @@
                             <span class="tooltip">
                                 <span style="display: inline-table;">
                                     <span class="chipDataRow">
-                                        <input ng-model="char.initBase" class="chipData"></input>
-                                        <span style="display: table-cell; vertical-align: middle;"> + </span>
-                                        <span class="chipData">{{char.initiative}}</span>
+                                         <span class="chipData dataRoll">
+                                            <span class="textPrior">{{char.initBase}}</span>
+                                            <span class="textNew">{{char.initBreakdown()}}</span>
+                                        </span>                                        
                                         <span style="display: table-cell; vertical-align: middle;"> + </span>
                                         <input ng-model="char.initMod" type="number" class="chipData"></input>
                                         <span style="display: table-cell; vertical-align: middle;"> = </span>
-                                        <span class="chipData dataRoll">
-                                            <span class="textPrior">{{char.initCur()}}</span>
-                                            <span class="textNew">{{char.initBreakdown()}}</span>
-                                        </span>
+                                        <span class="chipData">{{char.initCur()}}</span>
+                                       
                                     </span>
                                 </span>
                             </span>
@@ -61,6 +60,16 @@
                                 </span>
                             </span>
                         </span>
+                        <div class="dropdown">
+                            <button class="dropbtn">{{char.initSpace}}</button>
+                            <div class="dropdown-content">
+                                <a 
+                                    ng-repeat="initSpaceOption in char.initSpaceOptions"
+                                    href="#"
+                                    ng-click="setInitSpace(char,initSpaceOption)">{{initSpaceOption.name}}
+                                </a>
+                            </div>
+                        </div>
                     </span>
                 </span>
                 <span class="closebtn" ng-click="deleteChip(char)"> &#215 </span>                
