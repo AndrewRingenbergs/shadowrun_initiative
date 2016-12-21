@@ -25,7 +25,7 @@ app.controller("myCtrl", function($scope) {
 				{name:"Matrix: Hot", baseDice:"4d6", attribute: dataProcessing+intuition},
 				{name:"Rigging AR", baseDice:"1d6", attribute: reaction+intuition}];
 		var initSpace = initSpaceOptions[0].name;
-		var initBase = initSpaceOptions[0].baseDice;
+		var initBaseDice = initSpaceOptions[0].baseDice;
 		var initAttr = initSpaceOptions[0].attribute;
 
 		return {
@@ -34,20 +34,21 @@ app.controller("myCtrl", function($scope) {
 
 			initSpace: initSpace,
 			initSpaceOptions: initSpaceOptions,
-			initBase: initBase,
+			initBaseDice: initBaseDice,
 			initAttr: initAttr,
 			setInit: function ( obj ) {
 				this.initSpace = obj.name;
-				this.initBase = obj.baseDice;
+				this.initBaseDice = obj.baseDice;
 				this.initAttr = obj.attribute;
 				},
-			
+
 			initMod: initMod,
 			initPassAdj: initPassAdj,
 			initBaseRolls: initBaseRolls,
+			initBase: function() { return this.initBaseRolls.slice(0,this.initBaseDice.split("d")[0]).reduce(function(a,b) { return a + b; },0)+this.initAttr; },
 			initNewRound: function() { this.initBaseRolls = rollDice(10); this.initPassAdj=0; this.randomCoin = Math.floor(Math.random()*100+1); console.log("New initiative round"); },
-			initCur: function() { return this.initBaseRolls.slice(0,this.initBase.split("d")[0]).reduce(function(a,b) { return a + b; },0)+this.initAttr+this.initMod+this.initPassAdj; },
-			initBreakdown: function() { return "(" + this.initBaseRolls.slice(0,this.initBase.split("d")[0]) + ")+" + this.initAttr; },
+			initCur: function() { return this.initBaseRolls.slice(0,this.initBaseDice.split("d")[0]).reduce(function(a,b) { return a + b; },0)+this.initAttr+this.initMod+this.initPassAdj; },
+			initBreakdown: function() { return "(" + this.initBaseRolls.slice(0,this.initBaseDice.split("d")[0]) + ")+" + this.initAttr; },
 			healthPMax: 6,
 			damageP: 0,
 			activity: "active",
@@ -138,5 +139,6 @@ app.controller("myCtrl", function($scope) {
 	$scope.charArr.push(createChar("Beta", 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0));
 
 	console.log("Page load finished");
+	console.log($scope.charArr);
 
 });
