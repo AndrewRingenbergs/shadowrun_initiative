@@ -63,7 +63,9 @@
                                                                 ng-repeat="initModCustom in char.initModsCustom"
                                                                 class="chipDataRow"
                                                             >
-                                                                <span class="rmbtn" ng-click="char.removeCustomMod(initModCustom)"> &#215 </span>
+                                                                <span class="rmbtn-holder">
+                                                                    <span class="rmbtn" ng-click="char.removeCustomMod(initModCustom)"> &#215 </span>
+                                                                </span>
                                                                 <span class="chipDataCell">
                                                                     <input class="initModData longText" ng-model="initModCustom.descr"></input>
                                                                 </span>
@@ -74,14 +76,21 @@
                                                         </span>
                                                         <span class="chipDataTable">
                                                             <span class="chipDataRow">
-                                                                <span class="chipDataCell">Remove button here</span>
+                                                                <span class="chipDataCell"></span>
                                                                 <span class="chipDataCell">Description</span>
                                                                 <span class="chipDataCell">Modifier</span>
                                                             </span>
-                                                            <span class="chipDataRow">
-                                                                <span class="chipDataCell">data</span>
-                                                                <span class="chipDataCell">data</span>
-                                                                <span class="chipDataCell">data</span>
+                                                            <span
+                                                                ng-repeat="initModAuto in char.initModsAuto"
+                                                                class="chipDataRow"
+                                                            >
+                                                                <span class="rmbtn-holder"></span>
+                                                                <span class="chipDataCell">
+                                                                    <input class="initModData longText" ng-model="initModAuto.descr"></input>
+                                                                </span>
+                                                                <span class="chipDataCell">
+                                                                    <input class="initModData smallInput" ng-model="initModAuto.modifier"></input>
+                                                                </span>
                                                             </span>
                                                         </span>
                                                     </span>

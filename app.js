@@ -17,7 +17,7 @@ app.controller("myCtrl", function($scope) {
 		var initPassAdj = 0;
 		var randomCoin = Math.floor(Math.random()*100+1);
 
-		var initSpaceOptions=[
+		var initSpaceOptions = [
 				{name:"Meatspace", baseDice:"1d6", attribute: reaction+intuition},
 				{name:"Astral", baseDice:"2d6", attribute: intuition*2},
 				{name:"Matrix: AR", baseDice:"1d6", attribute: reaction+intuition},
@@ -28,10 +28,16 @@ app.controller("myCtrl", function($scope) {
 		var initBaseDice = initSpaceOptions[0].baseDice;
 		var initAttr = initSpaceOptions[0].attribute;
 
-		var initModsCustom=[
-			{descr:"Example A",modifier:1},
-			{descr:"Example B",modifier:-2},
-		]
+		var initModsCustom = [
+			{descr: "Example A", modifier: 1},
+			{descr: "Example B", modifier: -2},
+		];
+
+		var initModsAuto = [
+			{descr: "Example C", modifier: 0},
+		];
+
+		var damageP=0;
 
 		return {
 			guid: guid(),
@@ -49,7 +55,9 @@ app.controller("myCtrl", function($scope) {
 
 			initModsCustom: initModsCustom,
 			removeCustomMod: function(customMod) { this.initModsCustom.splice(this.initModsCustom.indexOf(customMod),1); },
-			
+			initModsAuto: initModsAuto,
+
+
 			initMod: initMod,
 			initPassAdj: initPassAdj,
 			initBaseRolls: initBaseRolls,
@@ -60,7 +68,7 @@ app.controller("myCtrl", function($scope) {
 
 
 			healthPMax: 6,
-			damageP: 0,
+			damageP: damageP,
 			activity: "active",
 			body: body,
 			agility: agility,
