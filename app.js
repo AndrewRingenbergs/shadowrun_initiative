@@ -28,6 +28,11 @@ app.controller("myCtrl", function($scope) {
 		var initBaseDice = initSpaceOptions[0].baseDice;
 		var initAttr = initSpaceOptions[0].attribute;
 
+		var initModsCustom=[
+			{descr:"Example A",modifier:1},
+			{descr:"Example B",modifier:-2},
+		]
+
 		return {
 			guid: guid(),
 			name: name,
@@ -42,6 +47,9 @@ app.controller("myCtrl", function($scope) {
 				this.initAttr = obj.attribute;
 				},
 
+			initModsCustom: initModsCustom,
+			removeCustomMod: function(customMod) { this.initModsCustom.splice(this.initModsCustom.indexOf(customMod),1); },
+			
 			initMod: initMod,
 			initPassAdj: initPassAdj,
 			initBaseRolls: initBaseRolls,
@@ -49,6 +57,8 @@ app.controller("myCtrl", function($scope) {
 			initNewRound: function() { this.initBaseRolls = rollDice(10); this.initPassAdj=0; this.randomCoin = Math.floor(Math.random()*100+1); console.log("New initiative round"); },
 			initCur: function() { return this.initBaseRolls.slice(0,this.initBaseDice.split("d")[0]).reduce(function(a,b) { return a + b; },0)+this.initAttr+this.initMod+this.initPassAdj; },
 			initBreakdown: function() { return "(" + this.initBaseRolls.slice(0,this.initBaseDice.split("d")[0]) + ")+" + this.initAttr; },
+
+
 			healthPMax: 6,
 			damageP: 0,
 			activity: "active",

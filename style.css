@@ -147,3 +147,30 @@
 .healthbox.marked {
     background-color: #a50f0f;
 }
+
+.initModData {
+    height: 30px;
+	background-color: #ffffff;
+}
+
+.longText {
+    width: 130px;
+}
+
+.smallInput {
+    width: 50px;
+}
+
+.rmbtn {
+    margin: 0px, 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.rmbtn:hover {
+    color: whitesmoke;
+}
