@@ -1,53 +1,18 @@
-.column {
-    float: left;
-    margin: 15px;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.characterSheet {
-    display: inline-block;
-    width: 60%;
-    height: 100%;
-    background-color: #555;
-    border-radius: 10px;
-    vertical-align:top;
-    color:#fff;
-}
-
-.characterSheet .sheetSection {
-    display: inline-block;
-    width: 50%;
-    margin: 2%;
-}
-
-.characterSheet .sheetSection .sheetData {
-    display: block;
-    width: 100%;
-}
-
-.defaultChar {
-	background-color: 'white';
-	transition: 0.3s;
-}
-
 .activeChar {
 	background-color: #C9F6F2;
 	transition: 0.3s;
-}
-
-.actedChar {
-	background-color: #C3B88C;
 }
 
 .charContainer {
     display: inline-block;
     width: 40%;
     vertical-align:top;
+}
+
+.characterList {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
 }
 
 .characterList .characterChip {
@@ -66,61 +31,24 @@
     background-color: cadetblue;
 }
 
-.characterList {
-    list-style-type: none;
-    padding: inherit;
-    margin: 0px;
-}
-
-characterChip .chipDataTable {
+.chipDataTable {
     display: inline-table;
-    float: left;
 }
 
 .chipDataRow {
     display: table-row;
 }
 
-.chipDataHeader {
+.chipDataCell {
     display: table-cell;
-    float: left;
-    margin: 2px 5px 0px 5px;
-    width: 50px;
-    font-size: 12px;
-	text-align: center;
-    font-weight: bold;
-    padding: 0px 2px;
+    padding: 2px;
 }
 
-li .chipData {
-    position: relative;
-    display: table-cell;
-    float: left;
-    margin: 0px 5px 10px 5px;
+.chipData {
     height: 30px;
     width: 50px;
 	background-color: #ffffff;
 	text-align: center;
-}
-
-.tooltip .chipData {
-    color: black;
-}
-
-li .chipDataLabel {
-    padding: 3px 2px;
-}
-
-li .textNew {
-    visibility: hidden;
-}
-
-li .dataRoll:hover .textPrior {
-    display: none;
-}
-
-li .dataRoll:hover .textNew {
-    visibility: visible;
 }
 
 .closebtn {
@@ -135,81 +63,6 @@ li .dataRoll:hover .textNew {
 
 .closebtn:hover {
     color: #000;
-}
-
-/* Tooltip container */
-/*
-.healthTooltip {
-    position: relative;
-    display: inline-block;
-    margin: 10px 5px 10px 5px;
-    height: 30px;
-    width: 30px;
-}*/
-
-/* Tooltip text */
-.tooltip {
-    visibility: hidden;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 2px;
-
-    /* Position the tooltip text */
-    position: absolute;
-    z-index: 1;
-    bottom: -15px;
-    left: 0%;
-
-    /* Fade in tooltip */
-    opacity: 0;
-    transition: opacity 1s;
-}
-
-/* Show the tooltip text when you mouse over the tooltip container */
-.chipData:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
-}
-
-.tooltip:hover {
-    visibility: visible;
-    opacity: 1;
-}
-
-.tooltip .healthbox {
-    display: inline-block;
-    background-color: #fff;
-    height: 10px;
-    width: 10px;
-    margin: 1%;
-    display: inline-flex;
-}
-
-.tooltip .healthbox:not(.marked):hover {
-    background-color: grey;
-}
-
-.tooltip .healthbox.marked {
-    background-color: #a50f0f;
-}
-
-.sheetDataItemName {
-    display: inline-block;
-    height: 100%;
-    margin: 5px;
-}
-
-.sheetDataInput, .sheetDataOutput {
-    float: right;
-    height: 100%;
-    width: 30px;
-    margin: 2px;
-}
-
-.columnHalf {
-    display: block;
-    width: 50%;
 }
 
 /* Style The Dropdown Button */
@@ -258,4 +111,39 @@ li .dataRoll:hover .textNew {
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
+}
+
+.tooltip_alt {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-content {
+    display: none;
+    position: absolute;
+    background-color: #555;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Show the dropdown menu on hover */
+.tooltip_alt:hover .tooltip-content {
+    display: block;
+}
+
+.healthbox {
+    display: inline-block;
+    background-color: #fff;
+    height: 10px;
+    width: 10px;
+    margin: 1%;
+    display: inline-flex;
+}
+
+.healthbox:not(.marked):hover {
+    background-color: grey;
+}
+
+.healthbox.marked {
+    background-color: #a50f0f;
 }

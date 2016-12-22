@@ -24,54 +24,65 @@
             >
                 <span class="chipDataTable">
                     <header class="chipDataRow">
-                        <span class="chipDataHeader">name</span>
-                        <span class="chipDataHeader">init</span>
-                        <span class="chipDataHeader">health</span>
+                        <span class="chipDataCell">name</span>
+                        <span class="chipDataCell">init</span>
+                        <span class="chipDataCell">health</span>
                     </header>
                     <span class="chipDataRow">
-                        <input ng-model="char.name" class="chipData"></input> 
-                        <span class="chipData chipDataLabel">
-                            {{char.initCur()}}
-                            <span class="tooltip">
-                                <span style="display: inline-table;">
-                                    <span class="chipDataRow">
-                                         <span class="chipData dataRoll">
-                                            <span class="textPrior">{{char.initBase()}}</span>
-                                            <span class="textNew">{{char.initBreakdown()}}</span>
-                                        </span>                                        
-                                        <span style="display: table-cell; vertical-align: middle;"> + </span>
-                                        <input ng-model="char.initMod" type="number" class="chipData"></input>
-                                        <span style="display: table-cell; vertical-align: middle;"> + </span>
-                                         <span class="chipData dataRoll">{{char.initPassAdj}}</span>
-                                        <span style="display: table-cell; vertical-align: middle;"> = </span>
-                                        <span class="chipData">{{char.initCur()}}</span>
-                                       
+                        <span class="chipDataCell">
+                            <input ng-model="char.name" class="chipData"></input>
+                        </span> 
+                        <span class="chipDataCell">
+                            <span class="tooltip_alt">
+                                <span class="chipData">{{char.initCur()}}</span>
+                                <span class="tooltip-content">
+                                    <span class="chipDataTable">
+                                        <span class="chipDataRow">
+                                            <span class="chipDataCell">
+                                                <span class="chipData">{{char.initBreakdown()}}</span>
+                                            </span>                                     
+                                            <span class="chipDataCell" style="vertical-align: middle;"> + </span>
+                                            <span class="chipDataCell">
+                                                <input ng-model="char.initMod" type="number" class="chipData"></input>
+                                            </span>
+                                            <span class="chipDataCell" style="vertical-align: middle;"> + </span>
+                                            <span class="chipDataCell">
+                                                <span class="chipData">{{char.initPassAdj}}</span>
+                                            </span>
+                                            <span class="chipDataCell" style="vertical-align: middle;"> = </span>
+                                            <span class="chipDataCell">
+                                                <span class="chipData">{{char.initCur()}}</span>
+                                            </span>
+                                        </span>
                                     </span>
                                 </span>
                             </span>
                         </span>
-                        <span class="chipData chipDataLabel">
-                            {{char.damageP}}
-                            <span class="tooltip">
-                                <span
-                                    ng-repeat="h in [1, 2, 3, 4, 5, 6]"
-                                    class="healthbox"
-                                    ng-click="healthBoxClick(char, h)"
-                                    ng-class="{'marked': char.damageP >= h}"
-                                >
+                        <span class="chipDataCell">
+                            <span class="tooltip_alt">
+                                <span class="chipData">{{char.damageP}}</span>
+                                <span class="tooltip-content">
+                                    <span
+                                        ng-repeat="h in [1, 2, 3, 4, 5, 6]"
+                                        class="healthbox"
+                                        ng-click="healthBoxClick(char, h)"
+                                        ng-class="{'marked': char.damageP >= h}"
+                                    ></span>
                                 </span>
                             </span>
                         </span>
-                        <div class="dropdown">
-                            <button class="dropbtn">{{char.initSpace}}</button>
-                            <div class="dropdown-content">
-                                <a 
-                                    ng-repeat="initSpaceOption in char.initSpaceOptions"
-                                    href="#"
-                                    ng-click="setInitSpace(char,initSpaceOption)">{{initSpaceOption.name}}
-                                </a>
+                        <span class="chipDataCell">
+                            <div class="dropdown">
+                                <button class="dropbtn">{{char.initSpace}}</button>
+                                <div class="dropdown-content">
+                                    <a 
+                                        ng-repeat="initSpaceOption in char.initSpaceOptions"
+                                        href="#"
+                                        ng-click="setInitSpace(char,initSpaceOption)">{{initSpaceOption.name}}
+                                    </a>
+                                </div>
                             </div>
-                        </div>
+                        </span>
                     </span>
                 </span>
                 <span class="closebtn" ng-click="deleteChip(char)"> &#215 </span>                
