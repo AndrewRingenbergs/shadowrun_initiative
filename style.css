@@ -177,3 +177,20 @@
 .rmbtn-holder:hover .rmbtn {
     color: whitesmoke;
 }
+
+.addbtn-holder {
+    width: 20px;
+}
+
+.addbtn-holder .addbtn {
+    color: mediumspringgreen;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.addbtn-holder:hover .rmbtn {
+    color: whitesmoke;
+}

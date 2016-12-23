@@ -36,21 +36,44 @@
                             <span class="tooltip_alt">
                                 <span class="chipData">{{char.initCur()}}</span>
                                 <span class="tooltip-content">
-                                    <span class="chipDataTable">
-                                        <span class="chipDataRow">
-                                            <span class="chipDataCell">
-                                                <span class="chipData">{{char.initBreakdown()}}</span>
-                                            </span>                                     
-                                            <span class="chipDataCell" style="vertical-align: middle;"> + </span>
-                                            <span class="chipDataCell">
-                                                <span class="tooltip_alt initMod">
+                                    <span>
+                                        <span class="chipDataTable">
+                                            <span class="chipDataRow">
+                                                <span class="chipDataCell">
+                                                    <span class="chipData">{{char.initBreakdown()}}</span>
+                                                </span>                                     
+                                                <span class="chipDataCell" style="vertical-align: middle;"> + </span>
+                                                <span class="chipDataCell">
                                                     <input ng-model="char.initMod" type="number" class="chipData"></input>
-                                                    <span class="tooltip-content">
+                                                </span>
+                                                <span class="chipDataCell" style="vertical-align: middle;"> + </span>
+                                                <span class="chipDataCell">
+                                                    <span class="chipData">{{char.initPassAdj}}</span>
+                                                </span>
+                                                <span class="chipDataCell" style="vertical-align: middle;"> = </span>
+                                                <span class="chipDataCell">
+                                                    <span class="chipData">{{char.initCur()}}</span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </span>
+                                    <span>
                                                         <span class="chipDataTable">
                                                             <span class="chipDataRow">
-                                                                <span class="chipDataCell">Add button</span>
+                                                                <span class="chipDataCell"></span>
                                                                 <span class="chipDataCell">Description</span>
                                                                 <span class="chipDataCell">Modifier</span>
+                                                            </span>
+                                                            <span class="chipDataRow">
+                                                                <span class="addbtn-holder">
+                                                                    <span class="addbtn" ng-click="char.addCustomMod()"> + </span>
+                                                                </span>
+                                                                <span class="chipDataCell">
+                                                                    <input class="initModData longText" ng-model="char.initModCustomNew.descr"></input>
+                                                                </span>
+                                                                <span class="chipDataCell">
+                                                                    <input class="initModData smallInput" ng-model="char.initModCustomNew.modifier"></input>
+                                                                </span>
                                                             </span>
                                                         </span>
                                                         <span class="chipDataTable">
@@ -94,18 +117,6 @@
                                                             </span>
                                                         </span>
                                                     </span>
-                                                </span>
-                                            </span>
-                                            <span class="chipDataCell" style="vertical-align: middle;"> + </span>
-                                            <span class="chipDataCell">
-                                                <span class="chipData">{{char.initPassAdj}}</span>
-                                            </span>
-                                            <span class="chipDataCell" style="vertical-align: middle;"> = </span>
-                                            <span class="chipDataCell">
-                                                <span class="chipData">{{char.initCur()}}</span>
-                                            </span>
-                                        </span>
-                                    </span>
                                 </span>
                             </span>
                         </span>

@@ -28,14 +28,23 @@ app.controller("myCtrl", function($scope) {
 		var initBaseDice = initSpaceOptions[0].baseDice;
 		var initAttr = initSpaceOptions[0].attribute;
 
+		function createInitMod(descr, modifier) {
+			return {
+				descr: descr,
+				modifier: modifier
+			}
+		}
+
 		var initModsCustom = [
-			{descr: "Example A", modifier: 1},
-			{descr: "Example B", modifier: -2},
+			new createInitMod("Example A", 1),
+			new createInitMod("Example B", -2)
 		];
 
 		var initModsAuto = [
-			{descr: "Example C", modifier: 0},
+			new createInitMod("Example C", -1)
 		];
+
+		var initModCustomNew = { descr: "", modifier: 0 };
 
 		var damageP=0;
 
@@ -53,11 +62,12 @@ app.controller("myCtrl", function($scope) {
 				this.initAttr = obj.attribute;
 				},
 
+			initModCustomNew: initModCustomNew,
+			addCustomMod: function() { this.initModsCustom.push(new createInitMod(initModCustomNew.descr,initModCustomNew.modifier)); this.initModCustomNew.descr = ""; this.initModCustomNew.modifier = 0; },
 			initModsCustom: initModsCustom,
 			removeCustomMod: function(customMod) { this.initModsCustom.splice(this.initModsCustom.indexOf(customMod),1); },
 			initModsAuto: initModsAuto,
-
-
+			
 			initMod: initMod,
 			initPassAdj: initPassAdj,
 			initBaseRolls: initBaseRolls,
