@@ -12,7 +12,7 @@ app.controller("myCtrl", function($scope) {
 		return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 		};
 
-	function createChar(name, initMod, body, agility, reaction, strength, willpower, logic, intuition, charisma, edge, essence, magres, dataProcessing) {
+	function createChar(name, body, agility, reaction, strength, willpower, logic, intuition, charisma, edge, essence, magres, dataProcessing) {
 		var initBaseRolls = rollDice(10);
 		var initPassAdj = 0;
 		var randomCoin = Math.floor(Math.random()*100+1);
@@ -37,7 +37,7 @@ app.controller("myCtrl", function($scope) {
 
 		var initModsCustom = [
 			new createInitMod("Example A", 1),
-			new createInitMod("Example B", -2)
+			new createInitMod("Example B", 2)
 		];
 
 		var initModsAuto = [
@@ -68,14 +68,13 @@ app.controller("myCtrl", function($scope) {
 			removeCustomMod: function(customMod) { this.initModsCustom.splice(this.initModsCustom.indexOf(customMod),1); },
 			initModsAuto: initModsAuto,
 			
-			initMod: initMod,
+			initMod: function () { return initModsCustom.reduce(function(a,b) { return a + parseInt(b["modifier"]); },0)+initModsAuto.reduce(function(a,b) { return a + parseInt(b["modifier"]); },0); },
 			initPassAdj: initPassAdj,
 			initBaseRolls: initBaseRolls,
 			initBase: function() { return this.initBaseRolls.slice(0,this.initBaseDice.split("d")[0]).reduce(function(a,b) { return a + b; },0)+this.initAttr; },
 			initNewRound: function() { this.initBaseRolls = rollDice(10); this.initPassAdj=0; this.randomCoin = Math.floor(Math.random()*100+1); console.log("New initiative round"); },
-			initCur: function() { return this.initBaseRolls.slice(0,this.initBaseDice.split("d")[0]).reduce(function(a,b) { return a + b; },0)+this.initAttr+this.initMod+this.initPassAdj; },
+			initCur: function() { return this.initBaseRolls.slice(0,this.initBaseDice.split("d")[0]).reduce(function(a,b) { return a + b; },0)+this.initAttr+this.initMod()+this.initPassAdj; },
 			initBreakdown: function() { return "(" + this.initBaseRolls.slice(0,this.initBaseDice.split("d")[0]) + ")+" + this.initAttr; },
-
 
 			healthPMax: 6,
 			damageP: damageP,
@@ -107,7 +106,7 @@ app.controller("myCtrl", function($scope) {
 	$scope.addChar = function() {
 		console.log($scope.charArr);
 		console.log('Creating New Char');
-		newChar = createChar("NA", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+		newChar = createChar("NA", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 		$scope.charArr.push(newChar);
 	}
 
@@ -163,8 +162,8 @@ app.controller("myCtrl", function($scope) {
 	}
 
 	$scope.charArr = [];
-	$scope.charArr.push(createChar("Alpha", 0, 0, 0, 3, 0, 0, 0, 4, 0, 0, 0, 0, 0));
-	$scope.charArr.push(createChar("Beta", 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0));
+	$scope.charArr.push(createChar("Alpha", 0, 0, 3, 0, 0, 0, 4, 0, 0, 0, 0, 0));
+	$scope.charArr.push(createChar("Beta", 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0));
 
 	console.log("Page load finished");
 	console.log($scope.charArr);

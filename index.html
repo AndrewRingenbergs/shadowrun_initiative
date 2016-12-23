@@ -44,7 +44,7 @@
                                                 </span>                                     
                                                 <span class="chipDataCell" style="vertical-align: middle;"> + </span>
                                                 <span class="chipDataCell">
-                                                    <input ng-model="char.initMod" type="number" class="chipData"></input>
+                                                    <span class="chipData">{{char.initMod()}}</span>
                                                 </span>
                                                 <span class="chipDataCell" style="vertical-align: middle;"> + </span>
                                                 <span class="chipDataCell">
@@ -72,7 +72,7 @@
                                                                     <input class="initModData longText" ng-model="char.initModCustomNew.descr"></input>
                                                                 </span>
                                                                 <span class="chipDataCell">
-                                                                    <input class="initModData smallInput" ng-model="char.initModCustomNew.modifier"></input>
+                                                                    <input class="initModData smallInput" type="number" ng-model="char.initModCustomNew.modifier"></input>
                                                                 </span>
                                                             </span>
                                                         </span>
@@ -93,7 +93,7 @@
                                                                     <input class="initModData longText" ng-model="initModCustom.descr"></input>
                                                                 </span>
                                                                 <span class="chipDataCell">
-                                                                    <input class="initModData smallInput" ng-model="initModCustom.modifier"></input>
+                                                                    <input class="initModData smallInput" type="number" ng-model="initModCustom.modifier"></input>
                                                                 </span>
                                                             </span>
                                                         </span>
