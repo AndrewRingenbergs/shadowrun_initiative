@@ -22,7 +22,6 @@
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.24.1",
-    "raw-loader": "^0.5.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0",
     "webpack-append": "^0.1.2",

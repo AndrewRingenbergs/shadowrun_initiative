@@ -1,5 +1,7 @@
 
 var webpack = require('webpack');
+var pkg = require('./package.json')
+
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -25,7 +27,7 @@ module.exports = function() {
 
   config.entry = isTest ? {} : {
     app: './src/app.js',
-    vendor: ['angular'],
+    vendor: Object.keys(pkg.dependencies),
     styles: './src/styles/style.css'
   };
 
@@ -43,7 +45,7 @@ module.exports = function() {
   }];
 
   config.plugins = [
-    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.js", Infinity)
+    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.[hash].js", Infinity)
   ];
 
   if (!isTest) {
