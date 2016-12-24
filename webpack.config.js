@@ -25,6 +25,7 @@ module.exports = function() {
 
   config.entry = isTest ? {} : {
     app: './src/app.js',
+    vendor: ['angular'],
     styles: './src/styles/style.css'
   };
 
@@ -42,12 +43,7 @@ module.exports = function() {
   }];
 
   config.plugins = [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendors',
-      minChunks: function(module) {
-        return isExternal(module);
-      }
-    })
+    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.js", Infinity)
   ];
 
   if (!isTest) {
