@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - stable
+branches:
+  except:
+    - gh-pages
+before_deploy:
+  - npm run build
+deploy:
+  provider: script
+  script: npm run gh-pages-travis
+  on:
+    branch: master
