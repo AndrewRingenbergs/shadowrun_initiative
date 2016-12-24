@@ -4,7 +4,7 @@
   "description": "A tool to allow showdowrunners to know who should roll the dice",
   "scripts": {
     "build": "rimraf dist && webpack --bail --progress --profile",
-    "deploy": "npm run build&&gh-pages -d dist",
+    "deploy": "npm run build&&gh-pages-travis",
     "server": "webpack-dev-server --inline --progress",
     "start": "npm run server",
     "test": "echo \"Error: no test specified\""

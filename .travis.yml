@@ -4,10 +4,15 @@ node_js:
 branches:
   except:
     - gh-pages
-before_deploy:
-  - npm run build
 deploy:
   provider: script
-  script: npm run gh-pages-travis
+  script: npm run deploy
   on:
     branch: master
+env:
+  global:
+    - SSH_KEY="id_rsa"
+    - GIT_NAME="AndrewRingenbergs - CI"
+    - GIT_EMAIL="AndrewRingenbergs@CI.com"
+    - SOURCE_DIR="dist"
+    - DEPLOY_BRANCH="master"
