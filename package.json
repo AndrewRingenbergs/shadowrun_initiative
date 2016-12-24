@@ -24,6 +24,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "gh-pages": "^0.12.0",
     "html-webpack-plugin": "^2.24.1",
+    "rimraf": "^2.5.4",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0",
     "webpack-append": "^0.1.2",
