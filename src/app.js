@@ -190,7 +190,7 @@ app.controller("myCtrl", function($scope) {
 	console.log("Page load finished");
 	console.log($scope.charArr);
 
-	
+
 	$scope.createInitArr = function() {  
 		var out = [];
 		for(var i = 0; i < $scope.charArr.length; i++) {
@@ -201,6 +201,10 @@ app.controller("myCtrl", function($scope) {
 		return out;
 	};
 
-	$scope.initArr = $scope.createInitArr()
+	$scope.$watch( // consider changing this to be less computationally expensive (i.e. less deep))
+		"charArr",
+		function(newVal, oldVal) { $scope.initArr = $scope.createInitArr(); console.log("test",$scope.initArr); },
+		true
+	);
 
 });

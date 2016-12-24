@@ -15,9 +15,9 @@
     <div class="initTrackerContainer">
         <ul class="initTrackerList">
             <li
-                ng-repeat="char in initArr | orderBy:['-init']"
+                ng-repeat="token in initArr | orderBy:['-init']"
             >
-            {{char.name}} - {{char.init}}
+            {{token.name}} - {{token.init}}
             </li>
         </ul>
     </div>
