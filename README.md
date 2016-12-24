@@ -14,5 +14,5 @@
 2. open localhost:8080
 
 ### Build (comming soon)
-1. `npm build`
+1. `npm run build`
 
