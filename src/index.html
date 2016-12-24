@@ -12,6 +12,16 @@
         <input type="button" value="add" ng-click="addChar()">
     </div>
 
+    <div class="initTrackerContainer">
+        <ul class="initTrackerList">
+            <li
+                ng-repeat="char in initArr | orderBy:['-init']"
+            >
+            {{char.name}} - {{char.init}}
+            </li>
+        </ul>
+    </div>
+
     <div class="charContainer" id="charContainer">
         <ul class="characterList" id="characterList">
             <li

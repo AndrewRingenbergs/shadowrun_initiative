@@ -116,6 +116,7 @@ app.controller("myCtrl", function($scope) {
 		};
 	}
 
+
 	function rollDice(dice) {
 		var rolls = [];
 		for(var i = 1; i <= dice; i++) {
@@ -188,5 +189,18 @@ app.controller("myCtrl", function($scope) {
 
 	console.log("Page load finished");
 	console.log($scope.charArr);
+
+	
+	$scope.createInitArr = function() {  
+		var out = [];
+		for(var i = 0; i < $scope.charArr.length; i++) {
+			for (var init = $scope.charArr[i].initCur(); init > 0; init = init - 10) {
+				out.push( { name: $scope.charArr[i].name, init: init } );
+			}
+		}; 
+		return out;
+	};
+
+	$scope.initArr = $scope.createInitArr()
 
 });
