@@ -1,0 +1,31 @@
+{
+  "name": "shadowrun_initiative",
+  "version": "0.0.1",
+  "description": "A tool to allow showdowrunners to know who should roll the dice",
+  "scripts": {
+    "build": "rimraf dist && webpack --bail --progress --profile",
+    "server": "webpack-dev-server --inline --progress",
+    "start": "npm run server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com/AndrewRingenbergs/shadowrun_initiative.git"
+  },
+  "author": "AndrewRingenbergs",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.6.0"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.26.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "html-webpack-plugin": "^2.24.1",
+    "raw-loader": "^0.5.1",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.14.0",
+    "webpack-append": "^0.1.2",
+    "webpack-dev-server": "^1.16.2"
+  }
+}
