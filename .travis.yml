@@ -5,6 +5,7 @@ branches:
   except:
     - gh-pages
 deploy:
+  skip_cleanup: true
   provider: script
   script: npm run deploy
   on:
