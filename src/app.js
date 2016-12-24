@@ -19,6 +19,8 @@ app.controller("myCtrl", function($scope) {
 		var initPassAdj = 0;
 		var randomCoin = Math.floor(Math.random()*100+1);
 
+		var initManual = false;
+
 		var initSpaceOptions = [
 				{name:"Meatspace", baseDice:"1d6", attribute: reaction+intuition},
 				{name:"Astral", baseDice:"2d6", attribute: intuition*2},
@@ -64,18 +66,37 @@ app.controller("myCtrl", function($scope) {
 				this.initAttr = obj.attribute;
 				},
 
+			initTypeToggle: function () { this.initManual = !this.initManual; },
+
 			initModCustomNew: initModCustomNew,
 			addCustomMod: function() { this.initModsCustom.push(new createInitMod(initModCustomNew.descr,initModCustomNew.modifier)); this.initModCustomNew.descr = ""; this.initModCustomNew.modifier = 0; },
 			initModsCustom: initModsCustom,
 			removeCustomMod: function(customMod) { this.initModsCustom.splice(this.initModsCustom.indexOf(customMod),1); },
 			initModsAuto: initModsAuto,
+			initBaseManual: 0,
+			initType: function() { if (this.initManual) { var out = "Manual" } else { var out = "Auto" }; return out; },
+			initBase: function() { if (this.initManual) {
+										var out = this.initBaseManual;
+									}
+									else {
+										var out = this.initBaseRolls.slice(0,this.initBaseDice.split("d")[0]).reduce(function(a,b) { return a + b; },0)+this.initAttr;
+									};
+									return out; 
+								},
 			initMod: function () { return initModsCustom.reduce(function(a,b) { return a + parseInt(b["modifier"]); },0)+initModsAuto.reduce(function(a,b) { return a + parseInt(b["modifier"]); },0); },
 			initPassAdj: initPassAdj,
 			initBaseRolls: initBaseRolls,
-			initBase: function() { return this.initBaseRolls.slice(0,this.initBaseDice.split("d")[0]).reduce(function(a,b) { return a + b; },0)+this.initAttr; },
 			initNewRound: function() { this.initBaseRolls = rollDice(10); this.initPassAdj=0; this.randomCoin = Math.floor(Math.random()*100+1); console.log("New initiative round"); },
-			initCur: function() { return this.initBaseRolls.slice(0,this.initBaseDice.split("d")[0]).reduce(function(a,b) { return a + b; },0)+this.initAttr+this.initMod()+this.initPassAdj; },
-			initBreakdown: function() { return "(" + this.initBaseRolls.slice(0,this.initBaseDice.split("d")[0]) + ")+" + this.initAttr; },
+			initCur: function() { return this.initBase()+this.initMod()+this.initPassAdj; },
+			initBreakdown: function() { 
+										if (this.initManual) {
+											var out = 0;
+										} 
+										else {
+											var out = "(" + this.initBaseRolls.slice(0,this.initBaseDice.split("d")[0]) + ")+" + this.initAttr;
+										};
+										return out; 
+									},
 
 			healthPMax: 6,
 			damageP: damageP,
@@ -93,6 +114,7 @@ app.controller("myCtrl", function($scope) {
 			magres: magres,
 			dataProcessing: dataProcessing,
 			randomCoin: randomCoin
+			
 		};
 	}
 

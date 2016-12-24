@@ -37,7 +37,8 @@
                                         <span class="chipDataTable">
                                             <span class="chipDataRow">
                                                 <span class="chipDataCell">
-                                                    <span class="chipData">{{char.initBreakdown()}}</span>
+                                                    <span class="chipData" ng-hide="char.initManual">{{char.initBreakdown()}}</span>
+                                                    <input class="chipData" type="number" ng-show="char.initManual" ng-model="char.initBaseManual"></input>
                                                 </span>                                     
                                                 <span class="chipDataCell" style="vertical-align: middle;"> + </span>
                                                 <span class="chipDataCell">
@@ -50,6 +51,9 @@
                                                 <span class="chipDataCell" style="vertical-align: middle;"> = </span>
                                                 <span class="chipDataCell">
                                                     <span class="chipData">{{char.initCur()}}</span>
+                                                </span>
+                                                <span class="chipDataCell">
+                                                    <button ng-click="char.initTypeToggle()">{{char.initType()}}</button>
                                                 </span>
                                             </span>
                                         </span>
