@@ -12,12 +12,16 @@
         <input type="button" value="add" ng-click="addChar()">
     </div>
 
-    <div class="initTrackerContainer">
-        <ul class="initTrackerList">
+    <div>
+        <ul class="initiativeTracker">
             <li
-                ng-repeat="token in initArr | orderBy:['-init']"
+                class="initiativeToken"  
+                ng-repeat="char in charArr |  orderBy:['-initCur()','-edge','-reaction','-intuition','-randomCoin']"
+                ng-hide="char.activity=='acted' || char.initCur()<=0"
             >
-            {{token.name}} - {{token.init}}
+                <span class="tokenData">
+                    {{char.name}} - {{char.initCur()}}
+                </span>
             </li>
         </ul>
     </div>
