@@ -139,12 +139,16 @@
                             <span class="tooltip_alt">
                                 <span class="chipData">{{char.damageP}}</span>
                                 <span class="tooltip-content">
-                                    <span
-                                        ng-repeat="h in [1, 2, 3, 4, 5, 6]"
-                                        class="healthbox"
-                                        ng-click="healthBoxClick(char, h)"
-                                        ng-class="{'marked': char.damageP >= h}"
-                                    ></span>
+                                    <span class="healthTrack">
+                                        <span class="healthTrackTitle">Physical</span>
+                                        <span
+                                            ng-repeat="h in [1, 2, 3, 4]"
+                                            class="healthbox"
+                                            ng-click="healthBoxClick(char, h)"
+                                            ng-class="{'marked': char.damageP >= h}"></span>
+                                        
+                                        </span>
+                                    </span>
                                 </span>
                             </span>
                         </span>
