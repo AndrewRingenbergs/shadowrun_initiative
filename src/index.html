@@ -31,8 +31,7 @@
         <ul class="characterList" id="characterList">
             <li
                 class="characterChip"
-                ng-repeat="char in charArr |  orderBy:['-initCur()','-edge','-reaction','-intuition','-randomCoin']"
-                ng-class="{'activeChar': char.activity=='active', 'selected': char.activity=='selected', 'acted': char.activity=='acted'}"
+                ng-repeat="char in charArr |  orderBy: 'name'"
             >
                 <span class="chipDataTable">
                     <header class="chipDataRow">
