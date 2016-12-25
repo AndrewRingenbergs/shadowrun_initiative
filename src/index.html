@@ -20,7 +20,8 @@
                 ng-hide="char.activity=='acted' || char.initCur()<=0"
             >
                 <span class="tokenData">
-                    {{char.name}} - {{char.initCur()}}
+                    <span>{{char.name}}</span>
+                    <span>({{char.initCur()}})</span>
                 </span>
             </li>
         </ul>
