@@ -49,6 +49,7 @@ app.controller("myCtrl", function($scope) {
 		var initModCustomNew = { descr: "", modifier: 0 };
 
 		var damageP=0;
+		var damageDPModifier = 0;
 
 		return {
 			guid: guid(),
@@ -96,8 +97,19 @@ app.controller("myCtrl", function($scope) {
 										return out; 
 									},
 
-			healthPMax: 6,
-			damageP: damageP,
+			healthPMax: 8+Math.ceil(body/2),
+			healthBoxClick: function(h) {
+								// Set damageP
+								if (this.damageP >= h) {
+									this.damageP = h-1;
+								} 
+								else {
+									this.damageP = h;
+								}
+								this.damageDPModifier=-Math.floor(this.damageP/3);
+								},
+			damageDPModifier,
+
 			activity: "active",
 			body: body,
 			agility: agility,
@@ -116,6 +128,9 @@ app.controller("myCtrl", function($scope) {
 		};
 	}
 
+	$scope.getNumber = function(num) {
+		return new Array(num);   
+	}
 
 	function rollDice(dice) {
 		var rolls = [];
@@ -130,11 +145,6 @@ app.controller("myCtrl", function($scope) {
 		console.log('Creating New Char');
 		newChar = createChar("NA", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 		$scope.charArr.push(newChar);
-	}
-
-	$scope.healthBoxClick = function(char, h) {
-		// Set damageP
-		char.damageP = h;
 	}
 
 	$scope.nextInit = function() {
