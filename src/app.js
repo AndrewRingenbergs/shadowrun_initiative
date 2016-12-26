@@ -13,6 +13,11 @@ app.controller("myCtrl", function($scope) {
 		};
 
 	function createChar(name, body, agility, reaction, strength, willpower, logic, intuition, charisma, edge, essence, magres, dataProcessing) {
+		
+		var damageP = 0;
+		var damageS = 0;
+		var damageDPModifier = 0;
+		
 		var initBaseRolls = rollDice(10);
 		var initPassAdj = 0;
 		var randomCoin = Math.floor(Math.random()*100+1);
@@ -42,15 +47,11 @@ app.controller("myCtrl", function($scope) {
 			new createInitMod("Example B", 2)
 		];
 
-		var initModsAuto = [
-			new createInitMod("Example C", -1)
+		var initModsAuto = [ 
+			new createInitMod("Condition Modifier", damageDPModifier)
 		];
 
 		var initModCustomNew = { descr: "", modifier: 0 };
-
-		var damageP = 0;
-		var damageS = 0;
-		var damageDPModifier = 0;
 
 		return {
 			guid: guid(),
@@ -72,8 +73,9 @@ app.controller("myCtrl", function($scope) {
 			addCustomMod: function() { this.initModsCustom.push(new createInitMod(initModCustomNew.descr,initModCustomNew.modifier)); this.initModCustomNew.descr = ""; this.initModCustomNew.modifier = 0; },
 			initModsCustom: initModsCustom,
 			removeCustomMod: function(customMod) { this.initModsCustom.splice(this.initModsCustom.indexOf(customMod),1); },
-			initModsAuto: initModsAuto,
 			initBaseManual: 0,
+			initModsAuto: initModsAuto,
+			updateInitModsAuto: function() { this.initModsAuto = [ new createInitMod("Condition Modifier", this.damageDPModifier) ]; },
 			initType: function() { if (this.initManual) { var out = "Manual" } else { var out = "Auto" }; return out; },
 			initBase: function() { if (this.initManual) {
 										var out = this.initBaseManual;
@@ -83,7 +85,7 @@ app.controller("myCtrl", function($scope) {
 									};
 									return out; 
 								},
-			initMod: function () { return initModsCustom.reduce(function(a,b) { return a + parseInt(b["modifier"]); },0)+initModsAuto.reduce(function(a,b) { return a + parseInt(b["modifier"]); },0); },
+			initMod: function () { return this.initModsCustom.reduce(function(a,b) { return a + parseInt(b["modifier"]); },0)+this.initModsAuto.reduce(function(a,b) { return a + parseInt(b["modifier"]); },0); },
 			initPassAdj: initPassAdj,
 			initBaseRolls: initBaseRolls,
 			initNewRound: function() { this.initBaseRolls = rollDice(10); this.initPassAdj=0; this.randomCoin = Math.floor(Math.random()*100+1); console.log("New initiative round"); },
@@ -191,7 +193,8 @@ app.controller("myCtrl", function($scope) {
 	$scope.charArr.push(createChar("Alpha", 4, 0, 3, 0, 0, 0, 4, 0, 0, 0, 0, 0));
 	$scope.charArr.push(createChar("Beta", 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0));
 
-	console.log("Page load finished");
+
+	// MOVE THIS STUFF INTO CHARACTER OBJECT IF POSSIBLE
 
 	 $scope.healthBoxClick = function(char,type,h) {
 		if (type === 'P') {
@@ -211,6 +214,9 @@ app.controller("myCtrl", function($scope) {
 			}
 		}
 		char.damageDPModifier = -Math.max(Math.floor(char.damageP/3), Math.floor(char.damageS/3));
+		char.updateInitModsAuto();
 	}
+
+	console.log("Page load finished");
 
 });
