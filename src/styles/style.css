@@ -208,20 +208,27 @@ li .tokenData {
     display: block;
 }
 
-.healthTrack {
-    display: flex;
-    flex-flow: row wrap;
-    width: 36px;
+.healthTrackGroup {
+    float: left;
+    background-color: #555;
     padding: 5px;
+    margin: 0px 2px;
 }
 
-.healthTrack .healthTrackTitle {
+.healthTrackGroup .healthTrackTitle {
     display: inline-block;
-    width: 100%;
+    width: 36px;
     align-content: center;
     font-size: 10px;
     color: white;
     padding: 0px 0px 3px 0px;
+}
+
+.healthTrackGroup .healthTrack {
+    display: flex;
+    flex-flow: row wrap;
+    position: absolute;
+    width: 36px;
 }
 
 .healthTrack .healthbox {

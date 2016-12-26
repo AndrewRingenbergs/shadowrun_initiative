@@ -48,7 +48,8 @@ app.controller("myCtrl", function($scope) {
 
 		var initModCustomNew = { descr: "", modifier: 0 };
 
-		var damageP=0;
+		var damageP = 0;
+		var damageS = 0;
 		var damageDPModifier = 0;
 
 		return {
@@ -96,19 +97,12 @@ app.controller("myCtrl", function($scope) {
 										};
 										return out; 
 									},
-
+			
 			healthPMax: 8+Math.ceil(body/2),
-			healthBoxClick: function(h) {
-								// Set damageP
-								if (this.damageP >= h) {
-									this.damageP = h-1;
-								} 
-								else {
-									this.damageP = h;
-								}
-								this.damageDPModifier=-Math.floor(this.damageP/3);
-								},
-			damageDPModifier,
+			healthSMax: 8+Math.ceil(willpower/2),
+			damageP: damageP,
+			damageS: damageS,
+			damageDPModifier: damageDPModifier,
 
 			activity: "active",
 			body: body,
@@ -194,26 +188,29 @@ app.controller("myCtrl", function($scope) {
 	}
 
 	$scope.charArr = [];
-	$scope.charArr.push(createChar("Alpha", 0, 0, 3, 0, 0, 0, 4, 0, 0, 0, 0, 0));
+	$scope.charArr.push(createChar("Alpha", 4, 0, 3, 0, 0, 0, 4, 0, 0, 0, 0, 0));
 	$scope.charArr.push(createChar("Beta", 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0));
 
 	console.log("Page load finished");
 
-	/*
-	$scope.createInitArr = function() {  
-		var out = [];
-		for(var i = 0; i < $scope.charArr.length; i++) {
-			for (var init = $scope.charArr[i].initCur(); init > 0; init = init - 10) {
-				out.push( { name: $scope.charArr[i].name, init: init } );
+	 $scope.healthBoxClick = function(char,type,h) {
+		if (type === 'P') {
+			if (char.damageP >= h) {
+				char.damageP = h-1;
+			} 
+			else {
+				char.damageP = h;
 			}
-		}; 
-		return out;
-	};
-
-	$scope.$watch( // consider changing this to be less computationally expensive (i.e. less deep))
-		"charArr",
-		function(newVal, oldVal) { $scope.initArr = $scope.createInitArr(); console.log("test",$scope.initArr); },
-		true
-	);*/
+		}
+		else if (type === 'S') {
+			if (char.damageS >= h) {
+				char.damageS = h-1;
+			} 
+			else {
+				char.damageS = h;
+			}
+		}
+		char.damageDPModifier = -Math.max(Math.floor(char.damageP/3), Math.floor(char.damageS/3));
+	}
 
 });

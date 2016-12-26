@@ -136,19 +136,24 @@
                             </span>
                         </span>
                         <span class="chipDataCell">
-                            <span class="tooltip_alt">
-                                <span class="chipData">{{char.damageDPModifier}}</span>
-                                <span class="tooltip-content">
-                                    <span class="healthTrack">
-                                        <span class="healthTrackTitle">Physical</span>
-                                        <span
-                                            ng-repeat="h in getNumber(char.healthPMax) track by $index"
-                                            class="healthbox"
-                                            ng-click="char.healthBoxClick($index+1)"
-                                            ng-class="{'marked': char.damageP >= $index+1}"></span>
-                                        
-                                        </span>
-                                    </span>
+                            <span class="healthTrackGroup">
+                                <span class="healthTrackTitle">Physical</span>
+                                <span class="healthTrack">
+                                    <span
+                                        ng-repeat="h in getNumber(char.healthPMax) track by $index"
+                                        class="healthbox"
+                                        ng-click="healthBoxClick(char,'P',$index+1)"
+                                        ng-class="{'marked': char.damageP >= $index+1}"></span>
+                                </span>
+                            </span>
+                            <span class="healthTrackGroup">
+                                <span class="healthTrackTitle">Stun</span>
+                                <span class="healthTrack">
+                                    <span
+                                        ng-repeat="h in getNumber(char.healthSMax) track by $index"
+                                        class="healthbox"
+                                        ng-click="healthBoxClick(char,'S',$index+1)"
+                                        ng-class="{'marked': char.damageS >= $index+1}"></span>
                                 </span>
                             </span>
                         </span>
