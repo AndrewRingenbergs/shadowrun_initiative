@@ -216,12 +216,12 @@ li .tokenData {
 }
 
 .healthTrackGroup .healthTrackTitle {
-    display: inline-block;
+    display: block;
     width: 36px;
-    align-content: center;
     font-size: 10px;
     color: white;
     padding: 0px 0px 3px 0px;
+    text-align: center;
 }
 
 .healthTrackGroup .healthTrack {
