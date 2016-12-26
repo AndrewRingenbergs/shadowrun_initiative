@@ -263,6 +263,7 @@ li .tokenData {
     padding: 5px;
     background-color: #555;
     color: white;
+    font-size: 10px;
 }
 
 .charSheet .dataBlock {
@@ -277,17 +278,23 @@ li .tokenData {
     flex-flow: row wrap;
     float: left;
     width: 110px;
-    margin: 0px 2px 0px 0px;
+    padding: 0px 5px 0px 0px;
 }
 
 .charSheet .dataBlock .attrLabel {
     display: inline-block;
     width: 80px;
+    height: 15px;
     margin: 0px 0px 3px 0px;
+    padding: 1px 0px;
 }
 
-.charSheet .dataBlock .dataInputSM {
+.charSheet .dataBlock .dataSM {
     display: inline-block;
     width: 25px;
+    height: 15px;
     margin: 0px 0px 3px 0px;
+    font-size: 10px;
+    padding: 1px 0px;
+    border: 0px;
 }

@@ -183,17 +183,50 @@
             <span class="dataBlock">b</span>
             <span class="dataBlock">
                 <span class="column">
-                    <span class="attrLabel">Body</span><input class="dataInputSM" type="number" ng-model="charArr[selectedCharIndex].body"></input>
-                    <span class="attrLabel">Agility</span><input class="dataInputSM" type="number" ng-model="charArr[selectedCharIndex].agility"></input>
-                    <span class="attrLabel">Reaction</span><input class="dataInputSM" type="number" ng-model="charArr[selectedCharIndex].reaction"></input>
-                    <span class="attrLabel">Strength</span><input class="dataInputSM" type="number" ng-model="charArr[selectedCharIndex].strength"></input>
-                    <span class="attrLabel">Willpower</span><input class="dataInputSM" type="number" ng-model="charArr[selectedCharIndex].willpower"></input>
-                    <span class="attrLabel">Logic</span><input class="dataInputSM" type="number" ng-model="charArr[selectedCharIndex].logic"></input>
-                    <span class="attrLabel">Intuition</span><input class="dataInputSM" type="number" ng-model="charArr[selectedCharIndex].intuition"></input>
-                    <span class="attrLabel">Charisma</span><input class="dataInputSM" type="number" ng-model="charArr[selectedCharIndex].charisma"></input>
-                    <span class="attrLabel">Edge</span><input class="dataInputSM" type="number" ng-model="charArr[selectedCharIndex].edge"></input>
+                    <span class="attrLabel">Body</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].body"></input>
+                    <span class="attrLabel">Agility</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].agility"></input>
+                    <span class="attrLabel">Reaction</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].reaction"></input>
+                    <span class="attrLabel">Strength</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].strength"></input>
+                    <span class="attrLabel">Willpower</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].willpower"></input>
+                    <span class="attrLabel">Logic</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].logic"></input>
+                    <span class="attrLabel">Intuition</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].intuition"></input>
+                    <span class="attrLabel">Charisma</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].charisma"></input>
+                    <span class="attrLabel">Edge</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].edge"></input>
                 </span>
-                <span class="column">second column</span>
+                <span class="column">
+                    <span class="attrLabel">Essence</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].essence"></input>
+                    <span class="attrLabel">Magic/Resonance</span><input class="dataSM" type="number"></input>
+                    <span class="attrLabel">Initiative</span><span class="dataSM">NA</span>
+                    <span class="attrLabel">Matrix Initative</span><span class="dataSM">NA</span>
+                    <span class="attrLabel">Astral Initiative</span><span class="dataSM">NA</span>
+                    <span class="attrLabel">Composure</span><span class="dataSM">NA</span>
+                    <span class="attrLabel">Judge Intentions</span><span class="dataSM">NA</span>
+                    <span class="attrLabel">Memory</span><span class="dataSM">NA</span>
+                    <span class="attrLabel">Lift/Carry</span><span class="dataSM">NA</span>
+                </span>
+            </span>
+            <span class="dataBlock">
+                <span class="healthTrackGroup">
+                    <span class="healthTrackTitle">Physical</span>
+                    <span class="healthTrack">
+                        <span
+                            ng-repeat="h in getNumber(charArr[selectedCharIndex].healthPMax) track by $index"
+                            class="healthbox"
+                            ng-click="healthBoxClick(charArr[selectedCharIndex],'P',$index+1)"
+                            ng-class="{'marked': charArr[selectedCharIndex].damageP >= $index+1}"></span>
+                    </span>
+                </span>
+                <span class="healthTrackGroup">
+                    <span class="healthTrackTitle">Stun</span>
+                    <span class="healthTrack">
+                        <span
+                            ng-repeat="h in getNumber(charArr[selectedCharIndex].healthSMax) track by $index"
+                            class="healthbox"
+                            ng-click="healthBoxClick(charArr[selectedCharIndex],'S',$index+1)"
+                            ng-class="{'marked': charArr[selectedCharIndex].damageS >= $index+1}"></span>
+                        </span>
+                    </span>
+                </span>
             </span>
         </span>
     </div>
