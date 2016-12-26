@@ -268,7 +268,26 @@ li .tokenData {
 .charSheet .dataBlock {
     display: inline-block;
     margin: 5px;
-    width: 43%;
     border: 1px solid;
     padding: 5px;
+}
+
+.charSheet .dataBlock .column {
+    display: flex;
+    flex-flow: row wrap;
+    float: left;
+    width: 110px;
+    margin: 0px 2px 0px 0px;
+}
+
+.charSheet .dataBlock .attrLabel {
+    display: inline-block;
+    width: 80px;
+    margin: 0px 0px 3px 0px;
+}
+
+.charSheet .dataBlock .dataInputSM {
+    display: inline-block;
+    width: 25px;
+    margin: 0px 0px 3px 0px;
 }
