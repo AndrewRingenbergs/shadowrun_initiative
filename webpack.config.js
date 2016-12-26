@@ -1,73 +1,75 @@
 
-var webpack = require('webpack');
-var pkg = require('./package.json')
+const webpack = require('webpack');
+const path = require('path');
+const merge = require('webpack-merge');
+const dependencies = Object.keys(require('./package.json').dependencies);
 
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+const parts = require('./webpack/webpack.parts.js');
 
-var ENV = process.env.npm_lifecycle_event;
-var isTest = ENV === 'test' || ENV === 'test-watch';
-var isProd = ENV === 'build';
-
-function isExternal(module) {
-  var userRequest = module.userRequest;
-
-  if (typeof userRequest !== 'string') {
-    return false;
-  }
-
-  return userRequest.indexOf('bower_components') >= 0 ||
-    userRequest.indexOf('node_modules') >= 0 ||
-    userRequest.indexOf('libraries') >= 0;
+const PATHS = {
+	app: path.join(__dirname, 'src', 'app.js'),
+	styles: path.join(__dirname, 'src', 'styles', 'style.css'),
+	build: path.join(__dirname, 'dist'),
+	pub: path.join(__dirname, 'src', 'public')
 }
 
-module.exports = function() {
-  var config = {};
+const getEnv = function() {
+	let env = process.env.npm_lifecycle_event;
+	switch(env) {
+		case 'build':
+			return 'production';
+		case 'test':
+		case 'test-watch':
+			return 'test';
+		default:
+			return 'dev'
+	}
+}
 
-  config.entry = isTest ? {} : {
-    app: './src/app.js',
-    vendor: Object.keys(pkg.dependencies),
-    styles: './src/styles/style.css'
-  };
+const common = merge({
+	entry: {
+		app: PATHS.app,
+		styles: PATHS.styles,
+		vendor: dependencies
+	}
+});
 
-  config.output = isTest ? {} : {
-    path: __dirname + '/dist',
-    publicPath: isProd ? '' : 'http://localhost:8080/',
-    filename: isProd ? '[name].[hash].js' : '[name].bundle.js',
-    chunkFilename: isProd ? '[name].[hash].js' : '[name].bundle.js'
-  };
+module.exports = function(env) {
+	console.log('Building in Environment: '+ env)
 
-  config.module = {}
-  config.module.loaders = [{
-    test: /\.css$/,
-    loader: ExtractTextPlugin.extract("style-loader", "css-loader"  )
-  }];
-
-  config.plugins = [
-    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.[hash].js", Infinity)
-  ];
-
-  if (!isTest) {
-    config.plugins.push(
-        new HtmlWebpackPlugin({
-          template: './src/index.html',
-          inject: 'body'
-        }),
-        new ExtractTextPlugin('[name].[hash].css', {disable: !isProd}))
-  }
-
-  if(isProd) {
-    config.plugins.push(
-        new webpack.optimize.UglifyJsPlugin(),
-        new CopyWebpackPlugin([{ from: __dirname + '/src/public' }])
-        );
-  }
-
-  config.devServer = {
-    contentBase: './src/public',
-    stats: 'minimal'
-  };
-
-  return config;
-}();
+	switch (env) {
+		case 'production':
+			return merge(common, {
+				devtool: 'source-map',
+				output: {
+					path: PATHS.build,
+					filename: '[name].[chunkhash:8].js'
+				}
+			},
+			parts.html({
+				template: './src/index.html',
+				inject: 'body'
+			}),
+			parts.extractCSS(PATHS.styles),
+			parts.copy([PATHS.pub]),
+			parts.minify()
+			);
+		case 'dev':
+			return merge(common, {
+				devtool: 'eval-source-map',
+				output: {
+					path: PATHS.build,
+					filename: '[name].js'
+				}
+			},
+			parts.html({
+				template: './src/index.html',
+				inject: 'body'
+			}),
+			parts.loadCSS(PATHS.styles),
+			parts.progress(),
+			parts.devServer({})
+			);
+	}
+	return config;
+}(getEnv());
