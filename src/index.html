@@ -31,6 +31,7 @@
             <li
                 class="characterChip"
                 ng-repeat="char in charArr |  orderBy: 'name'"
+                ng-click="getSelectedChar(char)"
             >
                 <span class="chipDataTable">
                     <header class="chipDataRow">
@@ -173,6 +174,25 @@
                 <span class="closebtn" ng-click="deleteChip(char)"> &#215 </span>                
             </li>
         </ul>
+    </div>
+    <div class="charSheetContainer">
+        <span class="charSheet">
+            <span class="dataBlock">
+                <span>Name</span><input ng-model="charArr[selectedCharIndex].name"></input>
+            </span>
+            <span class="dataBlock">b</span>
+            <span class="dataBlock">
+                <span>Body</span><input type="number" ng-model="charArr[selectedCharIndex].body"></input>
+                <span>Agility</span><input type="number" ng-model="charArr[selectedCharIndex].agility"></input>
+                <span>Reaction</span><input type="number" ng-model="charArr[selectedCharIndex].reaction"></input>
+                <span>Strength</span><input type="number" ng-model="charArr[selectedCharIndex].strength"></input>
+                <span>Willpower</span><input type="number" ng-model="charArr[selectedCharIndex].willpower"></input>
+                <span>Logic</span><input type="number" ng-model="charArr[selectedCharIndex].logic"></input>
+                <span>Intuition</span><input type="number" ng-model="charArr[selectedCharIndex].intuition"></input>
+                <span>Charisma</span><input type="number" ng-model="charArr[selectedCharIndex].charisma"></input>
+                <span>Edge</span><input type="number" ng-model="charArr[selectedCharIndex].edge"></input>
+            </span>
+        </span>
     </div>
 </div>
 </body>

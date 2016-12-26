@@ -4,7 +4,7 @@
 }
 
 .charContainer {
-    display: inline-block;
+    float: left;
     width: 40%;
     vertical-align:top;
 }
@@ -245,4 +245,30 @@ li .tokenData {
 
 .healthTrack .healthbox.marked {
     background-color: #a50f0f;
+}
+
+/* Character sheet formatting */
+.charSheetContainer {
+    float: left;
+    width: 55%;
+    margin: 5px;
+}
+
+.charSheetContainer .charSheet {
+    display: flex;
+    flex-flow: row wrap;
+    border-radius: 5px;
+    width: 100%;
+    min-height: 300px;
+    padding: 5px;
+    background-color: #555;
+    color: white;
+}
+
+.charSheet .dataBlock {
+    display: inline-block;
+    margin: 5px;
+    width: 43%;
+    border: 1px solid;
+    padding: 5px;
 }

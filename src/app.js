@@ -100,8 +100,8 @@ app.controller("myCtrl", function($scope) {
 										return out; 
 									},
 			
-			healthPMax: 8+Math.ceil(body/2),
-			healthSMax: 8+Math.ceil(willpower/2),
+			healthPMax: 8+Math.ceil(body/2), // need to get this to update automatically
+			healthSMax: 8+Math.ceil(willpower/2), // need to get this to update automatically
 			damageP: damageP,
 			damageS: damageS,
 			damageDPModifier: damageDPModifier,
@@ -193,6 +193,11 @@ app.controller("myCtrl", function($scope) {
 	$scope.charArr.push(createChar("Alpha", 4, 0, 3, 0, 0, 0, 4, 0, 0, 0, 0, 0));
 	$scope.charArr.push(createChar("Beta", 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0));
 
+	$scope.selectedCharIndex = 0;
+
+	$scope.getSelectedChar = function(char) {
+		$scope.selectedCharIndex = $scope.charArr.indexOf(char);
+	};
 
 	// MOVE THIS STUFF INTO CHARACTER OBJECT IF POSSIBLE
 
