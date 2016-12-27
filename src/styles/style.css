@@ -281,6 +281,14 @@ li .tokenData {
     padding: 0px 5px 0px 0px;
 }
 
+.charSheet .dataBlock .column-dbl {
+    display: flex;
+    flex-flow: row wrap;
+    float: left;
+    width: 230px;
+    padding: 0px;
+}
+
 .charSheet .dataBlock .attrLabel {
     display: inline-block;
     width: 80px;
@@ -294,6 +302,40 @@ li .tokenData {
     width: 25px;
     height: 15px;
     margin: 0px 0px 3px 0px;
+    font-size: 10px;
+    padding: 1px 0px;
+    border: 0px;
+}
+
+.charSheet .dataBlock .section {
+    margin: 0px 0px 1px 0px;
+    width: 100%;
+}
+
+
+.charSheet .dataBlock .group {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    width: 100%;
+    margin: 2px 0px;
+}
+
+.charSheet .dataBlock .group .label {
+    flex-grow: 1;
+    min-width: 100px;
+    margin: 0px 5px 0px 0px;
+    padding: 1px 0px;
+}
+
+.charSheet .dataBlock .group .dataFillWrapper {
+    flex-grow: 1;
+    font-size: 10px;
+    margin: 0px 2px 0px 0px;
+}
+
+.dataFillWrapper .dataFill {
+    width: 100%;
     font-size: 10px;
     padding: 1px 0px;
     border: 0px;

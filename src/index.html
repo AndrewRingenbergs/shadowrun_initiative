@@ -178,9 +178,43 @@
     <div class="charSheetContainer">
         <span class="charSheet">
             <span class="dataBlock">
-                <span>Name</span><input ng-model="charArr[selectedCharIndex].name"></input>
+                <span class="column-dbl">
+                    <span>Name</span><input ng-model="charArr[selectedCharIndex].name"></input>
+                </span>
             </span>
-            <span class="dataBlock">b</span>
+            <span class="dataBlock">
+                <span class="column-dbl">
+                    <span class="section">
+                        <span class="group">
+                            <span class="label">Primary Armor</span><span class="dataFillWrapper"><input class="dataFill"></span></input>
+                        </span>
+                    </span>
+                    <span class="section">
+                        <span class="group">
+                            <span class="label">Primary Ranged Weapon</span><span class="dataFillWrapper"><input class="dataFill"></span></input>
+                        </span>
+                        <span class="group">
+                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
+                        </span>
+                    </span>
+                    <span class="section">
+                        <span class="group">
+                            <span class="label">Primary Melee Weapon</span><span class="dataFillWrapper"><input class="dataFill"></span></input>
+                        </span>
+                        <span class="group">
+                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
+                        </span>
+                    </span>
+                </span>
+            </span>
             <span class="dataBlock">
                 <span class="column">
                     <span class="attrLabel">Body</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].body"></input>
@@ -206,24 +240,26 @@
                 </span>
             </span>
             <span class="dataBlock">
-                <span class="healthTrackGroup">
-                    <span class="healthTrackTitle">Physical</span>
-                    <span class="healthTrack">
-                        <span
-                            ng-repeat="h in getNumber(charArr[selectedCharIndex].healthPMax) track by $index"
-                            class="healthbox"
-                            ng-click="healthBoxClick(charArr[selectedCharIndex],'P',$index+1)"
-                            ng-class="{'marked': charArr[selectedCharIndex].damageP >= $index+1}"></span>
+                <span>
+                    <span class="healthTrackGroup">
+                        <span class="healthTrackTitle">Physical</span>
+                        <span class="healthTrack">
+                            <span
+                                ng-repeat="h in getNumber(charArr[selectedCharIndex].healthPMax) track by $index"
+                                class="healthbox"
+                                ng-click="healthBoxClick(charArr[selectedCharIndex],'P',$index+1)"
+                                ng-class="{'marked': charArr[selectedCharIndex].damageP >= $index+1}"></span>
+                        </span>
                     </span>
-                </span>
-                <span class="healthTrackGroup">
-                    <span class="healthTrackTitle">Stun</span>
-                    <span class="healthTrack">
-                        <span
-                            ng-repeat="h in getNumber(charArr[selectedCharIndex].healthSMax) track by $index"
-                            class="healthbox"
-                            ng-click="healthBoxClick(charArr[selectedCharIndex],'S',$index+1)"
-                            ng-class="{'marked': charArr[selectedCharIndex].damageS >= $index+1}"></span>
+                    <span class="healthTrackGroup">
+                        <span class="healthTrackTitle">Stun</span>
+                        <span class="healthTrack">
+                            <span
+                                ng-repeat="h in getNumber(charArr[selectedCharIndex].healthSMax) track by $index"
+                                class="healthbox"
+                                ng-click="healthBoxClick(charArr[selectedCharIndex],'S',$index+1)"
+                                ng-class="{'marked': charArr[selectedCharIndex].damageS >= $index+1}"></span>
+                            </span>
                         </span>
                     </span>
                 </span>
