@@ -136,11 +136,25 @@ app.controller("myCtrl", function($scope) {
 		return rolls;
 	}
 
+	$scope.charTypes = [ 
+		{type:"Blank",template:createChar("NA", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)}, 
+		{type:"Ganger",template:createChar("Ganger", 4, 4, 3, 4, 3, 2, 3, 3, 0, 6, 0, 0)},
+		{type:"Ganger Lieutennant",template:createChar("Ganger Lieutennant", 4, 4, 4, 4, 4, 3, 4, 4, 0, 5.7, 0, 0)}
+	];
+	console.log($scope.charTypes);
+	$scope.charTypeInsertable = $scope.charTypes[0];
+	$scope.setCharTypeInsertable = function(charType) {
+		$scope.charTypeInsertable = charType;
+	}
+	$scope.numCharsAdd = 1;
+
 	$scope.addChar = function() {
-		console.log($scope.charArr);
 		console.log('Creating New Char');
-		newChar = createChar("NA", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-		$scope.charArr.push(newChar);
+		template = $scope.charTypeInsertable.template;
+		for(var i = 0; i < $scope.numCharsAdd; i++) {
+			newChar = createChar(template.name, template.body, template.agility, template.reaction, template.strength, template.willpower, template.logic, template.intuition, template.charisma, template.edge, template.essence, template.magres, template.dataProcessing);
+			$scope.charArr.push(newChar);
+		}
 	}
 
 	$scope.nextInit = function() {

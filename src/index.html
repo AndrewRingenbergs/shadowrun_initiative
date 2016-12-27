@@ -9,6 +9,17 @@
     <div id="myTableActions">
         <input type="button" value="next" ng-click="nextInit()">
         <input type="button" value="add" ng-click="addChar()">
+        <input type="number" id="addNum" ng-model="numCharsAdd"></input>
+        <div class="dropdown">
+        <button class="dropbtn">{{charTypeInsertable.type}}</button>
+            <div class="dropdown-content">
+                <a 
+                    ng-repeat="charType in charTypes"
+                    href="#"
+                    ng-click="setCharTypeInsertable(charType)">{{charType.type}}
+                </a>
+            </div>
+        </div>
     </div>
 
     <div>
