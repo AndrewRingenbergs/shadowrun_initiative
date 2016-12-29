@@ -201,20 +201,20 @@
                 <span class="column-dbl">
                     <span class="section">
                         <span class="group">
-                            <span class="label">Primary Armor</span><span class="dataFillWrapper"><input class="dataFill"></input></span>
+                            <span class="label">Primary Armor</span><span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].primaryArmourName"></input></span>
                         </span>
                     </span>
                     <span class="section">
                         <span class="group">
-                            <span class="label">Primary Ranged Weapon</span><span class="dataFillWrapper"><input class="dataFill"></input></span>
+                            <span class="label">Primary Ranged Weapon</span><span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].primaryRangedWeaponName"></input></span>
                         </span>
                         <span class="group">
-                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
-                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
-                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
-                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
-                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
-                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].primaryRangedWeapon().damage"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].primaryRangedWeapon().acc"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].primaryRangedWeapon().AP"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].primaryRangedWeapon().mode"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].primaryRangedWeapon().RC"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].primaryRangedWeapon().ammo"></input></span>
                         </span>
                     </span>
                     <span class="section">

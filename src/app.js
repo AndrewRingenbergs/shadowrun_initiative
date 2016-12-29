@@ -11,8 +11,18 @@ app.controller("myCtrl", function($scope) {
 	function guid() {
 		return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 		};
+		
+	$scope.items = [
+		{ type: "Armour", list: [ {name: "Armour Vest", rating: 9, avail: 4, cost: 500} ]},
 
-	function createChar(name, body, agility, reaction, strength, willpower, logic, intuition, charisma, edge, essence, magres, dataProcessing) {
+		{ type: "Firearms", list: [ {name: "Browning Ultra-Power", subtype: "Heavy Pistols", acc: "5 (6)", damage: "8P", AP: -1, mode: "SA", RC: 0, ammo: "10 (c)", avail: "4R", cost: "640"} ]}
+	];
+
+	findItemByTypeName = function(itemType,itemName) {
+	 	return $scope.items.filter(function( obj ) { return obj.type == itemType; })[0].list.filter(function( obj ) { return obj.name == itemName; })[0];
+	}
+
+	function createChar(name, body, agility, reaction, strength, willpower, logic, intuition, charisma, edge, essence, magres, dataProcessing, primaryArmourName, primaryRangedWeaponName, primaryMeleeWeaponName) {
 		
 		var damageP = 0;
 		var damageS = 0;
@@ -119,8 +129,15 @@ app.controller("myCtrl", function($scope) {
 			essence: essence,
 			magres: magres,
 			dataProcessing: dataProcessing,
-			randomCoin: randomCoin
+			randomCoin: randomCoin,
 			
+			primaryArmourName: primaryArmourName,
+			primaryArmour: function () { return findItemByTypeName("Armour",primaryArmourName) },
+			primaryRangedWeaponName: primaryRangedWeaponName,
+			primaryRangedWeapon: function () { return findItemByTypeName("Firearms",primaryRangedWeaponName) },
+			primaryMeleeWeaponName: primaryMeleeWeaponName,
+			primaryMeleeWeapon: function () { return findItemByTypeName("Melee",primaryMeleeWeaponName) }
+
 		};
 	}
 
@@ -138,7 +155,7 @@ app.controller("myCtrl", function($scope) {
 
 	$scope.charTypes = [ 
 		{type:"Blank",template:createChar("NA", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)}, 
-		{type:"Ganger",template:createChar("Ganger", 4, 4, 3, 4, 3, 2, 3, 3, 0, 6, 0, 0)},
+		{type:"Ganger",template:createChar("Ganger", 4, 4, 3, 4, 3, 2, 3, 3, 0, 6, 0, 0, 'Armour Vest', "Browning Ultra-Power")},
 		{type:"Ganger Lieutennant",template:createChar("Ganger Lieutennant", 4, 4, 4, 4, 4, 3, 4, 4, 0, 5.7, 0, 0)}
 	];
 	console.log($scope.charTypes);
@@ -152,9 +169,10 @@ app.controller("myCtrl", function($scope) {
 		console.log('Creating New Char');
 		template = $scope.charTypeInsertable.template;
 		for(var i = 0; i < $scope.numCharsAdd; i++) {
-			newChar = createChar(template.name, template.body, template.agility, template.reaction, template.strength, template.willpower, template.logic, template.intuition, template.charisma, template.edge, template.essence, template.magres, template.dataProcessing);
+			newChar = createChar(template.name, template.body, template.agility, template.reaction, template.strength, template.willpower, template.logic, template.intuition, template.charisma, template.edge, template.essence, template.magres, template.dataProcessing, template.primaryArmourName, template.primaryRangedWeaponName, template.primaryMeleeWeaponName);
 			$scope.charArr.push(newChar);
 		}
+		console.log($scope.charArr);
 	}
 
 	$scope.nextInit = function() {
