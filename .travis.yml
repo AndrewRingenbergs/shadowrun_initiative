@@ -5,7 +5,7 @@ branches:
   except:
   - gh-pages
 before_deploy:
-- openssl aes-256-cbc -K $encrypted_0db1ee24de34_key -iv $encrypted_0db1ee24de34_iv
+- openssl aes-256-cbc -K $encrypted_f4baed597c4a_key -iv $encrypted_f4baed597c4a_iv
   -in id_rsa.enc -out id_rsa -d
 deploy:
   skip_cleanup: true
