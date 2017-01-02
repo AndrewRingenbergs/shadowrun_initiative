@@ -278,6 +278,70 @@
                         </span>
                     </span>
                 </span>
+            <span class="dataBlock">
+                <span class="column-dbl">
+                    <span class="section">
+                        <span class="chipDataTable">
+                            <span class="chipDataRow">
+                                <span class="chipDataCell"></span>
+                                <span class="chipDataCell">Description</span>
+                                <span class="chipDataCell">Modifier</span>
+                            </span>
+                            <span class="chipDataRow">
+                                <span class="addbtn-holder">
+                                    <span class="addbtn" ng-click="addCustomMod(charArr[selectedCharIndex])"> + </span>
+                                </span>
+                                <span class="chipDataCell">
+                                    <input class="initModData longText" ng-model="charArr[selectedCharIndex].initModCustomNew.descr"></input>
+                                </span>
+                                <span class="chipDataCell">
+                                    <input class="initModData smallInput" type="number" ng-model="charArr[selectedCharIndex].initModCustomNew.modifier"></input>
+                                </span>
+                            </span>
+                        </span>
+                        <span class="chipDataTable">
+                            <span class="chipDataRow">
+                                <span class="chipDataCell"></span>
+                                <span class="chipDataCell">Description</span>
+                                <span class="chipDataCell">Modifier</span>
+                            </span>
+                            <span
+                                ng-repeat="initModCustom in charArr[selectedCharIndex].initModsCustom"
+                                class="chipDataRow"
+                            >
+                                <span class="rmbtn-holder">
+                                    <span class="rmbtn" ng-click="removeCustomMod(charArr[selectedCharIndex],initModCustom)"> &#215 </span>
+                                </span>
+                                <span class="chipDataCell">
+                                    <input class="initModData longText" ng-model="initModCustom.descr"></input>
+                                </span>
+                                <span class="chipDataCell">
+                                    <input class="initModData smallInput" type="number" ng-model="initModCustom.modifier"></input>
+                                </span>
+                            </span>
+                        </span>
+                        <span class="chipDataTable">
+                            <span class="chipDataRow">
+                                <span class="chipDataCell"></span>
+                                <span class="chipDataCell">Description</span>
+                                <span class="chipDataCell">Modifier</span>
+                            </span>
+                            <span
+                                ng-repeat="initModAuto in charArr[selectedCharIndex].initModsAuto"
+                                class="chipDataRow"
+                            >
+                            <span class="rmbtn-holder"></span>
+                                <span class="chipDataCell">
+                                    <span>{{initModAuto.descr}}</span>
+                                </span>
+                                <span class="chipDataCell">
+                                    <span>{{initModAuto.modifier}}</span>
+                                </span>
+                            </span>
+                        </span>
+                    </span>
+                </span>
+            </span>
             </span>
         </span>
     </div>

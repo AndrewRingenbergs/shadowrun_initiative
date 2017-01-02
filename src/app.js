@@ -231,6 +231,20 @@ app.controller("myCtrl", [ '$scope', function($scope) {
 		$scope.selectedCharIndex = $scope.charArr.indexOf(char);
 	};
 
+	$scope.updateCharacter = function(char) {
+		char.healthPMax = 8+Math.ceil(char.body/2);
+		char.healthSMax = 8+Math.ceil(char.willpower/2);
+	}
+
+	$scope.addCustomMod = function(char) {
+		char.initModsCustom.push( { descr: char.initModCustomNew.descr, modifier: char.initModCustomNew.modifier } ); 
+		char.initModCustomNew.descr = ""; char.initModCustomNew.modifier = 0; 
+	};
+
+	$scope.removeCustomMod = function(char,customMod) {
+		char.initModsCustom.splice(char.initModsCustom.indexOf(customMod),1);
+	}
+
 	// MOVE THIS STUFF INTO CHARACTER OBJECT IF POSSIBLE
 
 	 $scope.healthBoxClick = function(char,type,h) {
