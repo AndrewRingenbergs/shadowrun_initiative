@@ -339,3 +339,54 @@ li .tokenData {
     padding: 1px 0px;
     border: 0px;
 }
+
+.column-dbl .initCondLabel {
+    width: 100%;
+    font-size: 10px;
+    padding: 1px 0px;
+    margin: 0px 2px 0px 0px;
+    border: 0px;
+}
+
+.column-dbl .initCondValue {
+    width: 40px;
+    font-size: 10px;
+    text-align: left;
+    padding: 1px 0px;
+    margin: 0px 2px 0px 0px;
+    border: 0px;
+}
+
+.group .rmbtn-holder {
+    width: 20px;
+}
+
+.group .rmbtn-holder .rmbtn {
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.group .rmbtn-holder:hover .rmbtn {
+    color: grey;
+}
+
+.group .addbtn-holder {
+    width: 20px;
+}
+
+.group .addbtn-holder .addbtn {
+    color: mediumspringgreen;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.group .addbtn-holder:hover .rmbtn {
+    color: whitesmoke;
+}
