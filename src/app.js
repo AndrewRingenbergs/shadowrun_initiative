@@ -11,7 +11,8 @@ app.controller("myCtrl", [ '$scope', function($scope) {
 	function guid() {
 		return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 		};
-		
+
+	/*	
 	$scope.items = [
 		{ type: "Armour", list: [ {name: "Armour Vest", rating: 9, avail: 4, cost: 500} ]},
 
@@ -20,9 +21,19 @@ app.controller("myCtrl", [ '$scope', function($scope) {
 
 	findItemByTypeName = function(itemType,itemName) {
 	 	return $scope.items.filter(function( obj ) { return obj.type == itemType; })[0].list.filter(function( obj ) { return obj.name == itemName; })[0];
+	}*/
+
+	$scope.items = [
+		{ type: "Armour", name: "Armour Vest", rating: 9, avail: 4, cost: 500 },
+
+		{ type: "Firearms", name: "Browning Ultra-Power", subtype: "Heavy Pistols", acc: "5 (6)", damage: "8P", AP: -1, mode: "SA", RC: 0, ammo: "10 (c)", avail: "4R", cost: "640" }
+	];
+
+	findItemByName = function(itemName) {
+	 	return $scope.items.filter(function( obj ) { return obj.name == itemName; })[0];
 	}
 
-	function createChar(name, body, agility, reaction, strength, willpower, logic, intuition, charisma, edge, essence, magres, dataProcessing, primaryArmourName, primaryRangedWeaponName, primaryMeleeWeaponName) {
+	function createChar(name, body, agility, reaction, strength, willpower, logic, intuition, charisma, edge, essence, magres, dataProcessing, gearList, equippedArmour, equippedRangedWeapon, equippedMeleeWeapon) {
 		
 		var damageP = 0;
 		var damageS = 0;
@@ -62,12 +73,6 @@ app.controller("myCtrl", [ '$scope', function($scope) {
 		];
 
 		var initModCustomNew = { descr: "", modifier: 0 };
-
-		var gearList = [
-			{name: "Test Equipment A", rating: 0, quantity: 1, pageRef: 52 },
-			{name: "Test Equipment B", rating: 1, quantity: 2, pageRef: 0 },
-			{name: "Test Equipment C", rating: 1, quantity: 0, pageRef: 5 }
-		]
 
 		return {
 			guid: guid(),
@@ -137,12 +142,9 @@ app.controller("myCtrl", [ '$scope', function($scope) {
 			dataProcessing: dataProcessing,
 			randomCoin: randomCoin,
 			
-			primaryArmourName: primaryArmourName,
-			primaryArmour: function () { return findItemByTypeName("Armour",primaryArmourName) },
-			primaryRangedWeaponName: primaryRangedWeaponName,
-			primaryRangedWeapon: function () { return findItemByTypeName("Firearms",primaryRangedWeaponName) },
-			primaryMeleeWeaponName: primaryMeleeWeaponName,
-			primaryMeleeWeapon: function () { return findItemByTypeName("Melee",primaryMeleeWeaponName) },
+			equippedArmour: equippedArmour,
+			equippedRangedWeapon: equippedRangedWeapon,
+			equippedMeleeWeapon: equippedMeleeWeapon,
 
 			gearList: gearList
 
@@ -161,10 +163,34 @@ app.controller("myCtrl", [ '$scope', function($scope) {
 		return rolls;
 	}
 
+
+	// [ TEMPORARY ]
+		var gearList = [
+			{name: "Browning Ultra-Power", rating: 0, quantity: 1, pageRef: 52 },
+			{name: "Armour Vest", rating: 1, quantity: 2, pageRef: 0 },
+			{name: "Test Equipment C", rating: 1, quantity: 0, pageRef: 5 }
+		];
+
 	$scope.charTypes = [ 
 		{type:"Blank",template:createChar("NA", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)}, 
-		{type:"Ganger",template:createChar("Ganger", 4, 4, 3, 4, 3, 2, 3, 3, 0, 6, 0, 0, 'Armour Vest', "Browning Ultra-Power")},
-		{type:"Ganger Lieutennant",template:createChar("Ganger Lieutennant", 4, 4, 4, 4, 4, 3, 4, 4, 0, 5.7, 0, 0)}
+		{type:"Ganger",template:createChar("Ganger", 4, 4, 3, 4, 3, 2, 3, 3, 0, 6, 0, 0, 
+			gearList = [
+				{name: "Browning Ultra-Power", rating: 0, quantity: 1, pageRef: 0 },
+				{name: "Knife", rating: 0, quantity: 1, pageRef: 0 },
+				{name: "Armour vest", rating: 1, quantity: 2, pageRef: 0 },
+				{name: "Meta Link commlink", rating: 1, quantity: 1, pageRef: 0 },
+				{name: "Cram or Jazz", rating: 0, quantity: 1, pageRef: 411 }
+			]
+		)},
+		{type:"Ganger Lieutennant",template:createChar("Ganger Lieutennant", 4, 4, 4, 4, 4, 3, 4, 4, 0, 5.7, 0, 0, 
+			gearList = [
+				{name: "Browning Ultra-Power", rating: 0, quantity: 1, pageRef: 0 },
+				{name: "Knife", rating: 0, quantity: 1, pageRef: 0 },
+				{name: "Retractable Spur", rating: 0, quantity: 1, pageRef: 0 },
+				{name: "Armour Jacket", rating: 1, quantity: 2, pageRef: 0 },
+				{name: "Sony Emperor commlink", rating: 2, quantity: 1, pageRef: 0 },
+				{name: "Cram or Jazz", rating: 0, quantity: 1, pageRef: 411 }
+		])}
 	];
 	console.log($scope.charTypes);
 	$scope.charTypeInsertable = $scope.charTypes[0];
@@ -177,7 +203,7 @@ app.controller("myCtrl", [ '$scope', function($scope) {
 		console.log('Creating New Char');
 		template = $scope.charTypeInsertable.template;
 		for(var i = 0; i < $scope.numCharsAdd; i++) {
-			newChar = createChar(template.name, template.body, template.agility, template.reaction, template.strength, template.willpower, template.logic, template.intuition, template.charisma, template.edge, template.essence, template.magres, template.dataProcessing, template.primaryArmourName, template.primaryRangedWeaponName, template.primaryMeleeWeaponName);
+			newChar = createChar(template.name, template.body, template.agility, template.reaction, template.strength, template.willpower, template.logic, template.intuition, template.charisma, template.edge, template.essence, template.magres, template.dataProcessing, template.gearList, template.equippedArmour, template.equippedRangedWeapon, template.equippedRangedWeapon);
 			$scope.charArr.push(newChar);
 		}
 		console.log($scope.charArr);
@@ -230,8 +256,16 @@ app.controller("myCtrl", [ '$scope', function($scope) {
 	}
 
 	$scope.charArr = [];
-	$scope.charArr.push(createChar("Alpha", 4, 0, 3, 0, 0, 0, 4, 0, 0, 0, 0, 0));
-	$scope.charArr.push(createChar("Beta", 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0));
+	$scope.charArr.push(createChar("Alpha", 4, 0, 3, 0, 0, 0, 4, 0, 0, 0, 0, 0,  [
+			{name: "Browning Ultra-Power", rating: 0, quantity: 1, pageRef: 52 },
+			{name: "Armour Vest", rating: 1, quantity: 2, pageRef: 0 },
+			{name: "Test Equipment C", rating: 1, quantity: 0, pageRef: 5 }
+		]));
+	$scope.charArr.push(createChar("Beta", 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0,  [
+			{name: "Browning Ultra-Power", rating: 0, quantity: 1, pageRef: 52 },
+			{name: "Armour Vest", rating: 1, quantity: 2, pageRef: 0 },
+			{name: "Test Equipment C", rating: 1, quantity: 0, pageRef: 5 }
+		]));
 
 	$scope.selectedCharIndex = 0;
 
@@ -274,6 +308,46 @@ app.controller("myCtrl", [ '$scope', function($scope) {
 		}
 		char.damageDPModifier = -Math.max(Math.floor(char.damageP/3), Math.floor(char.damageS/3));
 		char.updateInitModsAuto();
+	}
+
+	$scope.gearClick = function(char, itemName) {
+		var item = findItemByName(itemName);
+
+		if (item != null) {
+			switch (item.type) {
+				case "Armour":
+					char.equippedArmour = item;
+					break;
+				case "Firearms":
+					char.equippedRangedWeapon = item;
+					break;
+				case "Melee":
+					char.equippedRangedWeapon = item;
+					break;
+			}
+		}
+	}
+
+	$scope.removeGearItem = function(char,gearItem) {
+		if (gearItem.quantity <= 0) {
+			var item = findItemByName(gearItem.name);
+			
+			if (item != null) {
+				switch (item.type) {
+						case "Armour":
+							char.equippedArmour = null;
+							break;
+						case "Firearms":
+							char.equippedRangedWeapon = null;
+							break;
+						case "Melee":
+							char.equippedRangedWeapon = null;
+							break;
+					}
+			}
+
+			char.gearList.splice(char.gearList.indexOf(gearItem),1);
+		}
 	}
 
 	console.log("Page load finished");

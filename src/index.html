@@ -201,25 +201,25 @@
                 <span class="column-dbl">
                     <span class="section">
                         <span class="group">
-                            <span class="label">Primary Armor</span><span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].primaryArmourName"></input></span>
+                            <span class="label">Armor</span><span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedArmour.name"></input></span>
                         </span>
                     </span>
                     <span class="section">
                         <span class="group">
-                            <span class="label">Primary Ranged Weapon</span><span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].primaryRangedWeaponName"></input></span>
+                            <span class="label">Ranged Weapon</span><span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.name"></input></span>
                         </span>
                         <span class="group">
-                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].primaryRangedWeapon().damage"></input></span>
-                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].primaryRangedWeapon().acc"></input></span>
-                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].primaryRangedWeapon().AP"></input></span>
-                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].primaryRangedWeapon().mode"></input></span>
-                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].primaryRangedWeapon().RC"></input></span>
-                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].primaryRangedWeapon().ammo"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.damage"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.acc"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.AP"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.mode"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.RC"></input></span>
+                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.ammo"></input></span>
                         </span>
                     </span>
                     <span class="section">
                         <span class="group">
-                            <span class="label">Primary Melee Weapon</span><span class="dataFillWrapper"><input class="dataFill"></input></span>
+                            <span class="label">Melee Weapon</span><span class="dataFillWrapper"><input class="dataFill"></input></span>
                         </span>
                         <span class="group">
                             <span class="dataFillWrapper"><input class="dataFill"></input></span>
@@ -324,18 +324,18 @@
                 <span class="column-dbl">
                     <span class="section">
                         <span class="group">
-                            <span class="label">Name</span>
-                            <span class="itemListData">Rtg</span>
-                            <span class="itemListData">Qty</span>
-                            <span class="itemListData">Page</span>
+                            <span class="label heading">Name</span>
+                            <span class="itemListData heading">Rtg</span>
+                            <span class="itemListData heading">Qty</span>
+                            <span class="itemListData heading">Page</span>
                         </span>
                         <span 
                             class="group"
                             ng-repeat="item in charArr[selectedCharIndex].gearList"
                         >
-                            <span class="label">{{item.name}}</span>
+                            <span class="label" ng-click="gearClick(charArr[selectedCharIndex], item.name)">{{item.name}}</span>
                             <input class="itemListData" type="number" ng-model="item.rating"></input>
-                            <input class="itemListData" type="number" ng-model="item.quantity"></input>
+                            <input class="itemListData" type="number" ng-model="item.quantity" ng-blur="removeGearItem(charArr[selectedCharIndex], item)"></input>
                             <input class="itemListData" type="number" ng-model="item.pageRef"></input>
                         </span>
                     </span>

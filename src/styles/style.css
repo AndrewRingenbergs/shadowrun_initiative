@@ -398,3 +398,7 @@ li .tokenData {
     padding: 1px 0px;
     border: 0px;
 }
+
+.heading {
+    font-weight: bold;
+}
