@@ -320,6 +320,27 @@
                     </span>
                 </span>
             </span>
+            <span class="dataBlock">
+                <span class="column-dbl">
+                    <span class="section">
+                        <span class="group">
+                            <span class="label">Name</span>
+                            <span class="itemListData">Rtg</span>
+                            <span class="itemListData">Qty</span>
+                            <span class="itemListData">Page</span>
+                        </span>
+                        <span 
+                            class="group"
+                            ng-repeat="item in charArr[selectedCharIndex].gearList"
+                        >
+                            <span class="label">{{item.name}}</span>
+                            <input class="itemListData" type="number" ng-model="item.rating"></input>
+                            <input class="itemListData" type="number" ng-model="item.quantity"></input>
+                            <input class="itemListData" type="number" ng-model="item.pageRef"></input>
+                        </span>
+                    </span>
+                </span>
+            </span>
             </span>
         </span>
     </div>

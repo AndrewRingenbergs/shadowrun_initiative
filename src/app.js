@@ -63,6 +63,12 @@ app.controller("myCtrl", [ '$scope', function($scope) {
 
 		var initModCustomNew = { descr: "", modifier: 0 };
 
+		var gearList = [
+			{name: "Test Equipment A", rating: 0, quantity: 1, pageRef: 52 },
+			{name: "Test Equipment B", rating: 1, quantity: 2, pageRef: 0 },
+			{name: "Test Equipment C", rating: 1, quantity: 0, pageRef: 5 }
+		]
+
 		return {
 			guid: guid(),
 			name: name,
@@ -136,7 +142,9 @@ app.controller("myCtrl", [ '$scope', function($scope) {
 			primaryRangedWeaponName: primaryRangedWeaponName,
 			primaryRangedWeapon: function () { return findItemByTypeName("Firearms",primaryRangedWeaponName) },
 			primaryMeleeWeaponName: primaryMeleeWeaponName,
-			primaryMeleeWeapon: function () { return findItemByTypeName("Melee",primaryMeleeWeaponName) }
+			primaryMeleeWeapon: function () { return findItemByTypeName("Melee",primaryMeleeWeaponName) },
+
+			gearList: gearList
 
 		};
 	}
