@@ -348,15 +348,18 @@
     <div class="itemListContainer">
         <span class="itemListBody">
             <ul class="navItemList">
-                <li><a>Pistol</a></li>
+                <li><input ng-model="itemSearch.$"></input></li>
+                <li><a ng-click="itemListNavClick('Pistol')">Pistol</a></li>
                 <li><a>Armour</a></li>
                 <li><a>Misc</a></li>
             </ul>
             <ul class="itemList">
-                <li><span>Item 1</li></span>
-                <li><span>Item 2</li></span>
-                <li><span>Item 3</li></span>
-                <li><span>Item 4</li></span>
+                <li ng-repeat="item in items | filter:itemSearch">
+                    <span class="itemGroup">
+                        <span class="label">{{item.name}}</span>
+                        <span class="addbtn-holder" ng-click="addItemToActiveCharGear(item)">Add</span>
+                    </span>
+                </li>
             </ul>
         </span>
     </div>

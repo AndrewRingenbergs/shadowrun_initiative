@@ -479,3 +479,19 @@ ul.itemList {
     background-color: #555;
     color: white;
 }
+
+.itemList .itemGroup {
+    display: block;
+    padding: 0px;
+}
+
+.itemGroup .label {
+    display: inline-block;
+    width: max-content;
+}
+
+.itemGroup .addbtn-holder {
+    display: inline-block;
+    width: 20px;
+    float: right; /* need to work out how to fix this */
+}

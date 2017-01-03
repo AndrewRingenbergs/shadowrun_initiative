@@ -172,7 +172,7 @@ app.controller("myCtrl", [ '$scope', function($scope) {
 		];
 
 	$scope.charTypes = [ 
-		{type:"Blank",template:createChar("NA", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)}, 
+		{type:"Blank",template:createChar("NA", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, [])}, 
 		{type:"Ganger",template:createChar("Ganger", 4, 4, 3, 4, 3, 2, 3, 3, 0, 6, 0, 0, 
 			gearList = [
 				{name: "Browning Ultra-Power", rating: 0, quantity: 1, pageRef: 0 },
@@ -347,6 +347,23 @@ app.controller("myCtrl", [ '$scope', function($scope) {
 			}
 
 			char.gearList.splice(char.gearList.indexOf(gearItem),1);
+		}
+	}
+
+	/*$scope.itemListFilter = "";
+	$scope.itemListNavClick = function(itemType) {
+		console.log(itemType, $scope.itemListFilter);
+	} */
+
+	$scope.addItemToActiveCharGear = function(item) {
+		var char = $scope.charArr[$scope.selectedCharIndex];
+
+		var itemFound = char.gearList.filter(function( obj ) { return obj.name == item.name; })[0]
+		if (itemFound != null) {
+			itemFound.quantity += 1;
+		}
+		else {
+			char.gearList.push( { name: item.name, rating: 0, quantity: 1, pageRef: 0 });
 		}
 	}
 
