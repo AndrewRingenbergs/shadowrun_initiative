@@ -24,9 +24,25 @@ app.controller("myCtrl", [ '$scope', function($scope) {
 	}*/
 
 	$scope.items = [
-		{ type: "Armour", name: "Armour Vest", rating: 9, avail: 4, cost: 500 },
+		{ type: "Armour", name: "Armour vest", rating: 9, avail: 4, cost: 500 },
+		{ type: "Armour", name: "Armour jacket", rating: 12, avail: 2, cost: 1000 },
 
-		{ type: "Firearms", name: "Browning Ultra-Power", subtype: "Heavy Pistols", acc: "5 (6)", damage: "8P", AP: -1, mode: "SA", RC: 0, ammo: "10 (c)", avail: "4R", cost: "640" }
+		{ type: "Ranged Weapons", name: "Browning Ultra-Power", subtype: "Heavy Pistols", acc: "5 (6)", damage: "8P", AP: -1, mode: "SA", RC: 0, ammo: "10 (c)", avail: "4R", cost: 640 },
+
+		{ type: "Melee Weapons", name: "Knife", subtype: "Blades", acc: 5, reach: "-", damage: "(STR+1)P", AP: -1, avail: "-", cost: 10 },
+
+		{ type: "Melee Weapons", name: "Spurs (retractable)", subtype: "Cyber", acc: "NA", reach: "-", damage: "(STR+3)P", AP: -2, ess: 0.3, CAP: "[3]", avail: "12F", cost: 5000 },
+		
+		{ type: "Gear", name: "Meta Link commlink", subtype: "Commlinks", rating: 1, avail: 2, cost: 100 },
+		{ type: "Gear", name: "Sony Emperor commlink", subtype: "Commlinks", rating: 2, avail: 4, cost: 700 },
+		{ type: "Gear", name: "Renraku Sensei commlink", subtype: "Commlinks", rating: 3, avail: 6, cost: 1000 },
+		{ type: "Gear", name: "Erika Elite commlink", subtype: "Commlinks", rating: 4, avail: 8, cost: 2500 },
+		{ type: "Gear", name: "Hermes Ikon commlink", subtype: "Commlinks", rating: 5, avail: 10, cost: 3000 },
+		{ type: "Gear", name: "Transys Avalon commlink", subtype: "Commlinks", rating: 6, avail: 12, cost: 5000 },
+		{ type: "Gear", name: "Fairlight Caliban commlink", subtype: "Commlinks", rating: 7, avail: 14, cost: 8000 },
+		
+		{ type: "Gear", name: "Jazz", subtype: "Drugs", addictionRating: 8, additionThreshold: 3, avail: "2R", cost: 75 },
+		{ type: "Gear", name: "Cram", subtype: "Drugs", addictionRating: 4, additionThreshold: 3, avail: "2R", cost: 10 }
 	];
 
 	findItemByName = function(itemName) {
@@ -167,7 +183,7 @@ app.controller("myCtrl", [ '$scope', function($scope) {
 	// [ TEMPORARY ]
 		var gearList = [
 			{name: "Browning Ultra-Power", rating: 0, quantity: 1, pageRef: 52 },
-			{name: "Armour Vest", rating: 1, quantity: 2, pageRef: 0 },
+			{name: "Armour vest", rating: 1, quantity: 2, pageRef: 0 },
 			{name: "Test Equipment C", rating: 1, quantity: 0, pageRef: 5 }
 		];
 
@@ -186,8 +202,8 @@ app.controller("myCtrl", [ '$scope', function($scope) {
 			gearList = [
 				{name: "Browning Ultra-Power", rating: 0, quantity: 1, pageRef: 0 },
 				{name: "Knife", rating: 0, quantity: 1, pageRef: 0 },
-				{name: "Retractable Spur", rating: 0, quantity: 1, pageRef: 0 },
-				{name: "Armour Jacket", rating: 1, quantity: 2, pageRef: 0 },
+				{name: "Spurs (retractable)", rating: 0, quantity: 1, pageRef: 0 },
+				{name: "Armour jacket", rating: 1, quantity: 2, pageRef: 0 },
 				{name: "Sony Emperor commlink", rating: 2, quantity: 1, pageRef: 0 },
 				{name: "Cram or Jazz", rating: 0, quantity: 1, pageRef: 411 }
 		])}
@@ -318,11 +334,11 @@ app.controller("myCtrl", [ '$scope', function($scope) {
 				case "Armour":
 					char.equippedArmour = item;
 					break;
-				case "Firearms":
+				case "Ranged Weapons":
 					char.equippedRangedWeapon = item;
 					break;
-				case "Melee":
-					char.equippedRangedWeapon = item;
+				case "Melee Weapons":
+					char.equippedMeleeWeapon = item;
 					break;
 			}
 		}
@@ -337,11 +353,11 @@ app.controller("myCtrl", [ '$scope', function($scope) {
 						case "Armour":
 							char.equippedArmour = null;
 							break;
-						case "Firearms":
+						case "Ranged Weapons":
 							char.equippedRangedWeapon = null;
 							break;
-						case "Melee":
-							char.equippedRangedWeapon = null;
+						case "Melee Weapons":
+							char.equippedMeleeWeapon = null;
 							break;
 					}
 			}

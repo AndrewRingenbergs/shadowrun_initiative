@@ -440,6 +440,17 @@ ul.navItemList {
     text-decoration: none;
 }
 
+.navItemList li span {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.navItemList li span input[type=text] {
+    width: 100%;
+}
+
 .navItemList li a.active {
     background-color: #4CAF50;
     color: white;

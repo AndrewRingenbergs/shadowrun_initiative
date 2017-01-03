@@ -219,13 +219,13 @@
                         </span>
                         <span class="section">
                             <span class="group">
-                                <span class="label">Melee Weapon</span><span class="dataFillWrapper"><input class="dataFill"></input></span>
+                                <span class="label">Melee Weapon</span><span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedMeleeWeapon.name"></input></span>
                             </span>
                             <span class="group">
-                                <span class="dataFillWrapper"><input class="dataFill"></input></span>
-                                <span class="dataFillWrapper"><input class="dataFill"></input></span>
-                                <span class="dataFillWrapper"><input class="dataFill"></input></span>
-                                <span class="dataFillWrapper"><input class="dataFill"></input></span>
+                                <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedMeleeWeapon.reach"></input></span>
+                                <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedMeleeWeapon.damage"></input></span>
+                                <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedMeleeWeapon.acc"></input></span>
+                                <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedMeleeWeapon.AP"></input></span>
                             </span>
                         </span>
                     </span>
@@ -348,7 +348,7 @@
     <div class="itemListContainer">
         <span class="itemListBody">
             <ul class="navItemList">
-                <li><input ng-model="itemSearch.$"></input></li>
+                <li><span><input type="text" ng-model="itemSearch.$" placeholder="Search.."></input></span></li>
                 <li><a ng-click="itemListNavClick('Pistol')">Pistol</a></li>
                 <li><a>Armour</a></li>
                 <li><a>Misc</a></li>
