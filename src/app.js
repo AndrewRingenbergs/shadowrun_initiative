@@ -383,6 +383,24 @@ app.controller("myCtrl", [ '$scope', function($scope) {
 		}
 	}
 
+	$scope.itemTypes = [
+		{ type: "Armour" },
+		{ type: "Ranged Weapons" },
+		{ type: "Melee Weapons" },
+		{ type: "Gear" }
+	];
+
+	$scope.itemTypeSelected = null;
+
+	$scope.itemTypeClick = function(obj) {
+		if ($scope.itemTypeSelected === obj) {
+			$scope.itemTypeSelected = null;
+		}
+		else {
+			$scope.itemTypeSelected = obj;
+		}
+	};
+
 	console.log("Page load finished");
 
 }]);

@@ -349,12 +349,14 @@
         <span class="itemListBody">
             <ul class="navItemList">
                 <li><span><input type="text" ng-model="itemSearch.$" placeholder="Search.."></input></span></li>
-                <li><a ng-click="itemListNavClick('Pistol')">Pistol</a></li>
-                <li><a>Armour</a></li>
-                <li><a>Misc</a></li>
+                <li 
+                    ng-repeat="itemTypeObj in itemTypes"
+                    >
+                    <a ng-click="itemTypeClick(itemTypeObj)" ng-class="{'active': itemTypeObj === itemTypeSelected}">{{itemTypeObj.type}}</a>
+                </li>
             </ul>
             <ul class="itemList">
-                <li ng-repeat="item in items | filter:itemSearch">
+                <li ng-repeat="item in items | orderBy:['type','subtype','name'] | filter:itemTypeSelected.type | filter:itemSearch">
                     <span class="itemGroup">
                         <span class="label">{{item.name}}</span>
                         <span class="addbtn-holder" ng-click="addItemToActiveCharGear(item)">Add</span>
