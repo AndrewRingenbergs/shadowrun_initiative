@@ -36,312 +36,328 @@
             </li>
         </ul>
     </div>
-
-    <div class="charContainer" id="charContainer">
-        <ul class="characterList" id="characterList">
-            <li
-                class="characterChip"
-                ng-repeat="char in charArr |  orderBy: 'name'"
-                ng-click="getSelectedChar(char)"
-            >
-                <span class="chipDataTable">
-                    <header class="chipDataRow">
-                        <span class="chipDataCell">name</span>
-                        <span class="chipDataCell">init</span>
-                        <span class="chipDataCell">Health Mod</span>
-                    </header>
-                    <span class="chipDataRow">
-                        <span class="chipDataCell">
-                            <input ng-model="char.name" class="chipData"></input>
-                        </span> 
-                        <span class="chipDataCell">
-                            <span class="tooltip_alt">
-                                <span class="chipData">{{char.initCur()}}</span>
-                                <span class="tooltip-content">
-                                    <span>
-                                        <span class="chipDataTable">
-                                            <span class="chipDataRow">
-                                                <span class="chipDataCell">
-                                                    <span class="chipData" ng-hide="char.initManual">{{char.initBreakdown()}}</span>
-                                                    <input class="chipData" type="number" ng-show="char.initManual" ng-model="char.initBaseManual"></input>
-                                                </span>                                     
-                                                <span class="chipDataCell" style="vertical-align: middle;"> + </span>
-                                                <span class="chipDataCell">
-                                                    <span class="chipData">{{char.initMod()}}</span>
-                                                </span>
-                                                <span class="chipDataCell" style="vertical-align: middle;"> + </span>
-                                                <span class="chipDataCell">
-                                                    <span class="chipData">{{char.initPassAdj}}</span>
-                                                </span>
-                                                <span class="chipDataCell" style="vertical-align: middle;"> = </span>
-                                                <span class="chipDataCell">
-                                                    <span class="chipData">{{char.initCur()}}</span>
-                                                </span>
-                                                <span class="chipDataCell">
-                                                    <button ng-click="char.initTypeToggle()">{{char.initType()}}</button>
+    <div>
+        <div class="charContainer" id="charContainer">
+            <ul class="characterList" id="characterList">
+                <li
+                    class="characterChip"
+                    ng-repeat="char in charArr |  orderBy: 'name'"
+                    ng-click="getSelectedChar(char)"
+                >
+                    <span class="chipDataTable">
+                        <header class="chipDataRow">
+                            <span class="chipDataCell">name</span>
+                            <span class="chipDataCell">init</span>
+                            <span class="chipDataCell">Health Mod</span>
+                        </header>
+                        <span class="chipDataRow">
+                            <span class="chipDataCell">
+                                <input ng-model="char.name" class="chipData"></input>
+                            </span> 
+                            <span class="chipDataCell">
+                                <span class="tooltip_alt">
+                                    <span class="chipData">{{char.initCur()}}</span>
+                                    <span class="tooltip-content">
+                                        <span>
+                                            <span class="chipDataTable">
+                                                <span class="chipDataRow">
+                                                    <span class="chipDataCell">
+                                                        <span class="chipData" ng-hide="char.initManual">{{char.initBreakdown()}}</span>
+                                                        <input class="chipData" type="number" ng-show="char.initManual" ng-model="char.initBaseManual"></input>
+                                                    </span>                                     
+                                                    <span class="chipDataCell" style="vertical-align: middle;"> + </span>
+                                                    <span class="chipDataCell">
+                                                        <span class="chipData">{{char.initMod()}}</span>
+                                                    </span>
+                                                    <span class="chipDataCell" style="vertical-align: middle;"> + </span>
+                                                    <span class="chipDataCell">
+                                                        <span class="chipData">{{char.initPassAdj}}</span>
+                                                    </span>
+                                                    <span class="chipDataCell" style="vertical-align: middle;"> = </span>
+                                                    <span class="chipDataCell">
+                                                        <span class="chipData">{{char.initCur()}}</span>
+                                                    </span>
+                                                    <span class="chipDataCell">
+                                                        <button ng-click="char.initTypeToggle()">{{char.initType()}}</button>
+                                                    </span>
                                                 </span>
                                             </span>
                                         </span>
+                                        <span>
+                                                            <span class="chipDataTable">
+                                                                <span class="chipDataRow">
+                                                                    <span class="chipDataCell"></span>
+                                                                    <span class="chipDataCell">Description</span>
+                                                                    <span class="chipDataCell">Modifier</span>
+                                                                </span>
+                                                                <span class="chipDataRow">
+                                                                    <span class="addbtn-holder">
+                                                                        <span class="addbtn" ng-click="char.addCustomMod()"> + </span>
+                                                                    </span>
+                                                                    <span class="chipDataCell">
+                                                                        <input class="initModData longText" ng-model="char.initModCustomNew.descr"></input>
+                                                                    </span>
+                                                                    <span class="chipDataCell">
+                                                                        <input class="initModData smallInput" type="number" ng-model="char.initModCustomNew.modifier"></input>
+                                                                    </span>
+                                                                </span>
+                                                            </span>
+                                                            <span class="chipDataTable">
+                                                                <span class="chipDataRow">
+                                                                    <span class="chipDataCell"></span>
+                                                                    <span class="chipDataCell">Description</span>
+                                                                    <span class="chipDataCell">Modifier</span>
+                                                                </span>
+                                                                <span
+                                                                    ng-repeat="initModCustom in char.initModsCustom"
+                                                                    class="chipDataRow"
+                                                                >
+                                                                    <span class="rmbtn-holder">
+                                                                        <span class="rmbtn" ng-click="char.removeCustomMod(initModCustom)"> &#215 </span>
+                                                                    </span>
+                                                                    <span class="chipDataCell">
+                                                                        <input class="initModData longText" ng-model="initModCustom.descr"></input>
+                                                                    </span>
+                                                                    <span class="chipDataCell">
+                                                                        <input class="initModData smallInput" type="number" ng-model="initModCustom.modifier"></input>
+                                                                    </span>
+                                                                </span>
+                                                            </span>
+                                                            <span class="chipDataTable">
+                                                                <span class="chipDataRow">
+                                                                    <span class="chipDataCell"></span>
+                                                                    <span class="chipDataCell">Description</span>
+                                                                    <span class="chipDataCell">Modifier</span>
+                                                                </span>
+                                                                <span
+                                                                    ng-repeat="initModAuto in char.initModsAuto"
+                                                                    class="chipDataRow"
+                                                                >
+                                                                    <span class="rmbtn-holder"></span>
+                                                                    <span class="chipDataCell">
+                                                                        <span class="initModData longText">{{initModAuto.descr}}</span>
+                                                                    </span>
+                                                                    <span class="chipDataCell">
+                                                                        <span class="initModData smallInput">{{initModAuto.modifier}}</span>
+                                                                    </span>
+                                                                </span>
+                                                            </span>
+                                                        </span>
                                     </span>
-                                    <span>
-                                                        <span class="chipDataTable">
-                                                            <span class="chipDataRow">
-                                                                <span class="chipDataCell"></span>
-                                                                <span class="chipDataCell">Description</span>
-                                                                <span class="chipDataCell">Modifier</span>
-                                                            </span>
-                                                            <span class="chipDataRow">
-                                                                <span class="addbtn-holder">
-                                                                    <span class="addbtn" ng-click="char.addCustomMod()"> + </span>
-                                                                </span>
-                                                                <span class="chipDataCell">
-                                                                    <input class="initModData longText" ng-model="char.initModCustomNew.descr"></input>
-                                                                </span>
-                                                                <span class="chipDataCell">
-                                                                    <input class="initModData smallInput" type="number" ng-model="char.initModCustomNew.modifier"></input>
-                                                                </span>
-                                                            </span>
-                                                        </span>
-                                                        <span class="chipDataTable">
-                                                            <span class="chipDataRow">
-                                                                <span class="chipDataCell"></span>
-                                                                <span class="chipDataCell">Description</span>
-                                                                <span class="chipDataCell">Modifier</span>
-                                                            </span>
-                                                            <span
-                                                                ng-repeat="initModCustom in char.initModsCustom"
-                                                                class="chipDataRow"
-                                                            >
-                                                                <span class="rmbtn-holder">
-                                                                    <span class="rmbtn" ng-click="char.removeCustomMod(initModCustom)"> &#215 </span>
-                                                                </span>
-                                                                <span class="chipDataCell">
-                                                                    <input class="initModData longText" ng-model="initModCustom.descr"></input>
-                                                                </span>
-                                                                <span class="chipDataCell">
-                                                                    <input class="initModData smallInput" type="number" ng-model="initModCustom.modifier"></input>
-                                                                </span>
-                                                            </span>
-                                                        </span>
-                                                        <span class="chipDataTable">
-                                                            <span class="chipDataRow">
-                                                                <span class="chipDataCell"></span>
-                                                                <span class="chipDataCell">Description</span>
-                                                                <span class="chipDataCell">Modifier</span>
-                                                            </span>
-                                                            <span
-                                                                ng-repeat="initModAuto in char.initModsAuto"
-                                                                class="chipDataRow"
-                                                            >
-                                                                <span class="rmbtn-holder"></span>
-                                                                <span class="chipDataCell">
-                                                                    <span class="initModData longText">{{initModAuto.descr}}</span>
-                                                                </span>
-                                                                <span class="chipDataCell">
-                                                                    <span class="initModData smallInput">{{initModAuto.modifier}}</span>
-                                                                </span>
-                                                            </span>
-                                                        </span>
-                                                    </span>
                                 </span>
                             </span>
-                        </span>
-                        <span class="chipDataCell">
-                            <span class="healthTrackGroup">
-                                <span class="healthTrackTitle">Physical</span>
-                                <span class="healthTrack">
-                                    <span
-                                        ng-repeat="h in getNumber(char.healthPMax) track by $index"
-                                        class="healthbox"
-                                        ng-click="healthBoxClick(char,'P',$index+1)"
-                                        ng-class="{'marked': char.damageP >= $index+1}"></span>
+                            <span class="chipDataCell">
+                                <span class="healthTrackGroup">
+                                    <span class="healthTrackTitle">Physical</span>
+                                    <span class="healthTrack">
+                                        <span
+                                            ng-repeat="h in getNumber(char.healthPMax) track by $index"
+                                            class="healthbox"
+                                            ng-click="healthBoxClick(char,'P',$index+1)"
+                                            ng-class="{'marked': char.damageP >= $index+1}"></span>
+                                    </span>
+                                </span>
+                                <span class="healthTrackGroup">
+                                    <span class="healthTrackTitle">Stun</span>
+                                    <span class="healthTrack">
+                                        <span
+                                            ng-repeat="h in getNumber(char.healthSMax) track by $index"
+                                            class="healthbox"
+                                            ng-click="healthBoxClick(char,'S',$index+1)"
+                                            ng-class="{'marked': char.damageS >= $index+1}"></span>
+                                    </span>
                                 </span>
                             </span>
-                            <span class="healthTrackGroup">
-                                <span class="healthTrackTitle">Stun</span>
-                                <span class="healthTrack">
-                                    <span
-                                        ng-repeat="h in getNumber(char.healthSMax) track by $index"
-                                        class="healthbox"
-                                        ng-click="healthBoxClick(char,'S',$index+1)"
-                                        ng-class="{'marked': char.damageS >= $index+1}"></span>
-                                </span>
-                            </span>
-                        </span>
-                        <span class="chipDataCell">
-                            <div class="dropdown">
-                                <button class="dropbtn">{{char.initSpace}}</button>
-                                <div class="dropdown-content">
-                                    <a 
-                                        ng-repeat="initSpaceOption in char.initSpaceOptions"
-                                        href="#"
-                                        ng-click="setInitSpace(char,initSpaceOption)">{{initSpaceOption.name}}
-                                    </a>
+                            <span class="chipDataCell">
+                                <div class="dropdown">
+                                    <button class="dropbtn">{{char.initSpace}}</button>
+                                    <div class="dropdown-content">
+                                        <a 
+                                            ng-repeat="initSpaceOption in char.initSpaceOptions"
+                                            href="#"
+                                            ng-click="setInitSpace(char,initSpaceOption)">{{initSpaceOption.name}}
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
+                            </span>
                         </span>
                     </span>
-                </span>
-                <span class="closebtn" ng-click="deleteChip(char)"> &#215 </span>                
-            </li>
-        </ul>
-    </div>
-    <div class="charSheetContainer">
-        <span class="charSheet">
-            <span class="dataBlock">
-                <span class="column-dbl">
-                    <span class="section">
-                        <span class="group">
-                            <span class="label">Name</span><span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].name"></input></span>
-                        </span>
-                    </span>
-                </span>
-            </span>
-            <span class="dataBlock">
-                <span class="column-dbl">
-                    <span class="section">
-                        <span class="group">
-                            <span class="label">Armor</span><span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedArmour.name"></input></span>
-                        </span>
-                    </span>
-                    <span class="section">
-                        <span class="group">
-                            <span class="label">Ranged Weapon</span><span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.name"></input></span>
-                        </span>
-                        <span class="group">
-                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.damage"></input></span>
-                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.acc"></input></span>
-                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.AP"></input></span>
-                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.mode"></input></span>
-                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.RC"></input></span>
-                            <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.ammo"></input></span>
-                        </span>
-                    </span>
-                    <span class="section">
-                        <span class="group">
-                            <span class="label">Melee Weapon</span><span class="dataFillWrapper"><input class="dataFill"></input></span>
-                        </span>
-                        <span class="group">
-                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
-                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
-                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
-                            <span class="dataFillWrapper"><input class="dataFill"></input></span>
-                        </span>
-                    </span>
-                </span>
-            </span>
-            <span class="dataBlock">
-                <span class="column">
-                    <span class="attrLabel">Body</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].body"></input>
-                    <span class="attrLabel">Agility</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].agility"></input>
-                    <span class="attrLabel">Reaction</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].reaction"></input>
-                    <span class="attrLabel">Strength</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].strength"></input>
-                    <span class="attrLabel">Willpower</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].willpower"></input>
-                    <span class="attrLabel">Logic</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].logic"></input>
-                    <span class="attrLabel">Intuition</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].intuition"></input>
-                    <span class="attrLabel">Charisma</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].charisma"></input>
-                    <span class="attrLabel">Edge</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].edge"></input>
-                </span>
-                <span class="column">
-                    <span class="attrLabel">Essence</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].essence"></input>
-                    <span class="attrLabel">Magic/Resonance</span><input class="dataSM" type="number"></input>
-                    <span class="attrLabel">Initiative</span><span class="dataSM">NA</span>
-                    <span class="attrLabel">Matrix Initative</span><span class="dataSM">NA</span>
-                    <span class="attrLabel">Astral Initiative</span><span class="dataSM">NA</span>
-                    <span class="attrLabel">Composure</span><span class="dataSM">NA</span>
-                    <span class="attrLabel">Judge Intentions</span><span class="dataSM">NA</span>
-                    <span class="attrLabel">Memory</span><span class="dataSM">NA</span>
-                    <span class="attrLabel">Lift/Carry</span><span class="dataSM">NA</span>
-                </span>
-            </span>
-            <span class="dataBlock">
-                <span>
-                    <span class="healthTrackGroup">
-                        <span class="healthTrackTitle">Physical</span>
-                        <span class="healthTrack">
-                            <span
-                                ng-repeat="h in getNumber(charArr[selectedCharIndex].healthPMax) track by $index"
-                                class="healthbox"
-                                ng-click="healthBoxClick(charArr[selectedCharIndex],'P',$index+1)"
-                                ng-class="{'marked': charArr[selectedCharIndex].damageP >= $index+1}"></span>
-                        </span>
-                    </span>
-                    <span class="healthTrackGroup">
-                        <span class="healthTrackTitle">Stun</span>
-                        <span class="healthTrack">
-                            <span
-                                ng-repeat="h in getNumber(charArr[selectedCharIndex].healthSMax) track by $index"
-                                class="healthbox"
-                                ng-click="healthBoxClick(charArr[selectedCharIndex],'S',$index+1)"
-                                ng-class="{'marked': charArr[selectedCharIndex].damageS >= $index+1}"></span>
+                    <span class="closebtn" ng-click="deleteChip(char)"> &#215 </span>                
+                </li>
+            </ul>
+        </div>
+        <div class="charSheetContainer">
+            <span class="charSheet">
+                <span class="dataBlock">
+                    <span class="column-dbl">
+                        <span class="section">
+                            <span class="group">
+                                <span class="label">Name</span><span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].name"></input></span>
                             </span>
                         </span>
                     </span>
                 </span>
-            <span class="dataBlock">
-                <span class="column-dbl">
-                    <span class="section">
-                        <span class="group">
-                            <span class="rmbtn-holder"></span>
-                            <span class="initCondLabel">Description</span>
-                            <span class="initCondValue">Modifier</span>
-                        </span>
-                        <span class="group">
-                            <span class="addbtn-holder">
-                                <span class="addbtn" ng-click="addCustomMod(charArr[selectedCharIndex])"> + </span>
+                <span class="dataBlock">
+                    <span class="column-dbl">
+                        <span class="section">
+                            <span class="group">
+                                <span class="label">Armor</span><span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedArmour.name"></input></span>
                             </span>
-                            <input class="initCondLabel" ng-model="charArr[selectedCharIndex].initModCustomNew.descr"></input>
-                            <input class="initCondValue" type="number" ng-model="charArr[selectedCharIndex].initModCustomNew.modifier"></input>
                         </span>
+                        <span class="section">
+                            <span class="group">
+                                <span class="label">Ranged Weapon</span><span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.name"></input></span>
+                            </span>
+                            <span class="group">
+                                <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.damage"></input></span>
+                                <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.acc"></input></span>
+                                <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.AP"></input></span>
+                                <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.mode"></input></span>
+                                <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.RC"></input></span>
+                                <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.ammo"></input></span>
+                            </span>
+                        </span>
+                        <span class="section">
+                            <span class="group">
+                                <span class="label">Melee Weapon</span><span class="dataFillWrapper"><input class="dataFill"></input></span>
+                            </span>
+                            <span class="group">
+                                <span class="dataFillWrapper"><input class="dataFill"></input></span>
+                                <span class="dataFillWrapper"><input class="dataFill"></input></span>
+                                <span class="dataFillWrapper"><input class="dataFill"></input></span>
+                                <span class="dataFillWrapper"><input class="dataFill"></input></span>
+                            </span>
+                        </span>
+                    </span>
+                </span>
+                <span class="dataBlock">
+                    <span class="column">
+                        <span class="attrLabel">Body</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].body"></input>
+                        <span class="attrLabel">Agility</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].agility"></input>
+                        <span class="attrLabel">Reaction</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].reaction"></input>
+                        <span class="attrLabel">Strength</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].strength"></input>
+                        <span class="attrLabel">Willpower</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].willpower"></input>
+                        <span class="attrLabel">Logic</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].logic"></input>
+                        <span class="attrLabel">Intuition</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].intuition"></input>
+                        <span class="attrLabel">Charisma</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].charisma"></input>
+                        <span class="attrLabel">Edge</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].edge"></input>
+                    </span>
+                    <span class="column">
+                        <span class="attrLabel">Essence</span><input class="dataSM" type="number" ng-model="charArr[selectedCharIndex].essence"></input>
+                        <span class="attrLabel">Magic/Resonance</span><input class="dataSM" type="number"></input>
+                        <span class="attrLabel">Initiative</span><span class="dataSM">NA</span>
+                        <span class="attrLabel">Matrix Initative</span><span class="dataSM">NA</span>
+                        <span class="attrLabel">Astral Initiative</span><span class="dataSM">NA</span>
+                        <span class="attrLabel">Composure</span><span class="dataSM">NA</span>
+                        <span class="attrLabel">Judge Intentions</span><span class="dataSM">NA</span>
+                        <span class="attrLabel">Memory</span><span class="dataSM">NA</span>
+                        <span class="attrLabel">Lift/Carry</span><span class="dataSM">NA</span>
+                    </span>
+                </span>
+                <span class="dataBlock">
+                    <span>
+                        <span class="healthTrackGroup">
+                            <span class="healthTrackTitle">Physical</span>
+                            <span class="healthTrack">
+                                <span
+                                    ng-repeat="h in getNumber(charArr[selectedCharIndex].healthPMax) track by $index"
+                                    class="healthbox"
+                                    ng-click="healthBoxClick(charArr[selectedCharIndex],'P',$index+1)"
+                                    ng-class="{'marked': charArr[selectedCharIndex].damageP >= $index+1}"></span>
+                            </span>
+                        </span>
+                        <span class="healthTrackGroup">
+                            <span class="healthTrackTitle">Stun</span>
+                            <span class="healthTrack">
+                                <span
+                                    ng-repeat="h in getNumber(charArr[selectedCharIndex].healthSMax) track by $index"
+                                    class="healthbox"
+                                    ng-click="healthBoxClick(charArr[selectedCharIndex],'S',$index+1)"
+                                    ng-class="{'marked': charArr[selectedCharIndex].damageS >= $index+1}"></span>
+                                </span>
+                            </span>
+                        </span>
+                    </span>
+                <span class="dataBlock">
+                    <span class="column-dbl">
+                        <span class="section">
+                            <span class="group">
+                                <span class="rmbtn-holder"></span>
+                                <span class="initCondLabel">Description</span>
+                                <span class="initCondValue">Modifier</span>
+                            </span>
+                            <span class="group">
+                                <span class="addbtn-holder">
+                                    <span class="addbtn" ng-click="addCustomMod(charArr[selectedCharIndex])"> + </span>
+                                </span>
+                                <input class="initCondLabel" ng-model="charArr[selectedCharIndex].initModCustomNew.descr"></input>
+                                <input class="initCondValue" type="number" ng-model="charArr[selectedCharIndex].initModCustomNew.modifier"></input>
+                            </span>
 
-                        <span class="group">
-                            <span class="rmbtn-holder"></span>
-                            <span class="initCondLabel">Description</span>
-                            <span class="initCondValue">Modifier</span>
-                        </span>
-                        <span 
-                            ng-repeat="initModCustom in charArr[selectedCharIndex].initModsCustom"
-                            class="group"
-                        >
-                            <span class="rmbtn-holder">
-                                <span class="rmbtn" ng-click="removeCustomMod(charArr[selectedCharIndex],initModCustom)"> &#215 </span>
+                            <span class="group">
+                                <span class="rmbtn-holder"></span>
+                                <span class="initCondLabel">Description</span>
+                                <span class="initCondValue">Modifier</span>
                             </span>
-                            <input class="initCondLabel" ng-model="initModCustom.descr"></input>
-                            <input class="initCondValue" type="number" ng-model="initModCustom.modifier"></input>
-                        </span>
-                        <span
-                                ng-repeat="initModAuto in charArr[selectedCharIndex].initModsAuto"
+                            <span 
+                                ng-repeat="initModCustom in charArr[selectedCharIndex].initModsCustom"
                                 class="group"
                             >
-                            <span class="rmbtn-holder"></span>
-                            <span class="initCondLabel">{{initModAuto.descr}}</span>
-                            <span class="initCondValue">{{initModAuto.modifier}}</span>
+                                <span class="rmbtn-holder">
+                                    <span class="rmbtn" ng-click="removeCustomMod(charArr[selectedCharIndex],initModCustom)"> &#215 </span>
+                                </span>
+                                <input class="initCondLabel" ng-model="initModCustom.descr"></input>
+                                <input class="initCondValue" type="number" ng-model="initModCustom.modifier"></input>
+                            </span>
+                            <span
+                                    ng-repeat="initModAuto in charArr[selectedCharIndex].initModsAuto"
+                                    class="group"
+                                >
+                                <span class="rmbtn-holder"></span>
+                                <span class="initCondLabel">{{initModAuto.descr}}</span>
+                                <span class="initCondValue">{{initModAuto.modifier}}</span>
+                            </span>
                         </span>
                     </span>
                 </span>
-            </span>
-            <span class="dataBlock">
-                <span class="column-dbl">
-                    <span class="section">
-                        <span class="group">
-                            <span class="label heading">Name</span>
-                            <span class="itemListData heading">Rtg</span>
-                            <span class="itemListData heading">Qty</span>
-                            <span class="itemListData heading">Page</span>
-                        </span>
-                        <span 
-                            class="group"
-                            ng-repeat="item in charArr[selectedCharIndex].gearList"
-                        >
-                            <span class="label" ng-click="gearClick(charArr[selectedCharIndex], item.name)">{{item.name}}</span>
-                            <input class="itemListData" type="number" ng-model="item.rating"></input>
-                            <input class="itemListData" type="number" ng-model="item.quantity" ng-blur="removeGearItem(charArr[selectedCharIndex], item)"></input>
-                            <input class="itemListData" type="number" ng-model="item.pageRef"></input>
+                <span class="dataBlock">
+                    <span class="column-dbl">
+                        <span class="section">
+                            <span class="group">
+                                <span class="label heading">Name</span>
+                                <span class="itemListData heading">Rtg</span>
+                                <span class="itemListData heading">Qty</span>
+                                <span class="itemListData heading">Page</span>
+                            </span>
+                            <span 
+                                class="group"
+                                ng-repeat="item in charArr[selectedCharIndex].gearList"
+                            >
+                                <span class="label" ng-click="gearClick(charArr[selectedCharIndex], item.name)">{{item.name}}</span>
+                                <input class="itemListData" type="number" ng-model="item.rating"></input>
+                                <input class="itemListData" type="number" ng-model="item.quantity" ng-blur="removeGearItem(charArr[selectedCharIndex], item)"></input>
+                                <input class="itemListData" type="number" ng-model="item.pageRef"></input>
+                            </span>
                         </span>
                     </span>
                 </span>
+                </span>
             </span>
-            </span>
+        </div>
+    </div>
+    <div class="itemListContainer">
+        <span class="itemListBody">
+            <ul class="navItemList">
+                <li><a>Pistol</a></li>
+                <li><a>Armour</a></li>
+                <li><a>Misc</a></li>
+            </ul>
+            <ul class="itemList">
+                <li><span>Item 1</li></span>
+                <li><span>Item 2</li></span>
+                <li><span>Item 3</li></span>
+                <li><span>Item 4</li></span>
+            </ul>
         </span>
     </div>
 </div>
