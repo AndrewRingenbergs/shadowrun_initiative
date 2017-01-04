@@ -36,7 +36,7 @@
             </li>
         </ul>
     </div>
-    <div>
+    <div class="charMainContainer">
         <div class="charContainer" id="charContainer">
             <ul class="characterList" id="characterList">
                 <li
@@ -255,7 +255,7 @@
                     </span>
                 </span>
                 <span class="dataBlock">
-                    <span>
+                    <span class="healthTracks">
                         <span class="healthTrackGroup">
                             <span class="healthTrackTitle">Physical</span>
                             <span class="healthTrack">
@@ -346,23 +346,28 @@
         </div>
     </div>
     <div class="itemListContainer">
+        <span class="itemListHeader"><span class="title">Gear List</span></span>
         <span class="itemListBody">
-            <ul class="navItemList">
-                <li><span><input type="text" ng-model="itemSearch.$" placeholder="Search.."></input></span></li>
-                <li 
-                    ng-repeat="itemTypeObj in itemTypes"
-                    >
-                    <a ng-click="itemTypeClick(itemTypeObj)" ng-class="{'active': itemTypeObj === itemTypeSelected}">{{itemTypeObj.type}}</a>
-                </li>
-            </ul>
-            <ul class="itemList">
-                <li ng-repeat="item in items | orderBy:['type','subtype','name'] | filter:itemTypeSelected.type | filter:itemSearch">
-                    <span class="itemGroup">
-                        <span class="label">{{item.name}}</span>
-                        <span class="addbtn-holder" ng-click="addItemToActiveCharGear(item)">Add</span>
-                    </span>
-                </li>
-            </ul>
+            <span class="navItemListContainer">
+                <ul class="navItemList">
+                    <li><span><input type="text" ng-model="itemSearch.$" placeholder="Search.."></input></span></li>
+                    <li 
+                        ng-repeat="itemTypeObj in itemTypes"
+                        >
+                        <a ng-click="itemTypeClick(itemTypeObj)" ng-class="{'active': itemTypeObj === itemTypeSelected}">{{itemTypeObj.type}}</a>
+                    </li>
+                </ul>
+            </span>
+            <span class="gearListContainer">
+                <ul class="itemList">
+                    <li ng-repeat="item in items | orderBy:['type','subtype','name'] | filter:itemTypeSelected.type | filter:itemSearch">
+                        <span class="itemGroup">
+                            <span class="label">{{item.name}}</span>
+                            <span class="addbtn-holder" ng-click="addItemToActiveCharGear(item)">Add</span>
+                        </span>
+                    </li>
+                </ul>
+            </span>
         </span>
     </div>
 </div>
