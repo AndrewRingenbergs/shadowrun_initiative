@@ -336,22 +336,37 @@ li .tokenData {
     text-align: center;
 }
 
-.charSheet .dataBlock .group .itemGroup .initVal {
+.charSheet .dataBlock .group .itemGroup .valBox {
     display: block;
-    font-size: 12px;
-    min-width: 16px; 
     padding: 2px;
     margin: 2px;
     border: 1px solid;
     border-color: white;
+    font-size: 12px;
     text-align: center;
+}
+
+.charSheet .dataBlock .group .itemGroup .valBox .initVal {
+    display: block;
+    min-width: 16px;
+    padding: 1px 0px;
+}
+
+.charSheet .dataBlock .group .itemGroup .valBox .initInputVal {
+    display: block;
+    width: 34px;
+    border: 0px;
 }
 
 .charSheet .dataBlock .group .operator {
     font-size: 12px;
     min-width: 5px;
-    padding: 16px 2px 2px 2px;
+    padding: 17px 2px 2px 2px;
     margin: 2px;
+    text-align: center;
+}
+
+.charSheet .dataBlock .group .initCheckboxGroup .label {
     text-align: center;
 }
 

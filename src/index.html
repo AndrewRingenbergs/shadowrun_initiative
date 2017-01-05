@@ -284,22 +284,25 @@
                             <span class="group">
                                 <span class="itemGroup">
                                     <span class="title">Base Roll</span>
-                                    <span class="initVal">{{charArr[selectedCharIndex].initBreakdown()}}</span>
+                                    <span class="valBox">
+                                        <span class="initVal" ng-hide="charArr[selectedCharIndex].initManual">{{charArr[selectedCharIndex].initBreakdown()}}</span>
+                                        <input type="number" class="initInputVal" ng-show="charArr[selectedCharIndex].initManual" ng-model="charArr[selectedCharIndex].initBaseManual"></input>
+                                    </span>
                                 </span>
                                 <span class="operator">+</span>
                                 <span class="itemGroup">
                                     <span class="title">Modifier</span>
-                                    <span class="initVal">{{charArr[selectedCharIndex].initMod()}}</span>
+                                    <span class="valBox"><span class="initVal">{{charArr[selectedCharIndex].initMod()}}</span></span>
                                 </span>
                                 <span class="operator">+</span>
                                 <span class="itemGroup">
                                     <span class="title">Pass Adj</span>
-                                    <span class="initVal">{{charArr[selectedCharIndex].initPassAdj}}</span>
+                                    <span class="valBox"><span class="initVal">{{charArr[selectedCharIndex].initPassAdj}}</span></span>
                                 </span>
                                 <span class="operator">=</span>
                                 <span class="itemGroup">
                                     <span class="title">Initiative</span>
-                                    <span class="initVal">{{charArr[selectedCharIndex].initCur()}}</span>
+                                    <span class="valBox"><span class="initVal">{{charArr[selectedCharIndex].initCur()}}</span></span>
                                 </span>
                             </span>
                             <span class="group">
@@ -313,6 +316,10 @@
                                         </a>
                                     </div>
                                 </div>
+                                <span class="initCheckboxGroup">
+                                    <input type="checkbox" class="checkbox" ng-model="charArr[selectedCharIndex].initManual"></input>
+                                    <span class="label">Manual Roll?</span>
+                                </span>
                             </span>
                         </span>
                         <span class="section">
