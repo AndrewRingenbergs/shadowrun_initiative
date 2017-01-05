@@ -7,7 +7,7 @@ const dependencies = Object.keys(require('./package.json').dependencies);
 const parts = require('./webpack/webpack.parts.js');
 
 const PATHS = {
-	app: path.join(__dirname, 'src', 'app.js'),
+	app: path.join(__dirname, 'src', 'app'),
 	styles: path.join(__dirname, 'src', 'styles', 'style.css'),
 	build: path.join(__dirname, 'dist'),
 	pub: path.join(__dirname, 'src', 'public')
