@@ -329,6 +329,32 @@ li .tokenData {
     margin: 2px 0px;
 }
 
+.charSheet .dataBlock .group .itemGroup .title {
+    display: block;
+    font-size: 10px;
+    margin: 2px;
+    text-align: center;
+}
+
+.charSheet .dataBlock .group .itemGroup .initVal {
+    display: block;
+    font-size: 12px;
+    min-width: 16px; 
+    padding: 2px;
+    margin: 2px;
+    border: 1px solid;
+    border-color: white;
+    text-align: center;
+}
+
+.charSheet .dataBlock .group .operator {
+    font-size: 12px;
+    min-width: 5px;
+    padding: 16px 2px 2px 2px;
+    margin: 2px;
+    text-align: center;
+}
+
 .charSheet .dataBlock .group .label {
     flex-grow: 1;
     min-width: 100px;

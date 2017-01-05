@@ -282,6 +282,41 @@
                     <span class="column-dbl">
                         <span class="section">
                             <span class="group">
+                                <span class="itemGroup">
+                                    <span class="title">Base Roll</span>
+                                    <span class="initVal">{{charArr[selectedCharIndex].initBreakdown()}}</span>
+                                </span>
+                                <span class="operator">+</span>
+                                <span class="itemGroup">
+                                    <span class="title">Modifier</span>
+                                    <span class="initVal">{{charArr[selectedCharIndex].initMod()}}</span>
+                                </span>
+                                <span class="operator">+</span>
+                                <span class="itemGroup">
+                                    <span class="title">Pass Adj</span>
+                                    <span class="initVal">{{charArr[selectedCharIndex].initPassAdj}}</span>
+                                </span>
+                                <span class="operator">=</span>
+                                <span class="itemGroup">
+                                    <span class="title">Initiative</span>
+                                    <span class="initVal">{{charArr[selectedCharIndex].initCur()}}</span>
+                                </span>
+                            </span>
+                            <span class="group">
+                                <div class="dropdown">
+                                    <button class="dropbtn">{{charArr[selectedCharIndex].initSpace}}</button>
+                                    <div class="dropdown-content">
+                                        <a 
+                                            ng-repeat="initSpaceOption in charArr[selectedCharIndex].initSpaceOptions"
+                                            href="#"
+                                            ng-click="setInitSpace(charArr[selectedCharIndex],initSpaceOption)">{{initSpaceOption.name}}
+                                        </a>
+                                    </div>
+                                </div>
+                            </span>
+                        </span>
+                        <span class="section">
+                            <span class="group">
                                 <span class="rmbtn-holder"></span>
                                 <span class="initCondLabel">Description</span>
                                 <span class="initCondValue">Modifier</span>
