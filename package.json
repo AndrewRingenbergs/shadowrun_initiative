@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rimraf dist && webpack --bail --progress --profile",
     "deploy:dev": "npm run build && firebase deploy",
-    "deploy:prod": "npm run build && firebase use production && firebase deploy --token=${FIREBASE_TOKEN}",
+    "deploy:prod": "npm run build && firebase deploy -P production --token=${FIREBASE_TOKEN}",
     "server": "webpack-dev-server --inline --progress",
     "start": "npm run server",
     "test": "echo \"Error: no test specified\""
