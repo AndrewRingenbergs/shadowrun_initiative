@@ -4,19 +4,12 @@ node_js:
 branches:
   except:
   - gh-pages
-before_deploy:
-- openssl aes-256-cbc -K $encrypted_f4baed597c4a_key -iv $encrypted_f4baed597c4a_iv
-  -in id_rsa.enc -out id_rsa -d
 deploy:
   skip_cleanup: true
   provider: script
-  script: npm run deploy
+  script: npm run deploy:prod
   on:
     branch: master
 env:
   global:
-  - SSH_KEY="id_rsa"
-  - GIT_NAME="AndrewRingenbergs - CI"
-  - GIT_EMAIL="AndrewRingenbergs@CI.com"
-  - SOURCE_DIR="dist"
-  - DEPLOY_BRANCH="master"
+    secure: vx9FOXtbiko8/zVQN/OJ+V03FzJj3+2UE92Lt8wUPnEjwyO9j0GGHjkJ/BA5970LgeKVFou71vv9t6r2FtdvA03YUJE+S/9fQVoczzFGt4BlaR5PkzGsmj/M4hOYm/1NZsTvgPO6dCxPsC366bBuK3QthGq2iPeVv5MAcn0dQLaFi1HsFrvImfzyxGlxYh/SloAbAu7NI3WSf4o+9w1JPto+sYyz4oqUKpukfL7d6kM0MU50Xpam9LlkWChskrsyQTvm/NKUPC7SbejnjD035NY1WGWRdBFnmizt3BjMQmX4UXX6MhhEf7ZoZMts0F82km72iYolwIotiEErEqF5g1gec6QnBTGUJIyTd7tEaoo+IzcUfsCsTPMJ33wVs3wMxCcBSH8r9eofPa0kHpc4DRxxQsrrZ6Rv/uAInQt3CRUsds6zffNS+nhZtvW+M3N6WNkgcxiXsk96kCoIl5CSfPD8Hl+82x9rO+7wwfMEP1Y6nLgmSLGC9oj66r4frt8yhQg9l52gvUv8/EqlaqrJyW7gHWtKiUL8RVHEGGaBH87/33kH8H4WBITbzeoPeKyPbl5UzdWjX7Qh6+X0RmLw/OzoUzrYSebJNUR/+mBqDZTen4LWkyW0HgdFhvOOFSQ8u6xsTEvi2rHrB9EgPSrztVdjrEC6meIcvEOng3ha7hY=

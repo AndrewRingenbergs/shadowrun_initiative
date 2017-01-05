@@ -4,7 +4,8 @@
   "description": "A tool to allow showdowrunners to know who should roll the dice",
   "scripts": {
     "build": "rimraf dist && webpack --bail --progress --profile",
-    "deploy": "npm run build&&gh-pages-travis",
+    "deploy:dev": "npm run build && firebase deploy",
+    "deploy:prod": "npm run build && firebase deploy -P production --token=${FIREBASE_TOKEN}",
     "server": "webpack-dev-server --inline --progress",
     "start": "npm run server",
     "test": "echo \"Error: no test specified\""
@@ -23,8 +24,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^1.0.1",
-    "gh-pages": "^0.12.0",
-    "gh-pages-travis": "^1.0.0",
+    "firebase-tools": "^3.2.1",
     "html-webpack-plugin": "^2.24.1",
     "nyan-progress-webpack-plugin": "^1.1.4",
     "rimraf": "^2.5.4",
