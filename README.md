@@ -1,5 +1,6 @@
 # Shadowrun Initiative
-
+[![Build Status](https://travis-ci.org/AndrewRingenbergs/shadowrun_initiative.svg?branch=master)](https://travis-ci.org/AndrewRingenbergs/shadowrun_initiative)
+https://shadowrun-tracker.firebaseapp.com/
 
 ## Requirements
 [Node & Npm] (https://nodejs.org/en/download/)
