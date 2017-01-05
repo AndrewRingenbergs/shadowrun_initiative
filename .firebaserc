@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "shadowrun-tracker-dev",
+    "production": "shadowrun-tracker"
+  }
+}
