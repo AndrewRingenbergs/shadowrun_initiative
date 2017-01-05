@@ -1,6 +1,6 @@
 var app = angular.module("myApp", []);
 
-app.controller("myCtrl", [ '$scope', function($scope) {
+app.controller("mainController", [ '$scope', function($scope) {
 
 	function s4() {
 		return Math.floor((1 + Math.random()) * 0x10000)
