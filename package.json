@@ -24,7 +24,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^1.0.1",
-    "firebase": "^3.6.4",
+    "firebase-tools": "^3.2.1",
     "html-webpack-plugin": "^2.24.1",
     "nyan-progress-webpack-plugin": "^1.1.4",
     "rimraf": "^2.5.4",
