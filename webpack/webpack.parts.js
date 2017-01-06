@@ -62,10 +62,11 @@ exports.minify = function() {
 
 exports.setupJS = function(paths) {
   return {
-    modules: {
+    module: {
       loaders: [{
-        test: /\.js$/,
-        loader: 'ng-annotate'
+        test: /\.(js|jsx)$/,
+        exclude: /(node_modules)/,
+        loader: 'ng-annotate!babel-loader'
       }]
     }
   }

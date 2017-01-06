@@ -1,7 +1,4 @@
-var app = angular.module("myApp", []);
-
-
-module.exports = function($scope) {
+export default function($scope) {
   "ngInject"
 
 	function s4() {
@@ -47,7 +44,7 @@ module.exports = function($scope) {
 		{ type: "Gear", name: "Cram", subtype: "Drugs", addictionRating: 4, additionThreshold: 3, avail: "2R", cost: 10 }
 	];
 
-	findItemByName = function(itemName) {
+	var findItemByName = function(itemName) {
 	 	return $scope.items.filter(function( obj ) { return obj.name == itemName; })[0];
 	}
 
@@ -219,9 +216,9 @@ module.exports = function($scope) {
 
 	$scope.addChar = function() {
 		console.log('Creating New Char');
-		template = $scope.charTypeInsertable.template;
+		var template = $scope.charTypeInsertable.template;
 		for(var i = 0; i < $scope.numCharsAdd; i++) {
-			newChar = createChar(template.name, template.body, template.agility, template.reaction, template.strength, template.willpower, template.logic, template.intuition, template.charisma, template.edge, template.essence, template.magres, template.dataProcessing, template.gearList, template.equippedArmour, template.equippedRangedWeapon, template.equippedRangedWeapon);
+			var newChar = createChar(template.name, template.body, template.agility, template.reaction, template.strength, template.willpower, template.logic, template.intuition, template.charisma, template.edge, template.essence, template.magres, template.dataProcessing, template.gearList, template.equippedArmour, template.equippedRangedWeapon, template.equippedRangedWeapon);
 			$scope.charArr.push(newChar);
 		}
 		console.log($scope.charArr);

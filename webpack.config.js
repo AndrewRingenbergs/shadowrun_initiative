@@ -34,7 +34,7 @@ const common = merge({
 	}
 }, parts.setupJS());
 
-module.exports = function(env) {
+const conf = function(env) {
 	console.log('Building in Environment: '+ env)
 
 	switch (env) {
@@ -73,3 +73,13 @@ module.exports = function(env) {
 	}
 	return config;
 }(getEnv());
+
+
+
+console.log(JSON.stringify(conf));
+
+module.exports = conf
+
+
+
+
