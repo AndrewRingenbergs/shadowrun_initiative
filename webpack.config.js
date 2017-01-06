@@ -32,7 +32,7 @@ const common = merge({
 		styles: PATHS.styles,
 		vendor: dependencies
 	}
-});
+}, parts.setupJS());
 
 module.exports = function(env) {
 	console.log('Building in Environment: '+ env)

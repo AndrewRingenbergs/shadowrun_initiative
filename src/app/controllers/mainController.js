@@ -1,7 +1,8 @@
 var app = angular.module("myApp", []);
 
 
-module.exports = [ '$scope', function($scope) {
+module.exports = function($scope) {
+  "ngInject"
 
 	function s4() {
 		return Math.floor((1 + Math.random()) * 0x10000)
@@ -404,4 +405,4 @@ module.exports = [ '$scope', function($scope) {
 
 	console.log("Page load finished");
 
-}];
+};

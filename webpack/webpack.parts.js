@@ -60,6 +60,17 @@ exports.minify = function() {
 	};
 }
 
+exports.setupJS = function(paths) {
+  return {
+    modules: {
+      loaders: [{
+        test: /\.js$/,
+        loader: 'ng-annotate'
+      }]
+    }
+  }
+}
+
 exports.loadCSS = function(paths) {
 	return {
 		module: {
