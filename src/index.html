@@ -22,15 +22,7 @@
         </div>
     </div>
 
-    <ul class="initiativeTracker">
-            <li class="token-list-item"
-                ng-repeat="char in charArr |  orderBy:['-initCur()','-edge','-reaction','-intuition','-randomCoin']" 
-                ng-hide="char.activity=='acted' || char.initCur()<=0">
-            <initiative-token char="char" initiative="char.initCur()" />
-            </li>
-    </ul>
-
-
+    <initiative-tracker characters="charArr"></initiative-tracker>
 
     <div class="charMainContainer">
         <div class="charContainer" id="charContainer">
