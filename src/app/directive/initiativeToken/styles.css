@@ -1,0 +1,16 @@
+.tokenData {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    border-style: solid;
+    border-color: white;
+    width: 50px;
+    height: 30px;
+    background-color: #333
+}
+
+.tokenData span {
+    display: block;
+}

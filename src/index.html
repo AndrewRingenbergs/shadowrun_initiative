@@ -13,7 +13,7 @@
         <div class="dropdown">
         <button class="dropbtn">{{charTypeInsertable.type}}</button>
             <div class="dropdown-content">
-                <a 
+                <a
                     ng-repeat="charType in charTypes"
                     href="#"
                     ng-click="setCharTypeInsertable(charType)">{{charType.type}}
@@ -22,20 +22,16 @@
         </div>
     </div>
 
-    <div>
-        <ul class="initiativeTracker">
-            <li
-                class="initiativeToken"  
-                ng-repeat="char in charArr |  orderBy:['-initCur()','-edge','-reaction','-intuition','-randomCoin']"
-                ng-hide="char.activity=='acted' || char.initCur()<=0"
-            >
-                <span class="tokenData">
-                    <span>{{char.name}}</span>
-                    <span>({{char.initCur()}})</span>
-                </span>
+    <ul class="initiativeTracker">
+            <li class="token-list-item"
+                ng-repeat="char in charArr |  orderBy:['-initCur()','-edge','-reaction','-intuition','-randomCoin']" 
+                ng-hide="char.activity=='acted' || char.initCur()<=0">
+            <initiative-token char="char" initiative="char.initCur()" />
             </li>
-        </ul>
-    </div>
+    </ul>
+
+
+
     <div class="charMainContainer">
         <div class="charContainer" id="charContainer">
             <ul class="characterList" id="characterList">
@@ -52,7 +48,7 @@
                         <span class="chipDataRow">
                             <span class="chipDataCell">
                                 <input ng-model="char.name" class="chipData"></input>
-                            </span> 
+                            </span>
                             <span class="chipDataCell">
                                 <span class="healthTrackGroup">
                                     <span class="healthTrackTitle">Physical</span>
@@ -77,7 +73,7 @@
                             </span>
                         </span>
                     </span>
-                    <span class="closebtn" ng-click="deleteChip(char)"> &#215 </span>                
+                    <span class="closebtn" ng-click="deleteChip(char)"> &#215 </span>
                 </li>
             </ul>
         </div>
@@ -204,7 +200,7 @@
                                 <div class="dropdown">
                                     <button class="dropbtn">{{charArr[selectedCharIndex].initSpace}}</button>
                                     <div class="dropdown-content">
-                                        <a 
+                                        <a
                                             ng-repeat="initSpaceOption in charArr[selectedCharIndex].initSpaceOptions"
                                             href="#"
                                             ng-click="setInitSpace(charArr[selectedCharIndex],initSpaceOption)">{{initSpaceOption.name}}
@@ -236,7 +232,7 @@
                                 <span class="initCondLabel">Description</span>
                                 <span class="initCondValue">Modifier</span>
                             </span>
-                            <span 
+                            <span
                                 ng-repeat="initModCustom in charArr[selectedCharIndex].initModsCustom"
                                 class="group"
                             >
@@ -266,7 +262,7 @@
                                 <span class="itemListData heading">Qty</span>
                                 <span class="itemListData heading">Page</span>
                             </span>
-                            <span 
+                            <span
                                 class="group"
                                 ng-repeat="item in charArr[selectedCharIndex].gearList"
                             >
@@ -288,7 +284,7 @@
             <span class="navItemListContainer">
                 <ul class="navItemList">
                     <li><span><input type="text" ng-model="itemSearch.$" placeholder="Search.."></input></span></li>
-                    <li 
+                    <li
                         ng-repeat="itemTypeObj in itemTypes"
                         >
                         <a ng-click="itemTypeClick(itemTypeObj)" ng-class="{'active': itemTypeObj === itemTypeSelected}">{{itemTypeObj.type}}</a>
