@@ -26,13 +26,17 @@ const getEnv = function() {
 	}
 }
 
-const common = merge({
-	entry: {
-		app: PATHS.app,
-		styles: PATHS.styles,
-		vendor: dependencies
-	}
-});
+const common = merge(
+  {
+	  entry: {
+		  app: PATHS.app,
+		  styles: PATHS.styles,
+      vendor: dependencies
+	  }
+  },
+  parts.setupJS(PATHS.app),
+  parts.templates(PATHS.app)
+);
 
 module.exports = function(env) {
 	console.log('Building in Environment: '+ env)

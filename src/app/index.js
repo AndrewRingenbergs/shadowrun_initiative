@@ -1,5 +1,10 @@
-var mainController = require('./controllers/mainController');
+import mainController from './controllers/mainController';
 
-angular.module("myApp", [])
-  .controller('mainController', mainController);
+import InitiativeTracker from './directive/initiativeTracker';
+import InitiativeToken from './directive/initiativeToken';
+
+angular.module("myApp", ['angular-uuid'])
+  .controller('mainController', mainController)
+  .directive('initiativeTracker', () => new InitiativeTracker)
+  .directive('initiativeToken', () => new InitiativeToken)
 

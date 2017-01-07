@@ -1,28 +1,5 @@
-var app = angular.module("myApp", []);
-
-
-module.exports = [ '$scope', function($scope) {
-
-	function s4() {
-		return Math.floor((1 + Math.random()) * 0x10000)
-		.toString(16)
-		.substring(1);
-		};
-
-	function guid() {
-		return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-		};
-
-	/*	
-	$scope.items = [
-		{ type: "Armour", list: [ {name: "Armour Vest", rating: 9, avail: 4, cost: 500} ]},
-
-		{ type: "Firearms", list: [ {name: "Browning Ultra-Power", subtype: "Heavy Pistols", acc: "5 (6)", damage: "8P", AP: -1, mode: "SA", RC: 0, ammo: "10 (c)", avail: "4R", cost: "640"} ]}
-	];
-
-	findItemByTypeName = function(itemType,itemName) {
-	 	return $scope.items.filter(function( obj ) { return obj.type == itemType; })[0].list.filter(function( obj ) { return obj.name == itemName; })[0];
-	}*/
+export default function($scope, uuid) {
+  "ngInject"
 
 	$scope.items = [
 		{ type: "Armour", name: "Armour vest", rating: 9, avail: 4, cost: 500 },
@@ -46,7 +23,7 @@ module.exports = [ '$scope', function($scope) {
 		{ type: "Gear", name: "Cram", subtype: "Drugs", addictionRating: 4, additionThreshold: 3, avail: "2R", cost: 10 }
 	];
 
-	findItemByName = function(itemName) {
+	var findItemByName = function(itemName) {
 	 	return $scope.items.filter(function( obj ) { return obj.name == itemName; })[0];
 	}
 
@@ -92,7 +69,7 @@ module.exports = [ '$scope', function($scope) {
 		var initModCustomNew = { descr: "", modifier: 0 };
 
 		return {
-			guid: guid(),
+			uuid: uuid.v4(),
 			name: name,
 
 			initSpace: initSpace,
@@ -218,9 +195,9 @@ module.exports = [ '$scope', function($scope) {
 
 	$scope.addChar = function() {
 		console.log('Creating New Char');
-		template = $scope.charTypeInsertable.template;
+		var template = $scope.charTypeInsertable.template;
 		for(var i = 0; i < $scope.numCharsAdd; i++) {
-			newChar = createChar(template.name, template.body, template.agility, template.reaction, template.strength, template.willpower, template.logic, template.intuition, template.charisma, template.edge, template.essence, template.magres, template.dataProcessing, template.gearList, template.equippedArmour, template.equippedRangedWeapon, template.equippedRangedWeapon);
+			var newChar = createChar(template.name, template.body, template.agility, template.reaction, template.strength, template.willpower, template.logic, template.intuition, template.charisma, template.edge, template.essence, template.magres, template.dataProcessing, template.gearList, template.equippedArmour, template.equippedRangedWeapon, template.equippedRangedWeapon);
 			$scope.charArr.push(newChar);
 		}
 		console.log($scope.charArr);
@@ -404,4 +381,4 @@ module.exports = [ '$scope', function($scope) {
 
 	console.log("Page load finished");
 
-}];
+};

@@ -1,0 +1,14 @@
+.token-list-item {
+  list-style-type: none;
+  float: left
+}
+
+ul.initiativeTracker {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+
+
