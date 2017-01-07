@@ -10,7 +10,6 @@
 
 .charContainer {
     float: left;
-    width: 25%;
     vertical-align:top;
 }
 
@@ -56,20 +55,6 @@
     width: 50px;
 	background-color: #ffffff;
 	text-align: center;
-}
-
-.closebtn {
-    position: inline;
-    padding: 0px 10px;
-    color: #888;
-    font-weight: bold;
-    float: right;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.closebtn:hover {
-    color: #000;
 }
 
 /* Style The Dropdown Button */
@@ -559,4 +544,52 @@ ul.itemList {
     display: inline-block;
     width: 20px;
     float: right; /* need to work out how to fix this */
+}
+
+.characterChip .chipDataMain {
+    display: inline-block;
+    height: 100%;
+    width: 100px;
+}
+
+.characterChip .group {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    width: 100%;
+    margin: 2px 0px;
+}
+
+.characterChip .itemGroup {
+    display: block;
+    width: 100%;
+    margin: 2px 0px;
+    padding: 2px 0px;
+}
+
+.characterChip .itemGroup .nameLabel {
+    width: 94px;
+    font-size: 12px;
+    padding: 1px 0px;
+    margin: 0px 2px;
+}
+
+.characterChip .closeContainer {
+    position : relative;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.characterChip .closeContainer .closebtn {
+    display: block;
+    padding: 0px 10px;
+    color: #888;
+    font-weight: bold;
+    font-size: 20px;
+    height: 100%;
+    cursor: pointer;
+}
+
+.characterChip .closeContainer .closebtn:hover {
+    color: #000;
 }

@@ -32,40 +32,42 @@
                     ng-repeat="char in charArr |  orderBy: 'name'"
                     ng-click="getSelectedChar(char)"
                 >
-                    <span class="chipDataTable">
-                        <header class="chipDataRow">
-                            <span class="chipDataCell">name</span>
-                            <span class="chipDataCell">Health</span>
-                        </header>
-                        <span class="chipDataRow">
-                            <span class="chipDataCell">
-                                <input ng-model="char.name" class="chipData"></input>
+                    <span class="chipDataMain">
+                        <span class="group">
+                            <span class="itemGroup">
+                                <input ng-model="char.name" class="nameLabel"></input>
                             </span>
-                            <span class="chipDataCell">
-                                <span class="healthTrackGroup">
-                                    <span class="healthTrackTitle">Physical</span>
-                                    <span class="healthTrack">
-                                        <span
-                                            ng-repeat="h in getNumber(char.healthPMax) track by $index"
-                                            class="healthbox"
-                                            ng-click="healthBoxClick(char,'P',$index+1)"
-                                            ng-class="{'marked': char.damageP >= $index+1}"></span>
+                        </span>
+                        <span class="group">
+                            <span class="itemGroup">
+                                <span class="healthTracks">
+                                    <span class="healthTrackGroup">
+                                        <span class="healthTrackTitle">Physical</span>
+                                        <span class="healthTrack">
+                                            <span
+                                                ng-repeat="h in getNumber(char.healthPMax) track by $index"
+                                                class="healthbox"
+                                                ng-click="healthBoxClick(char,'P',$index+1)"
+                                                ng-class="{'marked': char.damageP >= $index+1}"></span>
+                                        </span>
                                     </span>
-                                </span>
-                                <span class="healthTrackGroup">
-                                    <span class="healthTrackTitle">Stun</span>
-                                    <span class="healthTrack">
-                                        <span
-                                            ng-repeat="h in getNumber(char.healthSMax) track by $index"
-                                            class="healthbox"
-                                            ng-click="healthBoxClick(char,'S',$index+1)"
-                                            ng-class="{'marked': char.damageS >= $index+1}"></span>
+                                    <span class="healthTrackGroup">
+                                        <span class="healthTrackTitle">Stun</span>
+                                        <span class="healthTrack">
+                                            <span
+                                                ng-repeat="h in getNumber(char.healthSMax) track by $index"
+                                                class="healthbox"
+                                                ng-click="healthBoxClick(char,'S',$index+1)"
+                                                ng-class="{'marked': char.damageS >= $index+1}"></span>
+                                        </span>
                                     </span>
                                 </span>
                             </span>
                         </span>
                     </span>
-                    <span class="closebtn" ng-click="deleteChip(char)"> &#215 </span>
+                    <span class="closeContainer">
+                        <span class="closebtn" ng-click="deleteChip(char)"> &#215 </span>
+                    </span>
                 </li>
             </ul>
         </div>
