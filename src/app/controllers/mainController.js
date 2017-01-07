@@ -1,26 +1,5 @@
-export default function($scope) {
+export default function($scope, uuid) {
   "ngInject"
-
-	function s4() {
-		return Math.floor((1 + Math.random()) * 0x10000)
-		.toString(16)
-		.substring(1);
-		};
-
-	function guid() {
-		return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-		};
-
-	/*	
-	$scope.items = [
-		{ type: "Armour", list: [ {name: "Armour Vest", rating: 9, avail: 4, cost: 500} ]},
-
-		{ type: "Firearms", list: [ {name: "Browning Ultra-Power", subtype: "Heavy Pistols", acc: "5 (6)", damage: "8P", AP: -1, mode: "SA", RC: 0, ammo: "10 (c)", avail: "4R", cost: "640"} ]}
-	];
-
-	findItemByTypeName = function(itemType,itemName) {
-	 	return $scope.items.filter(function( obj ) { return obj.type == itemType; })[0].list.filter(function( obj ) { return obj.name == itemName; })[0];
-	}*/
 
 	$scope.items = [
 		{ type: "Armour", name: "Armour vest", rating: 9, avail: 4, cost: 500 },
@@ -90,7 +69,7 @@ export default function($scope) {
 		var initModCustomNew = { descr: "", modifier: 0 };
 
 		return {
-			guid: guid(),
+			uuid: uuid.v4(),
 			name: name,
 
 			initSpace: initSpace,

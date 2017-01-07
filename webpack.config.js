@@ -30,11 +30,11 @@ const common = merge({
 	entry: {
 		app: PATHS.app,
 		styles: PATHS.styles,
-		vendor: dependencies
+    vendor: dependencies
 	}
 }, parts.setupJS());
 
-const conf = function(env) {
+module.exports = function(env) {
 	console.log('Building in Environment: '+ env)
 
 	switch (env) {
@@ -73,13 +73,3 @@ const conf = function(env) {
 	}
 	return config;
 }(getEnv());
-
-
-
-console.log(JSON.stringify(conf));
-
-module.exports = conf
-
-
-
-
