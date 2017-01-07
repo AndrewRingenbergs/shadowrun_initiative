@@ -1,11 +1,11 @@
 import template from './template.html'
 import style from './styles.css'
 
-export default function() {
-  return {
-    restrict: 'E',
-    templateUrl: template,
-    scope: {
+export default class InitiativeToken {
+  constructor() {
+    this.restrict = 'E',
+    this.templateUrl = template,
+    this.scope = {
       char: '=',
       initiative: '='
     }
