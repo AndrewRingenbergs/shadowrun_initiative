@@ -5,12 +5,15 @@ export default function($scope, uuid) {
 		{ type: "Armour", name: "Armour vest", rating: 9, avail: 4, cost: 500 },
 		{ type: "Armour", name: "Armour jacket", rating: 12, avail: 2, cost: 1000 },
 
-		{ type: "Ranged Weapons", name: "Browning Ultra-Power", subtype: "Heavy Pistols", acc: "5 (6)", damage: "8P", AP: -1, mode: "SA", RC: 0, ammo: "10 (c)", avail: "4R", cost: 640 },
+		{ type: "Ranged Weapons", name: "Browning Ultra-Power", subtype: "Heavy Pistols", acc: "5 (6)", damage: "8P", AP: -1, mode: "SA", RC: 0, ammo: 10, ammoContainer: 'c', avail: "4R", cost: 640 },
 
 		{ type: "Melee Weapons", name: "Knife", subtype: "Blades", acc: 5, reach: "-", damage: "(STR+1)P", AP: -1, avail: "-", cost: 10 },
 
 		{ type: "Melee Weapons", name: "Spurs (retractable)", subtype: "Cyber", acc: "NA", reach: "-", damage: "(STR+3)P", AP: -2, ess: 0.3, CAP: "[3]", avail: "12F", cost: 5000 },
 		
+		{ type: "Ammo", name: "Regular ammo", subtype: "Ammo", damageMod: 0, APMod: 0, avail: "2R", cost: 20 },
+		{ type: "Ammo", name: "Hollow points", subtype: "Ammo", damageMod: 1, APMod: 2, avail: "4F", cost: 70 },
+
 		{ type: "Gear", name: "Meta Link commlink", subtype: "Commlinks", rating: 1, avail: 2, cost: 100 },
 		{ type: "Gear", name: "Sony Emperor commlink", subtype: "Commlinks", rating: 2, avail: 4, cost: 700 },
 		{ type: "Gear", name: "Renraku Sensei commlink", subtype: "Commlinks", rating: 3, avail: 6, cost: 1000 },
@@ -68,7 +71,7 @@ export default function($scope, uuid) {
 
 		var initModCustomNew = { descr: "", modifier: 0 };
 
-		var equippedAmmo = { type: "Regular", qtyMax: 25, qtyUsed: 6 };
+		var equippedAmmo = { name: "Regular", qtyMax: 25, qtyUsed: 6 };
 
 		return {
 			uuid: uuid.v4(),
@@ -315,7 +318,6 @@ export default function($scope, uuid) {
 		char.initModsCustom.splice(char.initModsCustom.indexOf(customMod),1);
 	}
 
-	// MOVE THIS STUFF INTO CHARACTER OBJECT IF POSSIBLE
 
 	 $scope.healthBoxClick = function(char,type,h) {
 		if (type === 'P') {
@@ -338,6 +340,7 @@ export default function($scope, uuid) {
 		char.updateInitModsAuto();
 	}
 
+	// Gear stuff
 	$scope.gearClick = function(char, itemName) {
 		var item = findItemByName(itemName);
 
@@ -391,7 +394,7 @@ export default function($scope, uuid) {
 			itemFound.quantity += 1;
 		}
 		else {
-			char.gearList.push( { name: item.name, rating: 0, quantity: 1, pageRef: 0 });
+			char.gearList.push( { name: item.name, type: item.type, rating: 0, quantity: 1, pageRef: 0, qtyMax: null, qtyUsed: null, details: null });
 		}
 	}
 
@@ -399,6 +402,7 @@ export default function($scope, uuid) {
 		{ type: "Armour" },
 		{ type: "Ranged Weapons" },
 		{ type: "Melee Weapons" },
+		{ type: "Ammo" },
 		{ type: "Gear" }
 	];
 
@@ -513,6 +517,19 @@ export default function($scope, uuid) {
 			char.equippedAmmo.qtyUsed = index-1;
 		else
 			char.equippedAmmo.qtyUsed = index;
+	}
+
+	$scope.equipAmmo = function(char,ammoItem) {
+		if ((ammoItem.type === "Ammo")&(char.equippedRangedWeapon != null)) {
+			if ((ammoItem.details == null)|(ammoItem.details === char.equippedRangedWeapon.subtype)) {
+				if (ammoItem.qtyMax == null) {
+					ammoItem.details = char.equippedRangedWeapon.subtype; 
+					ammoItem.qtyMax = char.equippedRangedWeapon.ammo;
+					ammoItem.qtyUsed = 0;
+				}
+				char.equippedAmmo = ammoItem;
+			}
+		}
 	}
 
 	console.log("Page load finished");

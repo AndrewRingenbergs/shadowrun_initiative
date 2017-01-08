@@ -104,7 +104,16 @@
                             <span class="group">
                                 <span>
                                     <span>Ammo Type: </span>
-                                    <span>[Equipped ammo type]</span>
+                                    <div class="dropdown">
+                                        <button class="dropbtn">{{charArr[selectedCharIndex].equippedAmmo.name}}</span></button>
+                                        <div class="dropdown-content">
+                                            <a
+                                                ng-repeat="ammoItem in charArr[selectedCharIndex].gearList | filter:'Ammo'"
+                                                href="#"
+                                                ng-click="equipAmmo(charArr[selectedCharIndex],ammoItem)">{{ammoItem.name}}
+                                            </a>
+                                        </div>
+                                    </div>
                                 </span>
                             </span>
                             <span class="group">
