@@ -71,7 +71,7 @@ export default function($scope, uuid) {
 
 		var initModCustomNew = { descr: "", modifier: 0 };
 
-		var equippedAmmo = { name: "Regular", qtyMax: 25, qtyUsed: 6 };
+		var equippedAmmo = { name: "None", qtyMax: 0, qtyUsed: 0 };
 
 		return {
 			uuid: uuid.v4(),
@@ -534,8 +534,9 @@ export default function($scope, uuid) {
 			if ((ammoItem.details == null)|(ammoItem.details === char.equippedRangedWeapon.subtype)) {
 				if (ammoItem.qtyMax == null) {
 					let ammoItemOld = { name: ammoItem.name, type: ammoItem.type, rating: ammoItem.rating, quantity: ammoItem.quantity-1, pageRef: ammoItem.pageRef, qtyMax: ammoItem.qtyMax, qtyUsed: ammoItem.qtyUsed, details: ammoItem.details };
-					if (ammoItemOld.quantity > 0)
+					if (ammoItemOld.quantity > 0) {
 						char.gearList.push(ammoItemOld);
+					}
 					
 					ammoItem.quantity = 1;
 					ammoItem.details = char.equippedRangedWeapon.subtype; 
@@ -549,9 +550,10 @@ export default function($scope, uuid) {
 	}
 
 	$scope.unequipAmmo = function(char, ammoItem) {
-		char.equippedAmmo = null;
+		char.equippedAmmo = { name: "None", qtyMax: 0, qtyUsed: 0 };
 		if ((ammoItem.qtyMax === ammoItem.qtyUsed)) {
-			char.gearList.splice(char.gearList.indexOf(ammoItem),1);
+			if (char.gearList.indexOf(ammoItem) >= 0)
+				char.gearList.splice(char.gearList.indexOf(ammoItem),1);
 		}
 	}
 

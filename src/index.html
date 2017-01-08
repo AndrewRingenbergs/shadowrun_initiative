@@ -101,8 +101,8 @@
                                 <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.RC"></input></span>
                                 <span class="dataFillWrapper"><input class="dataFill" ng-model="charArr[selectedCharIndex].equippedRangedWeapon.ammo"></input></span>
                             </span>
-                            <span class="group">
-                                <span>
+                            <span ng-show="charArr[selectedCharIndex].equippedRangedWeapon != null">
+                                <span class="group">
                                     <span>Ammo Type: </span>
                                     <div class="dropdown">
                                         <button class="dropbtn">{{charArr[selectedCharIndex].equippedAmmo.name}}</span></button>
@@ -115,16 +115,16 @@
                                         </div>
                                     </div>
                                 </span>
-                            </span>
-                            <span class="group">
-                                <ul class="ammoTrackerContainer">
-                                    <li 
-                                        class="ammoBox"
-                                        ng-repeat="ammoBox in getNumber(charArr[selectedCharIndex].equippedAmmo.qtyMax) track by $index"
-                                        ng-click="ammoBoxClick(charArr[selectedCharIndex],$index+1)"
-                                        ng-class="{'marked': charArr[selectedCharIndex].equippedAmmo.qtyUsed >= $index+1}"
-                                    ></li>
-                                </ul>
+                                <span class="group">
+                                    <ul class="ammoTrackerContainer">
+                                        <li 
+                                            class="ammoBox"
+                                            ng-repeat="ammoBox in getNumber(charArr[selectedCharIndex].equippedAmmo.qtyMax) track by $index"
+                                            ng-click="ammoBoxClick(charArr[selectedCharIndex],$index+1)"
+                                            ng-class="{'marked': charArr[selectedCharIndex].equippedAmmo.qtyUsed >= $index+1}"
+                                        ></li>
+                                    </ul>
+                                </span>
                             </span>
                         </span>
                         <span class="section">
