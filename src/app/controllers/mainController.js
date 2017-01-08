@@ -27,7 +27,7 @@ export default function($scope, uuid) {
 	 	return $scope.items.filter(function( obj ) { return obj.name == itemName; })[0];
 	}
 
-	function createChar(name, body, agility, reaction, strength, willpower, logic, intuition, charisma, edge, essence, magres, dataProcessing, gearList, equippedArmour, equippedRangedWeapon, equippedMeleeWeapon) {
+	function createChar(name, body, agility, reaction, strength, willpower, logic, intuition, charisma, edge, essence, magres, dataProcessing, activeSkills, gearList, equippedArmour, equippedRangedWeapon, equippedMeleeWeapon) {
 		
 		var damageP = 0;
 		var damageS = 0;
@@ -140,7 +140,9 @@ export default function($scope, uuid) {
 			equippedRangedWeapon: equippedRangedWeapon,
 			equippedMeleeWeapon: equippedMeleeWeapon,
 
-			gearList: gearList
+			gearList: gearList,
+
+			activeSkills: activeSkills
 
 		};
 	}
@@ -166,8 +168,16 @@ export default function($scope, uuid) {
 		];
 
 	$scope.charTypes = [ 
-		{type:"Blank",template:createChar("NA", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, [])}, 
+		{type:"Blank",template:createChar("NA", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, [], [])}, 
 		{type:"Ganger",template:createChar("Ganger", 4, 4, 3, 4, 3, 2, 3, 3, 0, 6, 0, 0, 
+			[
+				{ name: "Blades", rating: 4 },
+				{ name: "Clubs", rating: 3 },
+				{ name: "Etiquette", rating: 3 },
+				{ name: "Intimidation", rating: 4 },
+				{ name: "Pistols", rating: 4 },
+				{ name: "Unarmed Combat", rating: 3 },
+			], 
 			gearList = [
 				{name: "Browning Ultra-Power", rating: 0, quantity: 1, pageRef: 0 },
 				{name: "Knife", rating: 0, quantity: 1, pageRef: 0 },
@@ -176,7 +186,16 @@ export default function($scope, uuid) {
 				{name: "Cram or Jazz", rating: 0, quantity: 1, pageRef: 411 }
 			]
 		)},
-		{type:"Ganger Lieutennant",template:createChar("Ganger Lieutennant", 4, 4, 4, 4, 4, 3, 4, 4, 0, 5.7, 0, 0, 
+		{type:"Ganger Lieutennant",template:createChar("Ganger Lieutennant", 4, 4, 4, 4, 4, 3, 4, 4, 0, 5.7, 0, 0,
+			[
+				{ name: "Blades", rating: 3 },
+				{ name: "Etiquette", rating: 4 },
+				{ name: "Intimidation", rating: 4 },
+				{ name: "Leadership", rating: 1 },
+				{ name: "Pistols", rating: 3 },
+				{ name: "Thrown Weapons", rating: 2 },
+				{ name: "Unarmed Combat", rating: 3 }				
+			], 
 			gearList = [
 				{name: "Browning Ultra-Power", rating: 0, quantity: 1, pageRef: 0 },
 				{name: "Knife", rating: 0, quantity: 1, pageRef: 0 },
@@ -197,7 +216,7 @@ export default function($scope, uuid) {
 		console.log('Creating New Char');
 		var template = $scope.charTypeInsertable.template;
 		for(var i = 0; i < $scope.numCharsAdd; i++) {
-			var newChar = createChar(template.name, template.body, template.agility, template.reaction, template.strength, template.willpower, template.logic, template.intuition, template.charisma, template.edge, template.essence, template.magres, template.dataProcessing, template.gearList, template.equippedArmour, template.equippedRangedWeapon, template.equippedRangedWeapon);
+			var newChar = createChar(template.name, template.body, template.agility, template.reaction, template.strength, template.willpower, template.logic, template.intuition, template.charisma, template.edge, template.essence, template.magres, template.dataProcessing, template.activeSkills, template.gearList, template.equippedArmour, template.equippedRangedWeapon, template.equippedRangedWeapon);
 			$scope.charArr.push(newChar);
 		}
 		console.log($scope.charArr);
@@ -250,12 +269,24 @@ export default function($scope, uuid) {
 	}
 
 	$scope.charArr = [];
-	$scope.charArr.push(createChar("Alpha", 4, 0, 3, 0, 0, 0, 4, 0, 0, 0, 0, 0,  [
+	$scope.charArr.push(createChar("Alpha", 4, 1, 3, 2, 3, 4, 4, 5, 6, 7, 8, 5, 
+		[
+			{ name: "Armourer", rating: 3 },
+			{ name: "Computer", rating: 4 },
+			{ name: "Archery", rating: 5 }
+		],
+		[
 			{name: "Browning Ultra-Power", rating: 0, quantity: 1, pageRef: 52 },
 			{name: "Armour Vest", rating: 1, quantity: 2, pageRef: 0 },
 			{name: "Test Equipment C", rating: 1, quantity: 0, pageRef: 5 }
 		]));
-	$scope.charArr.push(createChar("Beta", 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0,  [
+	$scope.charArr.push(createChar("Beta", 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0,
+		[
+			{ name: "Armourer", rating: 3 },
+			{ name: "Computer", rating: 4 },
+			{ name: "Archery", rating: 5 }
+		],
+		[
 			{name: "Browning Ultra-Power", rating: 0, quantity: 1, pageRef: 52 },
 			{name: "Armour Vest", rating: 1, quantity: 2, pageRef: 0 },
 			{name: "Test Equipment C", rating: 1, quantity: 0, pageRef: 5 }
@@ -379,6 +410,72 @@ export default function($scope, uuid) {
 		}
 	};
 
+	// Active Skills
+	$scope.listActiveSkills = [
+		{ name: "Animal Handling", attr: "charisma" },
+		{ name: "Archery", attr: "agility" },
+		{ name: "Armourer", attr: "logic" },
+		{ name: "Automatics", attr: "agility" },
+		{ name: "Blades", attr: "agility" },
+		{ name: "Clubs", attr: "agility" },
+		{ name: "Computer", attr: "logic" },
+		{ name: "Con", attr: "charisma" },
+		{ name: "Cybercombat", attr: "logic" },
+		{ name: "Cybertechnology", attr: "logic" },
+		{ name: "Demolitions", attr: "logic" },
+		{ name: "Disguise", attr: "intuition" },
+		{ name: "Electronic Warfare", attr: "logic" },
+		{ name: "Escape Artist", attr: "agility" },
+		{ name: "Etiquette", attr: "charisma" },
+		{ name: "First Aid", attr: "logic" },
+		{ name: "Forgery", attr: "logic" },
+		{ name: "Gunnery", attr: "agility" },
+		{ name: "Gymnastics", attr: "agility" },
+		{ name: "Hacking", attr: "logic" },
+		{ name: "Hardware", attr: "logic" },
+		{ name: "Heavy Weapons", attr: "agility" },
+		{ name: "Impersonation", attr: "charisma" },
+		{ name: "Instruction", attr: "charisma" },
+		{ name: "Intimidation", attr: "charisma" },
+		{ name: "Leadership", attr: "charisma" },
+		{ name: "Locksmith", attr: "agility" },
+		{ name: "Longarms", attr: "agility" },
+		{ name: "Navigation", attr: "intuition" },
+		{ name: "Negotiation", attr: "charisma" },
+		{ name: "Palming", attr: "agility" },
+		{ name: "Perception", attr: "intuition" },
+		{ name: "Performance", attr: "charisma" },
+		{ name: "Pilot Ground Craft", attr: "reaction" },
+		{ name: "Pilot Watercraft", attr: "reaction" },
+		{ name: "Pistols", attr: "agility" },
+		{ name: "Sneaking", attr: "agility" },
+		{ name: "Survival", attr: "willpower" },
+		{ name: "Throwing Weapons", attr: "agility" },
+		{ name: "Tracking", attr: "intuition" },
+		{ name: "Unarmed Combat", attr: "agility" }
+	];
+	
+	$scope.getActiveSkillRating = function(char, skillName) {
+		let rating = 0;
+		let list = char.activeSkills.filter(function( obj ) { return obj.name === skillName; });
+
+		if (list.length != 0)
+			rating = list[0].rating;
+		else 
+			rating = 0; 
+		
+		return rating;
+	}
+
+	$scope.getActiveSkillAttrVal = function(char, attr){
+		return char[attr];
+	}
+
+	$scope.getActiveSkillPool = function(char, activeSkill){
+		return $scope.getActiveSkillRating(char, activeSkill.name) + $scope.getActiveSkillAttrVal(char, activeSkill.attr);
+	}
+
 	console.log("Page load finished");
 
 };
+

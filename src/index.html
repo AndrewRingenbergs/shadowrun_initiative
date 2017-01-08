@@ -268,6 +268,27 @@
                         </span>
                     </span>
                 </span>
+                <span class="dataBlock">
+                    <span class="column-dbl">
+                        <span class="sectionFlex">
+                            <span class="groupHalfCol">
+                                <span class="label">Skill Name</span>
+                                <span class="value">Pool</span>
+                            </span>
+                            <span class="groupHalfCol">
+                                <span class="label">Skill Name</span>
+                                <span class="value">Pool</span>
+                            </span>
+                            <span 
+                                class="groupHalfCol"
+                                ng-repeat="skill in listActiveSkills"
+                            >
+                                <span class="label">{{skill.name}}</span>
+                                <span class="value">{{getActiveSkillPool(charArr[selectedCharIndex],skill)}}</span>
+                            </span>
+                        </span>
+                    </span>
+                </span>
                 </span>
             </span>
         </div>

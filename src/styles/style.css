@@ -593,3 +593,30 @@ ul.itemList {
 .characterChip .closeContainer .closebtn:hover {
     color: #000;
 }
+
+/* Formatting for skill section */
+
+.charSheet .dataBlock .sectionFlex {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: stretch;
+    margin: 0px 0px 1px 0px;
+    width: 100%;
+}
+
+.charSheet .dataBlock .sectionFlex .groupHalfCol {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    width: 50%;
+    margin: 2px 0px;
+}
+
+.charSheet .dataBlock .sectionFlex .groupHalfCol .label {
+    flex-grow: 1;
+}
+
+.charSheet .dataBlock .sectionFlex .groupHalfCol .value {
+    width: 30px;
+    text-align: center;
+}
