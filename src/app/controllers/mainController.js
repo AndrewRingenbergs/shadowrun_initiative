@@ -68,6 +68,8 @@ export default function($scope, uuid) {
 
 		var initModCustomNew = { descr: "", modifier: 0 };
 
+		var equippedAmmo = { type: "Regular", qtyMax: 25, qtyUsed: 6 };
+
 		return {
 			uuid: uuid.v4(),
 			name: name,
@@ -138,6 +140,7 @@ export default function($scope, uuid) {
 			
 			equippedArmour: equippedArmour,
 			equippedRangedWeapon: equippedRangedWeapon,
+			equippedAmmo: equippedAmmo,
 			equippedMeleeWeapon: equippedMeleeWeapon,
 
 			gearList: gearList,
@@ -502,6 +505,14 @@ export default function($scope, uuid) {
 				pool = pool + ' ('+ parseInt(pool+2) + ')';
 		
 		return pool;
+	}
+
+	// Ammo
+	$scope.ammoBoxClick = function(char, index) {
+		if (index <= char.equippedAmmo.qtyUsed)
+			char.equippedAmmo.qtyUsed = index-1;
+		else
+			char.equippedAmmo.qtyUsed = index;
 	}
 
 	console.log("Page load finished");
