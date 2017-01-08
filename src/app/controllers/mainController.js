@@ -388,13 +388,14 @@ export default function($scope, uuid) {
 
 	$scope.addItemToActiveCharGear = function(item) {
 		var char = $scope.charArr[$scope.selectedCharIndex];
+		var newItem = { name: item.name, type: item.type, rating: 0, quantity: 1, pageRef: 0, qtyMax: null, qtyUsed: null, details: null };
 
-		var itemFound = char.gearList.filter(function( obj ) { return obj.name == item.name; })[0]
+		var itemFound = char.gearList.filter(function( obj ) { return ((obj.name === newItem.name)&(obj.qtyMax === newItem.qtyMax)&(obj.qtyUsed === newItem.qtyUsed)&(obj.details === newItem.details)); })[0]
 		if (itemFound != null) {
 			itemFound.quantity += 1;
 		}
 		else {
-			char.gearList.push( { name: item.name, type: item.type, rating: 0, quantity: 1, pageRef: 0, qtyMax: null, qtyUsed: null, details: null });
+			char.gearList.push(newItem);
 		}
 	}
 
@@ -416,6 +417,15 @@ export default function($scope, uuid) {
 			$scope.itemTypeSelected = obj;
 		}
 	};
+
+	$scope.itemNameAdj = function(item) {
+		let nameAdj = item.name;
+
+		if ((item.qtyUsed != null)&(item.qtyMax != null)&(item.details != null))
+			nameAdj += ' (' + parseInt(item.qtyMax-item.qtyUsed) + '/' + item.qtyMax + ', ' + item.details + ')';
+		
+		return nameAdj;
+	}
 
 	// Active Skills
 	$scope.listActiveSkills = [
@@ -523,12 +533,25 @@ export default function($scope, uuid) {
 		if ((ammoItem.type === "Ammo")&(char.equippedRangedWeapon != null)) {
 			if ((ammoItem.details == null)|(ammoItem.details === char.equippedRangedWeapon.subtype)) {
 				if (ammoItem.qtyMax == null) {
+					let ammoItemOld = { name: ammoItem.name, type: ammoItem.type, rating: ammoItem.rating, quantity: ammoItem.quantity-1, pageRef: ammoItem.pageRef, qtyMax: ammoItem.qtyMax, qtyUsed: ammoItem.qtyUsed, details: ammoItem.details };
+					if (ammoItemOld.quantity > 0)
+						char.gearList.push(ammoItemOld);
+					
+					ammoItem.quantity = 1;
 					ammoItem.details = char.equippedRangedWeapon.subtype; 
 					ammoItem.qtyMax = char.equippedRangedWeapon.ammo;
 					ammoItem.qtyUsed = 0;
 				}
+				$scope.unequipAmmo(char, char.equippedAmmo);
 				char.equippedAmmo = ammoItem;
 			}
+		}
+	}
+
+	$scope.unequipAmmo = function(char, ammoItem) {
+		char.equippedAmmo = null;
+		if ((ammoItem.qtyMax === ammoItem.qtyUsed)) {
+			char.gearList.splice(char.gearList.indexOf(ammoItem),1);
 		}
 	}
 
