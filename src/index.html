@@ -283,8 +283,8 @@
                                 class="groupHalfCol"
                                 ng-repeat="skill in listActiveSkills"
                             >
-                                <span class="label">{{skill.name}}</span>
-                                <span class="value">{{getActiveSkillPool(charArr[selectedCharIndex],skill)}}</span>
+                                <span class="label">{{getAdjSkillName(charArr[selectedCharIndex],skill)}}</span>
+                                <span class="value">{{getActiveSkillPoolPrint(charArr[selectedCharIndex],skill)}}</span>
                             </span>
                         </span>
                     </span>

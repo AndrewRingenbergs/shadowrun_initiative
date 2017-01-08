@@ -173,7 +173,7 @@ export default function($scope, uuid) {
 			[
 				{ name: "Blades", rating: 4 },
 				{ name: "Clubs", rating: 3 },
-				{ name: "Etiquette", rating: 3 },
+				{ name: "Etiquette", specialisation: "Street", rating: 3 },
 				{ name: "Intimidation", rating: 4 },
 				{ name: "Pistols", rating: 4 },
 				{ name: "Unarmed Combat", rating: 3 },
@@ -189,12 +189,12 @@ export default function($scope, uuid) {
 		{type:"Ganger Lieutennant",template:createChar("Ganger Lieutennant", 4, 4, 4, 4, 4, 3, 4, 4, 0, 5.7, 0, 0,
 			[
 				{ name: "Blades", rating: 3 },
-				{ name: "Etiquette", rating: 4 },
+				{ name: "Etiquette", specialisation: "Street", rating: 4 },
 				{ name: "Intimidation", rating: 4 },
 				{ name: "Leadership", rating: 1 },
-				{ name: "Pistols", rating: 3 },
+				{ name: "Pistols", specialisation: "Semi-Automatics", rating: 3 },
 				{ name: "Thrown Weapons", rating: 2 },
-				{ name: "Unarmed Combat", rating: 3 }				
+				{ name: "Unarmed Combat", specialisation: "Cyberimplants", rating: 3 }				
 			], 
 			gearList = [
 				{name: "Browning Ultra-Power", rating: 0, quantity: 1, pageRef: 0 },
@@ -454,15 +454,33 @@ export default function($scope, uuid) {
 		{ name: "Tracking", attr: "intuition" },
 		{ name: "Unarmed Combat", attr: "agility" }
 	];
-	
-	$scope.getActiveSkillRating = function(char, skillName) {
-		let rating = 0;
-		let list = char.activeSkills.filter(function( obj ) { return obj.name === skillName; });
+
+	$scope.getCharActiveSkill = function(char, activeSkill) {
+		let list = char.activeSkills.filter(function( obj ) { return obj.name === activeSkill.name; });
+		let out = null;
 
 		if (list.length != 0)
-			rating = list[0].rating;
-		else 
-			rating = 0; 
+			out = list[0];
+		
+		return out;
+	}
+
+	$scope.getAdjSkillName = function(char, activeSkill){
+		let adjName = activeSkill.name;
+		const charSkill = $scope.getCharActiveSkill(char, activeSkill);
+		
+		if (charSkill != null)
+			if (charSkill.specialisation != null)
+				adjName = adjName + ' ('+ charSkill.specialisation + ')';
+		
+		return adjName;
+	}
+	
+	$scope.getActiveSkillRating = function(char, activeSkill) {
+		let rating = 0;
+		const charSkill = $scope.getCharActiveSkill(char, activeSkill);;
+		if (charSkill != null)
+				rating = charSkill.rating;
 		
 		return rating;
 	}
@@ -472,7 +490,18 @@ export default function($scope, uuid) {
 	}
 
 	$scope.getActiveSkillPool = function(char, activeSkill){
-		return $scope.getActiveSkillRating(char, activeSkill.name) + $scope.getActiveSkillAttrVal(char, activeSkill.attr);
+		return $scope.getActiveSkillRating(char, activeSkill) + $scope.getActiveSkillAttrVal(char, activeSkill.attr);
+	}
+
+	$scope.getActiveSkillPoolPrint = function(char, activeSkill){
+		let pool = $scope.getActiveSkillPool(char, activeSkill);
+		const charSkill = $scope.getCharActiveSkill(char, activeSkill);
+		
+		if (charSkill != null)
+			if (charSkill.specialisation != null)
+				pool = pool + ' ('+ parseInt(pool+2) + ')';
+		
+		return pool;
 	}
 
 	console.log("Page load finished");
